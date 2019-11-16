@@ -85,6 +85,8 @@ class AppController extends Controller
 				$this->Session->Write('Setting.'.$key, $value);
 			}
 		}
+
+		$this->log($this->request->params);
 		
 		if (isset($this->request->params['admin']))
 		{
@@ -127,9 +129,30 @@ class AppController extends Controller
 			
 			// グループモデルを共通で保持する
 			$this->loadModel('Group');
-		}
-		else
-		{
+		}elseif(isset($this->request->params['docent'])){
+			
+			$this->Auth->loginAction = array(
+				'controller' => 'users',
+				'action' => 'login',
+				'admin' => false,
+				'docent' => true
+			);
+			$this->Auth->loginRedirect = array(
+				'controller' => 'users',
+				'action' => 'index',
+				'admin' => false,
+				'docent' => true
+			);
+			$this->Auth->logoutRedirect = array(
+				'controller' => 'users',
+				'action' => 'login',
+				'admin' => false,
+				'docent' => true
+			);
+			$this->set('loginURL', "/docent/users/login/");
+			$this->set('logoutURL', "/docent/users/logout/");
+
+		}else{
 			$this->Auth->loginAction = array(
 					'controller' => 'users',
 					'action' => 'login',

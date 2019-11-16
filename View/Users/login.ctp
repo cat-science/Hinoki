@@ -1,7 +1,7 @@
 <div class="users-login">
 	<div class="panel panel-info form-signin">
 		<div class="panel-heading">
-			受講者ログイン
+			生徒ログイン
 		</div>
 		<div class="panel-body">
 			<div class="text-right"><a href="../admin/users/login">管理者ログインへ</a></div>

@@ -24,7 +24,7 @@ class UsersController extends AppController
 			'Paginator',
 			'Security' => array(
 				'csrfUseOnce' => false,
-				'unlockedActions' => array('login', 'admin_login'),
+				'unlockedActions' => array('login','docent_login','admin_login'),
 			),
 			'Search.Prg',
 			'Cookie',
@@ -702,5 +702,18 @@ class UsersController extends AppController
 		}
 		
 		fclose($fp);
+	}
+
+	/* 講師関連*/
+	public function docent_login(){
+		$this->login();
+	}
+
+	public function docent_logout(){
+		$this->logout();
+	}
+
+	public function docent_index(){
+		$this->log('docent_index');
 	}
 }

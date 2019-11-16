@@ -1,13 +1,13 @@
 <div class="admin-users-login">
 	<div class="panel panel-default form-signin">
 		<div class="panel-heading">
-			管理者ログイン
+			講師ログイン
 		</div>
 		<div class="panel-body">
-			<div class="text-right"><a href="../../docent/users/login">講師ログインへ</a></div>
+			<div class="text-right"><a href="../../users/login">生徒ログインへ</a></div>
 			<?php echo $this->Flash->render('auth'); ?>
 			<?php echo $this->Form->create('User'); ?>
-			
+			<?php $this->log('visited');?>
 			<div class="form-group">
 				<?php echo $this->Form->input('username', array('label' => 'ログインID', 'class'=>'form-control')); ?>
 			</div>
