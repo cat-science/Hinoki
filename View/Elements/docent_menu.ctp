@@ -3,20 +3,12 @@
 		<div class="navbar-collapse collapse">
 		<ul class="nav navbar-nav">
 			<?php
-			$is_active = (($this->name=='Users')&&($this->params["action"]!='admin_password')) ? ' active' : '';
-			echo '<li class="'.$is_active.'">'.$this->Html->link(__('ユーザ'), array('controller' => 'users', 'action' => 'index')).'</li>';
+			$is_active = (($this->name=='Lecture')&&($this->params["action"]!='admin_password')) ? ' active' : '';
+			echo '<li class="'.$is_active.'">'.$this->Html->link(__('授業関連'), array('controller' => 'lectures', 'action' => 'index')).'</li>';
 
 			$is_active = ($this->name=='Groups') ? ' active' : '';
 			echo '<li class="'.$is_active.'">'.$this->Html->link(__('グループ'), array('controller' => 'groups', 'action' => 'index')).'</li>';
 
-			$is_active = (($this->name=='Courses')||($this->name=='Contents')||($this->name=='ContentsQuestions')) ? ' active' : '';
-			echo '<li class="'.$is_active.'">'.$this->Html->link(__('コース'), array('controller' => 'courses', 'action' => 'index')).'</li>';
-
-			$is_active = ($this->name=='Infos') ? ' active' : '';
-			echo '<li class="'.$is_active.'">'.$this->Html->link(__('お知らせ'), array('controller' => 'infos', 'action' => 'index')).'</li>';
-
-			$is_active = ($this->name=='Records') ? ' active' : '';
-			echo '<li class="'.$is_active.'">'.$this->Html->link(__('学習履歴'), array('controller' => 'records', 'action' => 'index')).'</li>';
 
 			if($loginedUser['role']=='admin')
 			{

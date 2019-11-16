@@ -130,7 +130,7 @@ class AppController extends Controller
 			// グループモデルを共通で保持する
 			$this->loadModel('Group');
 		}elseif(isset($this->request->params['docent'])){
-			
+			//講師用
 			$this->Auth->loginAction = array(
 				'controller' => 'users',
 				'action' => 'login',
@@ -138,7 +138,7 @@ class AppController extends Controller
 				'docent' => true
 			);
 			$this->Auth->loginRedirect = array(
-				'controller' => 'users',
+				'controller' => 'lectures',
 				'action' => 'index',
 				'admin' => false,
 				'docent' => true
