@@ -40,15 +40,27 @@
 		// 例）１日が水曜日だった場合、日曜日から火曜日の３つ分の空セルを追加する
 		$week .= str_repeat('<td></td>', $youbi);
 		for ( $day = 1; $day <= $day_count; $day++, $youbi++) {
-		    // 2017-07-3
-		    $date = $ym . '-' . $day;
+				// 2017-07-3
+				$tmp_day = $day < 10 ? '0'.$day : $day;
+				$date = $ym . '-' . $tmp_day;
+				// その日の授業の配列を取得
+				$date_slash = str_replace("-","/",$date);
+				$date_lectures = $date_name_list[$date_slash];
+
 		    if ($today == $date) {
 					// 今日の日付の場合は、class="today"をつける
-					$text_url = '<div style = "margin : auto ;border: 1px solid #000; width : 80px; text-align: center">'.'<a href=/ >数学</a>' .'</div>';
-					$week .= '<td class="today" style = "width : 120px;">' . $day  . $text_url . $text_url;
-					//$week .= '<td class="today">' . $day . '<td>' . $text_url . '</td>';
+					$week .= '<td class="today" style = "width : 120px;">' . $day;
+					foreach($date_lectures as $lecture){
+						$lecture_url = '<div style = "margin : auto ;border: 1px solid #000; width : 80px; text-align: center">'. $this->Html->link($lecture, array('controller' => 'lectures', 'action' => 'lecture_edit', 1, $date)) .'</div>';
+						$week .= $lecture_url;
+					}
+					
 		    } else {
-		      $week .= '<td style = "width : 120px;" >' . $day;
+					$week .= '<td style = "width : 120px;" >' . $day;
+					foreach($date_lectures as $lecture){
+						$lecture_url = '<div style = "margin : auto ;border: 1px solid #000; width : 80px; text-align: center">'. $this->Html->link($lecture, array('controller' => 'lectures', 'action' => 'lecture_edit', 1, $date)) .'</div>';
+						$week .= $lecture_url;
+					}
 		    }
 		    $week .= '</td>';
 		    // 週終わり、または、月終わりの場合
@@ -141,3 +153,9 @@
 	</div>
 	</div>
 </div>
+
+<?php
+	foreach($date_name_list as $key => $value){
+		echo $key . '=>' . $value[0];
+	}
+?>
