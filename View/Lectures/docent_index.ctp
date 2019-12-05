@@ -23,7 +23,7 @@
 		    $timestamp = strtotime($ym . '-01');
 		}
 		// 今日の日付 フォーマット　例）2018-07-3
-		$today = date('Y-m-j');
+		$today = date('Y-m-d');
 		// カレンダーのタイトルを作成　例）2017年7月
 		$html_title = date('Y年n月', $timestamp);
 		// 前月・次月の年月を取得

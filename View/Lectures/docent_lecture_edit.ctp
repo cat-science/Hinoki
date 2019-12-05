@@ -1,9 +1,9 @@
 <?php echo $this->element('docent_menu');?>
-<div class="admin-courses-edit">
-<?php echo $this->Html->link(__('<< 戻る'), array('action' => 'docent_index'))?>
+<div class="docent-lecture-edit">
+<?php echo $this->Html->link(__('<< 戻る'), array('action' => 'index'))?>
 	<div class="panel panel-default">
 		<div class="panel-heading">
-			<?php echo ($this->action == 'admin_edit') ? __('授業記録') :  __('授業記録'); ?>
+			<?php echo ($this->action == 'admin_edit') ? __($lecture_name."ー授業記録") :  __($lecture_name."ー授業記録"); ?>
 		</div>
 		<div class="panel-body">
 			<?php echo $this->Form->create('Lecture', Configure::read('form_defaults')); ?>

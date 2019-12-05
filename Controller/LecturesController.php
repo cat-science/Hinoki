@@ -98,8 +98,38 @@ class LecturesController extends AppController
 				)
 			)
 		));
+	
+		//受講生リストを探し，作る
+		$student_list = $this->User->find('list',array(
+			'filed' => array(
+				'User.id','User.name'
+			),
+			'conditions' => array(
+				'User.role' => 'user'
+			)
+		));
+		/*
+		$student_list = [];
+		foreach($rows as $k => $v){
+			$row = array(
+				'id' => $k,
+				'text' => $v
+			);
+			$student_list[] = $row;
+		}
+		$this->log(json_encode($student_list));
+		$student_list = json_encode($student_list);
+		*/
+
+		$this->set(compact("docent_list","student_list"));
+		$lectures = $this->Lecture->find('list',array(
+			'fields' => array(
+				'Lecture.id',
+				'Lecture.lecture_name'
+			)
+		));
 		
-		$this->set(compact("docent_list"));
+		$this->set(compact('lectures'));
 
 		if ($this->request->is(array(
 			'post',
@@ -107,6 +137,7 @@ class LecturesController extends AppController
 		)))
 		{
 			$request_data = $this->request->data;
+			$this->log($request_data);
 			if($this->Lecture->save($request_data)){
 				$this->Flash->success(__('コースが保存されました'));
 				return $this->redirect(array(
@@ -116,7 +147,7 @@ class LecturesController extends AppController
 				$this->Flash->error(__('The course could not be saved. Please, try again.'));
 			}
 			
-			$this->log($request_data);
+			
 			
 		}else{
 			$options = array(
@@ -134,6 +165,8 @@ class LecturesController extends AppController
 
 	}
 
+
+	
 	/*-----------------------------------*/
 	/* 講師関連 */
 	public function docent_login(){
@@ -189,6 +222,28 @@ class LecturesController extends AppController
 	}
 
 	public function docent_lecture_edit($lecture_id, $lecture_date){
+		$this->loadModel('User');
 
+		$lecture_info = $this->Lecture->find('first',array(
+			'conditions' => array(
+				'Lecture.id' => $lecture_id
+			)
+		));
+		$lecture_name = $lecture_info['Lecture']['lecture_name']."($lecture_date)";
+
+		//講師リストを探し，作る
+		$docent_list = $this->User->find('list',array(
+			'filed' => array(
+				'User.id','User.name'
+			),
+			'conditions' => array(
+				'OR' => array(
+					array('User.role' => 'admin'),
+					array('User.role' => 'docent')
+				)
+			)
+		));
+		
+		$this->set(compact("lecture_name","docent_list"));
 	}
 }

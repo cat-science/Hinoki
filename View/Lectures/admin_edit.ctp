@@ -1,5 +1,18 @@
 <?php echo $this->element('admin_menu');?>
-<div class="admin-courses-edit">
+<?php echo $this->Html->css( 'select2.min.css');?>
+<?php echo $this->Html->script( 'select2.min.js');?>
+<?php $this->Html->scriptStart(array('inline' => false)); ?>
+	$(function (e) {
+		$('#LectureStudents').select2({
+			placeholder:   "所属する生徒を選択して下さい。(複数選択可)", 
+			closeOnSelect: <?php echo (Configure::read('close_on_select') ? 'true' : 'false'); ?>,
+		});
+
+		// パスワードの自動復元を防止
+		setTimeout('$("#UserNewPassword").val("");', 500);
+	});
+<?php $this->Html->scriptEnd(); ?>
+<div class="admin-lecture-edit">
 <?php echo $this->Html->link(__('<< 戻る'), array('action' => 'index_2'))?>
 	<div class="panel panel-default">
 		<div class="panel-heading">

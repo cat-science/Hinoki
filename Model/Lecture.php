@@ -56,6 +56,15 @@ class Lecture extends AppModel
 	public $belongsTo = array(
 	
 	);
+
+	/**
+	 * hasAndBelongsToMany associations
+	 *
+	 * @var array
+	 */
+	public $hasAndBelongsToMany = array(
+		
+	);
 	
 	/**
 	 * 検索用

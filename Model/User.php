@@ -153,7 +153,20 @@ class User extends AppModel
 					'limit' => '',
 					'offset' => '',
 					'finderQuery' => ''
-	 		)
+	 		),
+			 'Lecture' => array(
+					 'className' => 'Lecture',
+					 'joinTable' => 'users_lectures',
+					 'foreignKey' => 'user_id',
+					 'associationForeignKey' => 'lecture_id',
+					 'unique' => 'keepExisting',
+					 'conditions' => '',
+					 'fields' => '',
+					 'order' => '',
+					 'limit' => '',
+					 'offset' => '',
+					 'finderQuery' => ''
+				)
 	);
 
 	public function beforeSave($options = array())

@@ -142,3 +142,9 @@ $config['theme_colors'] = array(
 $config['import_group_count']  = 10;
 $config['import_course_count'] = 20;
 
+$config['lecture_status'] = array(
+	'1' => '未実施',
+	'2' => '実施中', 
+	'3' => '実施済み'
+);
+

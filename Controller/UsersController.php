@@ -251,6 +251,7 @@ class UsersController extends AppController
 	 */
 	public function admin_edit($user_id = null)
 	{
+		$this->loadModel('Lecture');
 		if ($this->action == 'admin_edit' && ! $this->User->exists($user_id))
 		{
 			throw new NotFoundException(__('Invalid user'));
@@ -265,6 +266,8 @@ class UsersController extends AppController
 		{
 			if(Configure::read('demo_mode'))
 				return;
+			
+			$this->log($this->request->data);
 			
 			if ($this->request->data['User']['new_password'] !== '')
 				$this->request->data['User']['password'] = $this->request->data['User']['new_password'];
@@ -301,8 +304,13 @@ class UsersController extends AppController
 		
 		$courses = $this->User->Course->find('list');
 		$groups = $this->Group->find('list');
+		$lectures = $this->Lecture->find('list',array(
+			'fields' => array(
+				'Lecture.id','Lecture.lecture_name'
+			)
+		));
 		
-		$this->set(compact('courses', 'groups', 'username'));
+		$this->set(compact('courses', 'groups','lectures','username'));
 	}
 
 	/**
