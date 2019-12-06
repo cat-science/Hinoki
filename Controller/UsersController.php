@@ -209,6 +209,7 @@ class UsersController extends AppController
 					'(SELECT group_concat(g.title order by g.id SEPARATOR \', \') as group_title  FROM ib_users_groups  ug INNER JOIN ib_groups  g ON g.id = ug.group_id  WHERE ug.user_id = User.id) as group_title',
 					// 受講コース一覧   ※パフォーマンス改善
 					'(SELECT group_concat(c.title order by c.id SEPARATOR \', \') as course_title FROM ib_users_courses uc INNER JOIN ib_courses c ON c.id = uc.course_id WHERE uc.user_id = User.id) as course_title',
+					'(SELECT group_concat(l.lecture_name order by l.id SEPARATOR \', \') as lecture_title FROM ib_users_lectures ul INNER JOIN ib_lectures l ON l.id = ul.lecture_id WHERE ul.user_id = User.id) as lecture_title',
 				),
 				'conditions' => $conditions,
 				'limit' => 20,

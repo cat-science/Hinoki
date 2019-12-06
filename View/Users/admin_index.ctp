@@ -36,6 +36,7 @@
 		<th nowrap><?php echo $this->Paginator->sort('role', '権限'); ?></th>
 		<th nowrap><?php echo __('所属グループ'); ?></th>
 		<th nowrap class="ib-col-datetime"><?php echo __('受講コース'); ?></th>
+		<th nowrap class="ib-col-datetime"><?php echo __('受講科目'); ?></th>
 		<th class="ib-col-datetime"><?php echo $this->Paginator->sort('last_logined', '最終ログイン日時'); ?></th>
 		<th class="ib-col-datetime"><?php echo $this->Paginator->sort('created', '作成日時'); ?></th>
 		<?php if($loginedUser['role']=='admin') {?>
@@ -51,21 +52,21 @@
 		<td nowrap><?php echo h(Configure::read('user_role.'.$user['User']['role'])); ?>&nbsp;</td>
 		<td><div class="reader" title="<?php echo h($user[0]['group_title']); ?>"><p><?php echo h($user[0]['group_title']); ?>&nbsp;</p></td>
 		<td><div class="reader" title="<?php echo h($user[0]['course_title']); ?>"><p><?php echo h($user[0]['course_title']); ?>&nbsp;</p></div></td>
+		<td><div class="reader" title="<?php echo h($user[0]['lecture_title']); ?>"><p><?php echo h($user[0]['lecture_title']); ?>&nbsp;</p></div></td>
 		<td class="ib-col-datetime"><?php echo h(Utils::getYMDHN($user['User']['last_logined'])); ?>&nbsp;</td>
 		<td class="ib-col-datetime"><?php echo h(Utils::getYMDHN($user['User']['created'])); ?>&nbsp;</td>
 		<?php if($loginedUser['role']=='admin') {?>
 		<td class="ib-col-action">
-			<button type="button" class="btn btn-success"
-				onclick="location.href='<?php echo Router::url(array('action' => 'edit', $user['User']['id'])) ?>'">編集</button>
 			<?php
-
-echo $this->Form->postLink(__('削除'), array(
-				'action' => 'delete',
-				$user['User']['id']
-		), array(
-				'class' => 'btn btn-danger'
-		), __('[%s] を削除してもよろしいですか?', $user['User']['name']));
+				echo $this->Form->postLink(__('削除'), array(
+					'action' => 'delete',
+					$user['User']['id']
+				), array(
+					'class' => 'btn btn-danger'
+				), __('[%s] を削除してもよろしいですか?', $user['User']['name']));
 		?>
+		<button type="button" class="btn btn-success"
+				onclick="location.href='<?php echo Router::url(array('action' => 'edit', $user['User']['id'])) ?>'">編集</button>
 		</td>
 		<?php }?>
 	</tr>
