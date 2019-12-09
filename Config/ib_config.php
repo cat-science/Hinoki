@@ -148,3 +148,7 @@ $config['lecture_status'] = array(
 	'3' => '実施済み'
 );
 
+$config['attendance'] = array(
+	'1' => '欠席',
+	'2' => '出席'
+);

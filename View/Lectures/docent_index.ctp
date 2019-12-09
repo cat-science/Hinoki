@@ -51,14 +51,14 @@
 					// 今日の日付の場合は、class="today"をつける
 					$week .= '<td class="today" style = "width : 120px;">' . $day;
 					foreach($date_lectures as $lecture){
-						$lecture_url = '<div style = "margin : auto ;border: 1px solid #000; width : 80px; text-align: center">'. $this->Html->link($lecture, array('controller' => 'lectures', 'action' => 'lecture_edit', 1, $date)) .'</div>';
+						$lecture_url = '<div style = "margin : auto ;border: 1px solid #000; width : 80px; text-align: center">'. $this->Html->link($lecture, array('controller' => 'lecturesRecords', 'action' => 'edit', $lecture_name_id[$lecture], $date)) .'</div>';
 						$week .= $lecture_url;
 					}
 					
 		    } else {
 					$week .= '<td style = "width : 120px;" >' . $day;
 					foreach($date_lectures as $lecture){
-						$lecture_url = '<div style = "margin : auto ;border: 1px solid #000; width : 80px; text-align: center">'. $this->Html->link($lecture, array('controller' => 'lectures', 'action' => 'lecture_edit', 1, $date)) .'</div>';
+						$lecture_url = '<div style = "margin : auto ;border: 1px solid #000; width : 80px; text-align: center">'. $this->Html->link($lecture, array('controller' => 'lecturesRecords', 'action' => 'edit',  $lecture_name_id[$lecture], $date)) .'</div>';
 						$week .= $lecture_url;
 					}
 		    }

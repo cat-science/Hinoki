@@ -1,26 +1,14 @@
 <?php echo $this->element('docent_menu');?>
 <div class="docent-lecture-edit">
-<?php echo $this->Html->link(__('<< 戻る'), array('action' => 'index'))?>
+<?php echo $this->Html->link(__('<< 戻る'), array('controller' => 'lectures', 'action' => 'index'))?>
 	<div class="panel panel-default">
 		<div class="panel-heading">
 			<?php echo ($this->action == 'admin_edit') ? __($lecture_name."ー授業記録") :  __($lecture_name."ー授業記録"); ?>
 		</div>
 		<div class="panel-body">
-			<?php echo $this->Form->create('Lecture', Configure::read('form_defaults')); ?>
+			<?php echo $this->Form->create('LecturesRecord', Configure::read('form_defaults')); ?>
 			<?php
-				echo $this->Form->input('id');
-				echo $this->Form->input('lecture_name',	array('label' => __('授業名')));
-				/*
-				echo $this->Form->input('opened',	array(
-					'type' => 'datetime',
-					'dateFormat' => 'YMD',
-					'monthNames' => false,
-					'timeFormat' => '24',
-					'separator' => ' - ',
-					'label'=> '公開日時',
-					'style' => 'width:initial; display: inline;'
-				));
-				*/
+				echo $this->Form->hidden('id');
 				echo $this->Form->input('docent_id',	array(
 					'label' => __('担当講師'),
 					'options'=> $docent_list, 
@@ -29,20 +17,49 @@
 					'required'=>false, 
 					'class'=>'form-control'
         ));
-        echo $this->Form->input('text_info',		array(
+        echo $this->Form->input('text',		array(
 					'label' => __('単元名とテキスト該当ページ'),
 					'type' => 'textarea',
     			'class' => '',
-					'style' => 'width : 200px',
+					'style' => '',
         ));
-        //ここはダミー
-        echo $this->Form->input('attendance',		array(
-					'label' => __('出欠席'),
-					'type' => 'textarea',
-    			'class' => '',
-					'style' => 'width : 200px',
-        ));
-        //
+				?>
+				<table style = "width : 74%; float : right; margin-left:26%;">
+				<thead>
+				<tr>
+					<th nowrap class="ib-col-datetime"><?php echo __('名前'); ?></th>
+					<th nowrap class="ib-col-datetime"><?php echo __('出席状況'); ?></th>
+				</tr>
+				</thead>
+				<tbody>
+				<?php foreach ($users as $id => $user): ?>
+				<tr>
+				<td class="ib-col-datetime"><?php echo h($user); ?>&nbsp;</td>
+					<td class="ib-col-datetime">
+						<?php
+							echo $this->Form->input("$id-attendance",	array(
+								'type' => 'radio',
+								'before' => '',
+								'separator'=>"  ",
+								'legend' => false,
+								'div' => '',
+								'class' => '',
+								'style' => '',
+								'required'=> 'required',
+								'options' => Configure::read('attendance'),
+								'label' => array(
+									'style' => 'margin-left:25%'
+								)
+							));
+							echo "</div>";
+						?>
+					</td>
+				</tr>
+				<?php endforeach; ?>
+				</tbody>
+				</table>
+				</br>
+				<?php 
         echo $this->Form->input('homework',		array(
 					'label' => __('宿題'),
 					'type' => 'textarea',

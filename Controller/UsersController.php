@@ -242,6 +242,7 @@ class UsersController extends AppController
 		
 		// グループ一覧を取得
 		$groups = $this->Group->find('list');
+		$this->log($users);
 		
 		$this->set(compact('groups', 'users', 'group_id'));
 	}

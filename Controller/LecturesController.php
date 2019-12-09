@@ -1,10 +1,7 @@
 <?php
 /**
- * iroha Board Project
+ * Hinoki Project
  *
- * @author        Kotaro Miura
- * @copyright     2015-2016 iroha Soft, Inc. (http://irohasoft.jp)
- * @link          http://irohaboard.irohasoft.jp
  * @license       http://www.gnu.org/licenses/gpl-3.0.en.html GPL License
  */
 
@@ -196,7 +193,16 @@ class LecturesController extends AppController
 			'conditions' => $conditions,
 			'order' => 'Lecture.created DESC'
 		));
-		$this->log($lectures);
+		//$this->log($lectures);
+
+		$lecture_name_id = $this->Lecture->find('list',array(
+			'fields' => array(
+				'Lecture.lecture_name','Lecture.id'
+			)
+		));
+		$this->log('l_n_i');
+		$this->log($lecture_name_id);
+
 		$date_name_list = [];
 		foreach($lectures as $lecture){
 			$rows = $lecture['Lecture']['lecture_date'];
@@ -218,11 +224,13 @@ class LecturesController extends AppController
 			$this->log($date_name_list);
 			
 		}
-		$this->set(compact("date_name_list"));
+		$this->set(compact("date_name_list","lecture_name_id"));
 	}
+
 
 	public function docent_lecture_edit($lecture_id, $lecture_date){
 		$this->loadModel('User');
+		$this->loadModel('UsersLecture');
 
 		$lecture_info = $this->Lecture->find('first',array(
 			'conditions' => array(
@@ -243,7 +251,55 @@ class LecturesController extends AppController
 				)
 			)
 		));
+
+		$lecture_student_rows = $this->UsersLecture->findAllUsersInThisLecture($lecture_id);
+
+		$this->log($lecture_student_rows);
+
+		$conditions = [];
+		foreach($lecture_student_rows as $row){
+			$conditions['OR'][] = array('User.id' => $row);
+		}
+
 		
-		$this->set(compact("lecture_name","docent_list"));
+		$users = $this->User->find('list',array(
+			'filed' => array(
+				'User.id','User.name'
+			),
+			'conditions' => $conditions
+		));
+
+			
+		$this->set(compact("lecture_name","docent_list","users"));
+		if ($this->request->is(array(
+			'post',
+			'put'
+		)))
+		{
+			$request_data = $this->request->data;
+			$this->log($request_data);
+			/*
+			if($this->Lecture->save($request_data)){
+				$this->Flash->success(__('コースが保存されました'));
+				return $this->redirect(array(
+					'action' => 'index_2'
+				));
+			}else{
+				$this->Flash->error(__('The course could not be saved. Please, try again.'));
+			}
+			
+			
+			
+		}else{
+			$options = array(
+				'conditions' => array(
+					'Lecture.' . $this->Lecture->primaryKey => $lecture_id
+				)
+			);
+			$this->request->data = $this->Lecture->find('first', $options);
+		}
+		*/
+		}
+
 	}
 }
