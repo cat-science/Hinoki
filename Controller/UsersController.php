@@ -242,7 +242,6 @@ class UsersController extends AppController
 		
 		// グループ一覧を取得
 		$groups = $this->Group->find('list');
-		$this->log($users);
 		
 		$this->set(compact('groups', 'users', 'group_id'));
 	}
@@ -311,6 +310,7 @@ class UsersController extends AppController
 				'Lecture.id','Lecture.lecture_name'
 			)
 		));
+		$this->log($lectures);
 		
 		$this->set(compact('courses', 'groups','lectures','username'));
 	}
