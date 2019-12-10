@@ -63,7 +63,19 @@ class Lecture extends AppModel
 	 * @var array
 	 */
 	public $hasAndBelongsToMany = array(
-		
+		'Member' => array(
+			'className' => 'User',
+			'joinTable' => 'users_lectures',
+			'foreignKey' => 'lecture_id',
+			'associationForeignKey' => 'user_id',
+			'unique' => 'keepExisting',
+			'conditions' => '',
+			'fields' => '',
+			'order' => '',
+			'limit' => '',
+			'offset' => '',
+			'finderQuery' => ''
+	 )
 	);
 	
 	/**

@@ -3,7 +3,7 @@
 <?php echo $this->Html->script( 'select2.min.js');?>
 <?php $this->Html->scriptStart(array('inline' => false)); ?>
 	$(function (e) {
-		$('#LectureStudents').select2({
+		$('#MemberMember').select2({
 			placeholder:   "所属する生徒を選択して下さい。(複数選択可)", 
 			closeOnSelect: <?php echo (Configure::read('close_on_select') ? 'true' : 'false'); ?>,
 		});
@@ -51,6 +51,7 @@
 2019/11/02
 のように入力してください'
 				));
+				echo $this->Form->input('Member',				array('label' => '受講生'));
 				echo $this->Form->input('comment',		array(
 					'label' => __('備考'),
 					'type' => 'textarea',

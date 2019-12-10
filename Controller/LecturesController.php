@@ -154,6 +154,18 @@ class LecturesController extends AppController
 				)
 			);
 			$this->request->data = $this->Lecture->find('first', $options);
+			$members = $this->User->find('list',array(
+				'fileds' => array(
+					'User.id','User.username'
+				),
+				'conditions' => array(
+					'User.role' => 'user'
+				)
+			));
+			$this->set(compact("members"));
+			
+			$this->log($this->request->data);
+			$this->log($members);
 		}
 	}
 	/*
