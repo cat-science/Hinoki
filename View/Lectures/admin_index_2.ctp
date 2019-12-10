@@ -29,7 +29,6 @@
 		<td class="ib-col-date"><?php echo h(Utils::getYMDHN($lecture['Lecture']['created'])); ?>&nbsp;</td>
 		<td class="ib-col-date"><?php echo h(Utils::getYMDHN($lecture['Lecture']['modified'])); ?>&nbsp;</td>
 		<td class="ib-col-action">
-			<button type="button" class="btn btn-success" onclick="location.href='<?php echo Router::url(array('action' => 'edit', $lecture['Lecture']['id'])) ?>'">編集</button>
 			<?php
 			if($loginedUser['role']=='admin')
 			{
@@ -39,6 +38,7 @@
 					__('[%s] を削除してもよろしいですか?', $lecture['Lecture']['lecture_name'])
 				);
 			}?>
+			<button type="button" class="btn btn-success" onclick="location.href='<?php echo Router::url(array('action' => 'edit', $lecture['Lecture']['id'])) ?>'">編集</button>
 		</td>
 	</tr>
 	<?php endforeach; ?>

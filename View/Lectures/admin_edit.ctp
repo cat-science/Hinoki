@@ -49,8 +49,7 @@
 					'style' => '',
 					'placeholder' => '2019/11/01
 2019/11/02
-のように入力してください',
-    			'value' => $enquete_inputted['Enquete']['before_false_reason']
+のように入力してください'
 				));
 				echo $this->Form->input('comment',		array(
 					'label' => __('備考'),

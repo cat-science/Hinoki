@@ -26,6 +26,7 @@ class UsersCoursesController extends AppController
 	 */
 	public function index()
 	{
+		$this->loadModel('Lecture');
 		$user_id = $this->Auth->user('id');
 		
 		// 全体のお知らせの取得
@@ -59,5 +60,56 @@ class UsersCoursesController extends AppController
 			$no_record = __('受講可能なコースはありません');
 		
 		$this->set(compact('courses', 'no_record', 'info', 'infos', 'no_info'));
+
+		//講義情報の取得---start
+		$from_date = array(
+			'year' => date('Y', strtotime("-1 month")),
+			'month' => date('m', strtotime("-1 month")), 
+			'day' => date('d', strtotime("-1 month"))
+		);
+		
+		$to_date	= array('year' => date('Y'), 'month' => date('m'), 'day' => date('d'));
+
+		$conditions['Lecture.created BETWEEN ? AND ?'] = array(
+			implode("/", $from_date), 
+			implode("/", $to_date).' 23:59:59'
+		);
+		$lectures = $this->Lecture->find('all',array(
+			'conditions' => $conditions,
+			'order' => 'Lecture.created DESC'
+		));
+		//$this->log($lectures);
+
+		$lecture_name_id = $this->Lecture->find('list',array(
+			'fields' => array(
+				'Lecture.lecture_name','Lecture.id'
+			)
+		));
+		$this->log('l_n_i');
+		$this->log($lecture_name_id);
+
+		$date_name_list = [];
+		foreach($lectures as $lecture){
+			$rows = $lecture['Lecture']['lecture_date'];
+			$lecture_name = $lecture['Lecture']['lecture_name'];
+
+			$rows = explode("\n",$rows);
+			foreach($rows as $row){
+				$row = str_replace(array("\r","\r\n","\n"), '', $row);
+				$this->log($row);
+
+				if($date_name_list[$row]){
+					array_push($date_name_list[$row],$lecture_name);
+				}else{
+					$date_name_list[$row] = array();
+					array_push($date_name_list[$row],$lecture_name);
+				}
+				
+			}
+			$this->log($date_name_list);
+			
+		}
+		$this->set(compact("date_name_list","lecture_name_id"));
 	}
+	//講義情報の取得---end
 }

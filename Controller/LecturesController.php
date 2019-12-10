@@ -34,12 +34,13 @@ class LecturesController extends AppController
 			)
 	);
 	
+	/* 生徒関連 */
 	/**
 	 * ホーム画面（受講コース一覧）へリダイレクト
 	 */
-	public function index()
+	public function index($lecture_id)
 	{
-		$this->redirect("/users_courses");
+		
 	}
 
 	/* 専任講師関連 */
