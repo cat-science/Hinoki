@@ -5,7 +5,7 @@
 </style>
 
 <div class="users-courses-index">
-	<?php //カレンダー?>
+	<?php //カレンダー ?>
 	<?php
 		// タイムゾーンを設定
 		date_default_timezone_set('Asia/Tokyo');
@@ -50,17 +50,22 @@
 		    if ($today == $date) {
 					// 今日の日付の場合は、class="today"をつける
 					$week .= '<td class="today" style = "width : 120px;">' . $day;
-					foreach($date_lectures as $lecture){
-						$lecture_url = '<div style = "margin : auto ;border: 1px solid #000; width : 80px; text-align: center">'. $this->Html->link($lecture, array('controller' => 'lectures', 'action' => 'index', $lecture_name_id[$lecture])) .'</div>';
-						$week .= $lecture_url;
+					if(isset($date_lectures)){
+						foreach($date_lectures as $lecture){
+							$lecture_url = '<div style = "margin : auto ;border: 1px solid #000; width : 80px; text-align: center">'. $this->Html->link($lecture, array('controller' => 'lectures', 'action' => 'index', $lecture_name_id[$lecture])) .'</div>';
+							$week .= $lecture_url;
+						}
 					}
 					
 		    } else {
 					$week .= '<td style = "width : 120px;" >' . $day;
-					foreach($date_lectures as $lecture){
-						$lecture_url = '<div style = "margin : auto ;border: 1px solid #000; width : 80px; text-align: center">'. $this->Html->link($lecture, array('controller' => 'lectures', 'action' => 'index',  $lecture_name_id[$lecture])) .'</div>';
-						$week .= $lecture_url;
+					if(isset($date_lectures)){
+						foreach($date_lectures as $lecture){
+							$lecture_url = '<div style = "margin : auto ;border: 1px solid #000; width : 80px; text-align: center">'. $this->Html->link($lecture, array('controller' => 'lectures', 'action' => 'index',  $lecture_name_id[$lecture])) .'</div>';
+							$week .= $lecture_url;
+						}
 					}
+					
 		    }
 		    $week .= '</td>';
 		    // 週終わり、または、月終わりの場合

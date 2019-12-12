@@ -27,6 +27,9 @@ class UsersCoursesController extends AppController
 	public function index()
 	{
 		$this->loadModel('Lecture');
+		$this->loadModel('UsersLecture');
+		$this->loadModel('User');
+
 		$user_id = $this->Auth->user('id');
 		
 		// 全体のお知らせの取得
@@ -61,6 +64,7 @@ class UsersCoursesController extends AppController
 		
 		$this->set(compact('courses', 'no_record', 'info', 'infos', 'no_info'));
 
+
 		//講義情報の取得---start
 		$from_date = array(
 			'year' => date('Y', strtotime("-1 month")),
@@ -74,11 +78,30 @@ class UsersCoursesController extends AppController
 			implode("/", $from_date), 
 			implode("/", $to_date).' 23:59:59'
 		);
+
+		$rows = $this->User->find('all',array(
+			'conditions' => array(
+				'User.id' => $user_id
+			)
+		));
+
+		$this->log($rows);
+		
+		$conditions['OR'][] = array('Lecture.id' => 0);
+		$rows = $rows[0]['Lecture'];
+		foreach($rows as $row){
+			$conditions['OR'][] = array(
+				'Lecture.id' => $row['id']
+			);
+		}
+
+		$this->log($rows);
+
 		$lectures = $this->Lecture->find('all',array(
 			'conditions' => $conditions,
 			'order' => 'Lecture.created DESC'
 		));
-		//$this->log($lectures);
+		$this->log($lectures);
 
 		$lecture_name_id = $this->Lecture->find('list',array(
 			'fields' => array(

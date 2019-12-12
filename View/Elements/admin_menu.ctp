@@ -6,8 +6,8 @@
 			$is_active = (($this->name=='Users')&&($this->params["action"]!='admin_password')) ? ' active' : '';
 			echo '<li class="'.$is_active.'">'.$this->Html->link(__('ユーザ'), array('controller' => 'users', 'action' => 'index')).'</li>';
 
-			$is_active = ($this->name=='Interview') ? ' active' : '';
-			echo '<li class="'.$is_active.'">'.$this->Html->link(__('面談'), array('controller' => 'lectures', 'action' => 'index')).'</li>';
+			$is_active = ($this->name=='Interviews') ? ' active' : '';
+			echo '<li class="'.$is_active.'">'.$this->Html->link(__('面談'), array('controller' => 'interviews', 'action' => 'index')).'</li>';
 
 			$is_active = ($this->name=='Groups') ? ' active' : '';
 			echo '<li class="'.$is_active.'">'.$this->Html->link(__('グループ'), array('controller' => 'groups', 'action' => 'index')).'</li>';
