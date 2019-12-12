@@ -42,8 +42,36 @@ class InterviewsController extends AppController{
 		$this->set(compact("users"));
 	}
 
-	public function admin_edit(){
-		
+	/** 
+	* @param int $user_id 生徒ID
+	*/
+	public function admin_edit($user_id){
+		$this->loadModel('User');
+		$this->loadModel('Records');
+
+		//個人情報を検索
+		$user_info = $this->User->find('all',array(
+			'conditions' => array(
+				'User.id' => $user_id
+			)
+		));
+
+		$user_info = $user_info[0];
+
+
+		$this->set(compact("user_info"));
+
+		if ($this->request->is(array(
+			'post',
+			'put'
+		)))
+		{
+			$request_data = $this->request->data;
+			$this->log($request_data);
+		}else{
+
+		}
+
 	}
 
 	public function admin_delete(){
