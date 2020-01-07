@@ -134,7 +134,7 @@
           <table class = "table table-borderless ">
             <tbody>
               <tr>
-                <th>コース名</th>
+                <th>Webテスト</th>
                 <th>コンテンツ名</th>
                 <th>得点</th>
                 <th>満点</th>

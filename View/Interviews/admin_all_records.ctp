@@ -54,7 +54,7 @@
 			echo '</div>';
 			
 			echo '<div class="ib-row">';
-			echo $this->Form->input('course_id',		array('label' => 'コース :', 'options'=>$courses, 'selected'=>$course_id, 'empty' => '全て', 'required'=>false, 'class'=>'form-control'));
+			echo $this->Form->input('course_id',		array('label' => 'Webテスト :', 'options'=>$courses, 'selected'=>$course_id, 'empty' => '全て', 'required'=>false, 'class'=>'form-control'));
 			//echo $this->Form->input('content_category',	array('label' => 'コンテンツ種別 :', 'options'=>Configure::read('content_category'), 'selected'=>$content_category, 'empty' => '全て', 'required'=>false, 'class'=>'form-control'));
 			echo $this->Form->input('contenttitle',		array('label' => 'コンテンツ名 :', 'value'=>$contenttitle, 'class'=>'form-control'));
       echo $this->Form->input('name',	array(
@@ -73,7 +73,7 @@
 	<table cellpadding="0" cellspacing="0">
 	<thead>
 	<tr>
-		<th nowrap><?php echo $this->Paginator->sort('course_id', 'コース'); ?></th>
+		<th nowrap><?php echo $this->Paginator->sort('course_id', 'Webテスト'); ?></th>
 		<th nowrap><?php echo $this->Paginator->sort('content_id', 'コンテンツ'); ?></th>
 		<th nowrap><?php echo $this->Paginator->sort('User.name', '氏名'); ?></th>
 		<th nowrap class="ib-col-center"><?php echo $this->Paginator->sort('score', '得点'); ?></th>

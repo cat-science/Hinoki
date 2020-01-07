@@ -46,16 +46,16 @@
 </script>
 <?php $this->end(); ?>
 <div class="admin-courses-index">
-	<div class="ib-page-title"><?php echo __('コース一覧'); ?></div>
+	<div class="ib-page-title"><?php echo __('Webテスト一覧'); ?></div>
 	<div class="buttons_container">
 		<button type="button" class="btn btn-primary btn-add" onclick="location.href='<?php echo Router::url(array('action' => 'add')) ?>'">+ 追加</button>
 	</div>
 
-	<div class="alert alert-warning">ドラッグアンドドロップでコースの並び順が変更できます。</div>
+	<div class="alert alert-warning">ドラッグアンドドロップでWebテストの並び順が変更できます。</div>
 	<table id='sortable-table'>
 	<thead>
 	<tr>
-		<th><?php echo __('コース名'); ?></th>
+		<th><?php echo __('Webテスト名'); ?></th>
 		<th class="ib-col-datetime"><?php echo __('作成日時'); ?></th>
 		<th class="ib-col-datetime"><?php echo __('更新日時'); ?></th>
 		<th class="ib-col-action"><?php echo __('Actions'); ?></th>

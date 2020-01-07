@@ -3,13 +3,13 @@
 <?php echo $this->Html->link(__('<< 戻る'), array('action' => 'index'))?>
 	<div class="panel panel-default">
 		<div class="panel-heading">
-			<?php echo ($this->action == 'admin_edit') ? __('編集') :  __('新規コース'); ?>
+			<?php echo ($this->action == 'admin_edit') ? __('編集') :  __('新規Webテスト'); ?>
 		</div>
 		<div class="panel-body">
 			<?php echo $this->Form->create('Course', Configure::read('form_defaults')); ?>
 			<?php
 				echo $this->Form->input('id');
-				echo $this->Form->input('title',	array('label' => __('コース名')));
+				echo $this->Form->input('title',	array('label' => __('Webテスト名')));
 				/*
 				echo $this->Form->input('opened',	array(
 					'type' => 'datetime',
@@ -21,7 +21,7 @@
 					'style' => 'width:initial; display: inline;'
 				));
 				*/
-				echo $this->Form->input('introduction',	array('label' => __('コース紹介')));
+				echo $this->Form->input('introduction',	array('label' => __('Webテスト紹介')));
 				echo $this->Form->input('comment',		array('label' => __('備考')));
 			?>
 			<div class="form-group">

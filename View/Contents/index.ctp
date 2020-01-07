@@ -30,7 +30,7 @@
 	// 管理者による学習履歴表示の場合、パンくずリストを表示しない
 	if(!$is_admin_record)
 	{
-		$this->Html->addCrumb('<< '.__('コース一覧'), array(
+		$this->Html->addCrumb('<< '.__('Webテスト一覧'), array(
 			'controller' => 'users_courses',
 			'action' => 'index'
 		));
