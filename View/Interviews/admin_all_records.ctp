@@ -23,68 +23,57 @@
 	{
 		var url = '<?php echo Router::url(array('action' => 'csv')) ?>/' + $('#MembersEventEventId').val() + '/' + $('#MembersEventStatus').val() + '/' + $('#MembersEventUsername').val();
 		$("#RecordCmd").val("csv");
-		$("#RecordAdminIndexForm").submit();
+		$("#RecordAdminAllRecordsForm").submit();
 		$("#RecordCmd").val("");
 	}
 </script>
 <?php $this->end(); ?>
 <div class="admin-records-index">
-	<div class="ib-page-title"><?php echo __('学習履歴一覧'); ?></div>
+  <div class="ib-page-title" style = "margin-bottom : 1%" ><?php echo __($user_info['User']['name'].'のWebテスト成績一覧'); ?></div>
 	<div class="ib-horizontal">
 		<?php
-			echo $this->Form->create('Record');
-			echo '<div class="ib-search-buttons">';
-			echo $this->Form->submit(__('検索'),	array('class' => 'btn btn-info', 'div' => false));
+			echo $this->Form->create('Record',array('type'=>'get'));
+      echo '<div class="ib-search-buttons">';
+      
+      echo $this->Form->submit(__('検索'),	array('class' => 'btn btn-info', 'div' => false));
 			echo $this->Form->hidden('cmd');
 			echo '<button type="button" class="btn btn-default" onclick="downloadCSV()">'.__('CSV出力').'</button>';
+      /*
+			echo $this->Form->submit(__('検索'),	array(
+        'class' => 'btn btn-info', 
+        'div' => false,
+        'name' => 'search'
+      ));
+
+      echo $this->Form->submit(__('CSV出力'),	array(
+        'class' => 'btn btn-default', 
+        'div' => false,
+        'name' => 'csv'
+      ));
+      */
 			echo '</div>';
 			
 			echo '<div class="ib-row">';
 			echo $this->Form->input('course_id',		array('label' => 'Webテスト :', 'options'=>$courses, 'selected'=>$course_id, 'empty' => '全て', 'required'=>false, 'class'=>'form-control'));
-			echo $this->Form->input('content_category',	array('label' => 'コンテンツ種別 :', 'options'=>Configure::read('content_category'), 'selected'=>$content_category, 'empty' => '全て', 'required'=>false, 'class'=>'form-control'));
+			//echo $this->Form->input('content_category',	array('label' => 'コンテンツ種別 :', 'options'=>Configure::read('content_category'), 'selected'=>$content_category, 'empty' => '全て', 'required'=>false, 'class'=>'form-control'));
 			echo $this->Form->input('contenttitle',		array('label' => 'コンテンツ名 :', 'value'=>$contenttitle, 'class'=>'form-control'));
-			echo '</div>';
-			
-			echo '<div class="ib-row">';
-			echo $this->Form->input('group_id',		array('label' => 'グループ :', 'options'=>$groups, 'selected'=>$group_id, 'empty' => '全て', 'required'=>false, 'class'=>'form-control'));
-			echo $this->Form->input('name',			array('label' => '氏名 :', 'value'=>$name, 'class'=>'form-control'));
-			echo '</div>';
-			
-			echo '<div class="ib-search-date-container">';
-			echo $this->Form->input('from_date', array(
-				'type' => 'date',
-				'dateFormat' => 'YMD',
-				'monthNames' => false,
-				'timeFormat' => '24',
-				'minYear' => date('Y') - 5,
-				'maxYear' => date('Y'),
-				'separator' => ' / ',
-				'label'=> '対象日時 : ',
-				'class'=>'form-control',
-				'style' => 'display: inline;',
-				'value' => $from_date
-			));
-			echo $this->Form->input('to_date', array(
-				'type' => 'date',
-				'dateFormat' => 'YMD',
-				'monthNames' => false,
-				'timeFormat' => '24',
-				'minYear' => date('Y') - 5,
-				'maxYear' => date('Y'),
-				'separator' => ' / ',
-				'label'=> '～',
-				'class'=>'form-control',
-				'style' => 'display: inline;',
-				'value' => $to_date
-			));
-			echo '</div>';
+      echo $this->Form->input('name',	array(
+        'label' => '氏名 :', 
+        'value'=>$name, 
+        'class'=>'form-control', 
+        'id' => 'disabledInput',
+        'value' => $user_info['User']['name'],
+        'disabled'
+      ));
+      echo '</div>';
+      
 			echo $this->Form->end();
 		?>
 	</div>
 	<table cellpadding="0" cellspacing="0">
 	<thead>
 	<tr>
-		<th nowrap><?php echo $this->Paginator->sort('course_id', 'コース'); ?></th>
+		<th nowrap><?php echo $this->Paginator->sort('course_id', 'Webテスト'); ?></th>
 		<th nowrap><?php echo $this->Paginator->sort('content_id', 'コンテンツ'); ?></th>
 		<th nowrap><?php echo $this->Paginator->sort('User.name', '氏名'); ?></th>
 		<th nowrap class="ib-col-center"><?php echo $this->Paginator->sort('score', '得点'); ?></th>

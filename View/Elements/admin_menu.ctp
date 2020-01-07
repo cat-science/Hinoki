@@ -10,10 +10,10 @@
 			echo '<li class="'.$is_active.'">'.$this->Html->link(__('面談'), array('controller' => 'interviews', 'action' => 'index')).'</li>';
 
 			$is_active = ($this->name=='Groups') ? ' active' : '';
-			echo '<li class="'.$is_active.'">'.$this->Html->link(__('グループ'), array('controller' => 'groups', 'action' => 'index')).'</li>';
+			echo '<li class="'.$is_active.'">'.$this->Html->link(__('キャンパス'), array('controller' => 'groups', 'action' => 'index')).'</li>';
 
 			$is_active = (($this->name=='Courses')||($this->name=='Contents')||($this->name=='ContentsQuestions')) ? ' active' : '';
-			echo '<li class="'.$is_active.'">'.$this->Html->link(__('コース'), array('controller' => 'courses', 'action' => 'index')).'</li>';
+			echo '<li class="'.$is_active.'">'.$this->Html->link(__('Webテスト'), array('controller' => 'courses', 'action' => 'index')).'</li>';
 
 			$is_active = ($this->name=='Infos') ? ' active' : '';
 			echo '<li class="'.$is_active.'">'.$this->Html->link(__('お知らせ'), array('controller' => 'infos', 'action' => 'index')).'</li>';

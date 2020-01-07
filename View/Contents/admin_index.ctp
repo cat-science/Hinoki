@@ -49,7 +49,7 @@
 <div class="admin-contents-index">
 	<div class="ib-breadcrumb">
 	<?php
-		$this->Html->addCrumb('コース一覧', array('controller' => 'courses', 'action' => 'index'));
+		$this->Html->addCrumb('Webテスト一覧', array('controller' => 'courses', 'action' => 'index'));
 		$this->Html->addCrumb(h($course['Course']['title']));
 
 		echo $this->Html->getCrumbs(' / ');

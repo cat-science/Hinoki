@@ -3,9 +3,9 @@
 <?php echo $this->Html->script( 'select2.min.js');?>
 <?php $this->Html->scriptStart(array('inline' => false)); ?>
 	$(function (e) {
-		$('#GroupGroup').select2({placeholder:   "所属するグループを選択して下さい。(複数選択可)", closeOnSelect: <?php echo (Configure::read('close_on_select') ? 'true' : 'false'); ?>,});
-		$('#CourseCourse').select2({placeholder: "受講するコースを選択して下さい。(複数選択可)", closeOnSelect: <?php echo (Configure::read('close_on_select') ? 'true' : 'false'); ?>,});
-		$('#LectureLecture').select2({placeholder: "受講するコースを選択して下さい。(複数選択可)", closeOnSelect: <?php echo (Configure::read('close_on_select') ? 'true' : 'false'); ?>,});
+		$('#GroupGroup').select2({placeholder:   "所属するキャンパスを選択して下さい。(複数選択可)", closeOnSelect: <?php echo (Configure::read('close_on_select') ? 'true' : 'false'); ?>,});
+		$('#CourseCourse').select2({placeholder: "受講するWebテストを選択して下さい。(複数選択可)", closeOnSelect: <?php echo (Configure::read('close_on_select') ? 'true' : 'false'); ?>,});
+		$('#LectureLecture').select2({placeholder: "受講する科目を選択して下さい。(複数選択可)", closeOnSelect: <?php echo (Configure::read('close_on_select') ? 'true' : 'false'); ?>,});
 
 		// パスワードの自動復元を防止
 		setTimeout('$("#UserNewPassword").val("");', 500);
@@ -42,9 +42,9 @@
 				);
 				
 				echo $this->Form->input('email',				array('label' => 'メールアドレス'));
-				echo $this->Form->input('Group',				array('label' => '所属グループ',	'size' => 20));
+				echo $this->Form->input('Group',				array('label' => '所属キャンパス',	'size' => 20));
 				
-				echo $this->Form->input('Course',				array('label' => '受講コース',		'size' => 20));
+				echo $this->Form->input('Course',				array('label' => 'Webテスト',		'size' => 20));
 				echo $this->Form->input('Lecture',				array('label' => '受講科目',		'size' => 20));
 				echo $this->Form->input('comment',				array('label' => '備考'));
 			?>
