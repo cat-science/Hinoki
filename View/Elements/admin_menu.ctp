@@ -24,6 +24,10 @@
 			$is_active = ($this->name=='Lectures') ? ' active' : '';
 			echo '<li class="'.$is_active.'">'.$this->Html->link(__('授業編集'), array('controller' => 'lectures', 'action' => 'index_2')).'</li>';
 
+			$is_active = ($this->name=='Logs') ? ' active' : '';
+			echo '<li class="'.$is_active.'">'.$this->Html->link(__('ログイン履歴'), array('controller' => 'logs', 'action' => 'index')).'</li>';
+			
+
 			if($loginedUser['role']=='admin')
 			{
 				$is_active = ($this->name=='Settings') ? ' active' : '';
