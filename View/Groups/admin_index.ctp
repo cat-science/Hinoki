@@ -1,6 +1,6 @@
 <?php echo $this->element('admin_menu');?>
 <div class="admin-groups-index">
-	<div class="ib-page-title"><?php echo __('グループ一覧'); ?></div>
+	<div class="ib-page-title"><?php echo __('キャンパス一覧'); ?></div>
 	<div class="buttons_container">
 		<button type="button" class="btn btn-primary btn-add" onclick="location.href='<?php echo Router::url(array('action' => 'add')) ?>'">+ 追加</button>
 	</div>
@@ -8,7 +8,7 @@
 	<table>
 	<thead>
 	<tr>
-		<th><?php echo $this->Paginator->sort('title', 'グループ名'); ?></th>
+		<th><?php echo $this->Paginator->sort('title', 'キャンパス名'); ?></th>
 		<th nowrap class="col-course"><?php echo __('受講コース'); ?></th>
 		<th class="ib-col-date"><?php echo $this->Paginator->sort('created', '作成日時'); ?></th>
 		<th class="ib-col-date"><?php echo $this->Paginator->sort('modified', '更新日時'); ?></th>

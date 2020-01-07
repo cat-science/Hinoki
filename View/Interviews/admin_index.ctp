@@ -4,9 +4,9 @@
 
 	<div class="ib-horizontal">
 		<?php
-			echo $this->Form->create('User');
+			echo $this->Form->create();
 			echo $this->Form->input('group_id',		array(
-				'label' => 'グループ : ', 
+				'label' => 'キャンパス : ', 
 				'options'=>$groups, 
 				'selected'=>$group_id, 
 				'empty' => '全て', 
@@ -28,7 +28,7 @@
 		<th nowrap><?php echo $this->Paginator->sort('username', 'ログインID'); ?></th>
 		<th nowrap class="col-width"><?php echo $this->Paginator->sort('name', '氏名'); ?></th>
 
-		<th nowrap><?php echo __('所属グループ'); ?></th>
+		<th nowrap><?php echo __('所属キャンパス'); ?></th>
 
 		<th nowrap class="ib-col-datetime"><?php echo __('受講科目'); ?></th>
 

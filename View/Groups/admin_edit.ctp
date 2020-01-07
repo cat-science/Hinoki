@@ -10,13 +10,13 @@
 <?php echo $this->Html->link(__('<< 戻る'), array('action' => 'index'))?>
 	<div class="panel panel-default">
 		<div class="panel-heading">
-			<?php echo ($this->action == 'admin_edit') ? __('編集') :  __('新規グループ'); ?>
+			<?php echo ($this->action == 'admin_edit') ? __('編集') :  __('新規キャンパス'); ?>
 		</div>
 		<div class="panel-body">
 			<?php echo $this->Form->create('Group', Configure::read('form_defaults')); ?>
 			<?php
 				echo $this->Form->input('id');
-				echo $this->Form->input('title',	array('label' => __('グループ名')));
+				echo $this->Form->input('title',	array('label' => __('キャンパス名')));
 				echo $this->Form->input('Course',	array('label' => __('受講コース'),		'size' => 20));
 				echo $this->Form->input('comment',	array('label' => __('備考')));
 			?>

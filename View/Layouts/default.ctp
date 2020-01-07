@@ -21,8 +21,11 @@
 		// 管理画面フラグ（ログイン画面は例外とする）
 		$is_admin_page = (($this->params['admin']==1)&&($this->params['action']!='admin_login'));
 		
+		// 講師画面フラグ (ログイン画面は例外とする)
+		$is_docent_page = (($this->params['docent']==1)&&($this->params['action']!='docent_login'));
+		
 		// 受講者向け画面及び、管理システムのログイン画面のみ viewport を設定（スマートフォン対応）
-		if(!$is_admin_page)
+		if(!$is_admin_page || !$is_docent_page)
 			echo '<meta name="viewport" content="width=device-width,initial-scale=1">';
 		
 		echo $this->Html->meta('icon');
@@ -79,7 +82,32 @@
 <body>
 	<div class="header ib-theme-color">
 		<div class="ib-logo ib-left">
-			<a href="<?php echo $this->Html->url('/')?>"><?php echo h($this->Session->read('Setting.title')); ?></a>
+
+			<?php 
+				/** 
+				 * adminページ 	 => docentページ 
+				 * docentページ  => userページ
+				 * userページ 	 => adminページ
+				 */
+				if($loginedUser['role'] == 'admin' && ($is_admin_page) && (!$is_docent_page)){
+					$top_url = '/docent/lectures';
+				}else if($loginedUser['role'] == 'admin' && (!$is_admin_page) && ($is_docent_page)){
+					$top_url = '/';
+				}else if($loginedUser['role'] == 'admin' && (!$is_admin_page) && (!$is_docent_page)){
+					$top_url = '/admin/users';
+				}else if($loginedUser['role'] == 'docent' && (!$is_admin_page) && ($is_docent_page)){
+					$top_url = '/';
+				}else if($loginedUser['role'] == 'docent' && (!$is_admin_page) && (!$is_docent_page)){
+					$top_url = '/docent/lectures';
+				}else{
+					$top_url = '/';
+				}
+			?>
+
+			<?php //$top_url = (($loginedUser['role']=='admin') && (!$is_admin_page)) ? '/admin/recentstates' : '/'; ?>
+			<a href="<?php echo $this->Html->url($top_url)?>">
+				<?php echo h($this->Session->read('Setting.title')); ?>
+			</a>
 		</div>
 		<?php if(@$loginedUser) {?>
 		<div class="ib-navi-item ib-right"><?php echo $this->Html->link(__('ログアウト'), $logoutURL); ?></div>
