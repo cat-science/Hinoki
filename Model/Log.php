@@ -24,4 +24,14 @@ class Log extends AppModel {
 			'order' => ''
 		)
 	);
+
+	/**
+	 * 検索用
+	 */
+	public $actsAs = array(
+		'Search.Searchable'
+	);
+
+	public $filterArgs = array(
+	);
 }

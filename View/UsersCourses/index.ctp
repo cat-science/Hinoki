@@ -38,6 +38,7 @@
 		$week = '';
 		// 第１週目：空のセルを追加
 		// 例）１日が水曜日だった場合、日曜日から火曜日の３つ分の空セルを追加する
+		//$this->log($date_name_list);
 		$week .= str_repeat('<td></td>', $youbi);
 		for ( $day = 1; $day <= $day_count; $day++, $youbi++) {
 				// 2017-07-3
@@ -46,6 +47,11 @@
 				// その日の授業の配列を取得
 				$date_slash = str_replace("-","/",$date);
 				$date_lectures = $date_name_list[$date_slash];
+
+				/*
+				$this->log($date_slash);
+				$this->log($date_lectures);
+				*/
 
 		    if ($today == $date) {
 					// 今日の日付の場合は、class="today"をつける

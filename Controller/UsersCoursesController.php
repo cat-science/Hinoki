@@ -74,18 +74,13 @@ class UsersCoursesController extends AppController
 		
 		$to_date	= array('year' => date('Y'), 'month' => date('m'), 'day' => date('d'));
 
-		$conditions['Lecture.created BETWEEN ? AND ?'] = array(
-			implode("/", $from_date), 
-			implode("/", $to_date).' 23:59:59'
-		);
-
+	
 		$rows = $this->User->find('all',array(
 			'conditions' => array(
 				'User.id' => $user_id
 			)
 		));
 
-		$this->log($rows);
 		
 		$conditions['OR'][] = array('Lecture.id' => 0);
 		$rows = $rows[0]['Lecture'];
@@ -95,28 +90,33 @@ class UsersCoursesController extends AppController
 			);
 		}
 
-		$this->log($rows);
+		//$this->log($rows);
 
 		$lectures = $this->Lecture->find('all',array(
 			'conditions' => $conditions,
 			'order' => 'Lecture.created DESC'
 		));
-		$this->log($lectures);
+		//$this->log($lectures);
 
 		$lecture_name_id = $this->Lecture->find('list',array(
 			'fields' => array(
 				'Lecture.lecture_name','Lecture.id'
 			)
 		));
+		/*
 		$this->log('l_n_i');
 		$this->log($lecture_name_id);
+		*/
 
 		$date_name_list = [];
+		$this->log($lectures);
 		foreach($lectures as $lecture){
+			$this->log('row1',$rows);
 			$rows = $lecture['Lecture']['lecture_date'];
 			$lecture_name = $lecture['Lecture']['lecture_name'];
 
 			$rows = explode("\n",$rows);
+			$this->log('row2',$rows);
 			foreach($rows as $row){
 				$row = str_replace(array("\r","\r\n","\n"), '', $row);
 				$this->log($row);
@@ -129,10 +129,11 @@ class UsersCoursesController extends AppController
 				}
 				
 			}
-			$this->log($date_name_list);
+			
 			
 		}
 		$this->set(compact("date_name_list","lecture_name_id"));
+		//$this->log($date_name_list);
 	}
 	//講義情報の取得---end
 }
