@@ -22,7 +22,7 @@
 			echo '<li class="'.$is_active.'">'.$this->Html->link(__('学習履歴'), array('controller' => 'records', 'action' => 'index')).'</li>';
 
 			$is_active = ($this->name=='Lectures') ? ' active' : '';
-			echo '<li class="'.$is_active.'">'.$this->Html->link(__('授業編集'), array('controller' => 'lectures', 'action' => 'index_2')).'</li>';
+			echo '<li class="'.$is_active.'">'.$this->Html->link(__('授業編集'), array('controller' => 'lectures', 'action' => 'index')).'</li>';
 
 			$is_active = ($this->name=='Logs') ? ' active' : '';
 			echo '<li class="'.$is_active.'">'.$this->Html->link(__('ログイン履歴'), array('controller' => 'logs', 'action' => 'index')).'</li>';
