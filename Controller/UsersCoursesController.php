@@ -109,17 +109,14 @@ class UsersCoursesController extends AppController
 		*/
 
 		$date_name_list = [];
-		$this->log($lectures);
+		
 		foreach($lectures as $lecture){
-			$this->log('row1',$rows);
 			$rows = $lecture['Lecture']['lecture_date'];
 			$lecture_name = $lecture['Lecture']['lecture_name'];
 
 			$rows = explode("\n",$rows);
-			$this->log('row2',$rows);
 			foreach($rows as $row){
 				$row = str_replace(array("\r","\r\n","\n"), '', $row);
-				$this->log($row);
 
 				if($date_name_list[$row]){
 					array_push($date_name_list[$row],$lecture_name);
@@ -134,6 +131,7 @@ class UsersCoursesController extends AppController
 		}
 		$this->set(compact("date_name_list","lecture_name_id"));
 		//$this->log($date_name_list);
+		//講義情報の取得---end
+
 	}
-	//講義情報の取得---end
 }

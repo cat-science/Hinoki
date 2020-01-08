@@ -1,4 +1,4 @@
-<?php echo $this->element('docent_menu');?>
+<?php echo $this->element('admin_menu');?>
 <div class="docent-lecture-edit">
 <?php echo $this->Html->link(__('<< 戻る'), array('controller' => 'lectures', 'action' => 'index'))?>
 	<div class="panel panel-default">
@@ -72,6 +72,17 @@
     			'class' => '',
 					'style' => '',
 				));
+        
+				echo $this->Form->input('lecture_date',array(
+					'label' => __('授業日'),
+    			'type' => 'textarea',
+    			'class' => '',
+					'style' => '',
+					'placeholder' => '2019/11/01
+2019/11/02
+のように入力してください',
+    			'value' => $enquete_inputted['Enquete']['before_false_reason']
+        ));
         
 			?>
 			<div class="form-group">
