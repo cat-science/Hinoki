@@ -70,19 +70,9 @@
 					'label' => __('特記事項'),
 					'type' => 'textarea',
     			'class' => '',
-					'style' => '',
+					'style' => ''
 				));
         
-				echo $this->Form->input('lecture_date',array(
-					'label' => __('授業日'),
-    			'type' => 'textarea',
-    			'class' => '',
-					'style' => '',
-					'placeholder' => '2019/11/01
-2019/11/02
-のように入力してください',
-    			'value' => $enquete_inputted['Enquete']['before_false_reason']
-        ));
         
 			?>
 			<div class="form-group">
