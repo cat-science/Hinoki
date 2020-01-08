@@ -228,7 +228,43 @@ class LecturesController extends AppController
 	}
 
 	public function docent_index(){
+		$this->loadModel('UsersLecture');
 		$this->loadModel('User');
+		$this->loadModel('UsersCourse');
+
+		$user_id = $this->Auth->user('id');
+		
+		// 全体のお知らせの取得
+		App::import('Model', 'Setting');
+		$this->Setting = new Setting();
+		
+		$data = $this->Setting->find('all', array(
+			'conditions' => array(
+				'Setting.setting_key' => 'information'
+			)
+		));
+		
+		$info = $data[0]['Setting']['setting_value'];
+		
+		// お知らせ一覧を取得
+		$this->loadModel('Info');
+		$infos = $this->Info->getInfos($user_id, 2);
+		
+		$no_info = "";
+		
+		// 全体のお知らせもお知らせも存在しない場合
+		if(($info=="") && count($infos)==0)
+			$no_info = __('お知らせはありません');
+		
+		// 受講コース情報の取得
+		$courses = $this->UsersCourse->getCourseRecord($user_id);
+		
+		$no_record = "";
+		
+		if(count($courses)==0)
+			$no_record = __('受講可能なコースはありません');
+		
+		$this->set(compact('courses', 'no_record', 'info', 'infos', 'no_info'));
 
 		$from_date = array(
 			'year' => date('Y', strtotime("-1 month")),
