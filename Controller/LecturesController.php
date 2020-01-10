@@ -40,7 +40,44 @@ class LecturesController extends AppController
 	 */
 	public function index($lecture_id)
 	{
+		$this->loadModel('LecturesRecord');
+		$this->loadModel('User');
+		$this->loadModel('LecturesAttendance');
+
+
+		$user_id = $this->Auth->user('id');
+
+		$records = $this->LecturesRecord->find('all',array(
+			//'fields' => array( 'id', 'lecture_date' ),
+			'conditions' => array(
+				'LecturesRecord.lecture_id' => $lecture_id
+			),
+			'order' => 'LecturesRecord.lecture_date desc'
+		));
 		
+		$lecture_list = $this->Lecture->find('list',array(
+			'fields' => array('id', 'lecture_name')
+		));
+
+		$user_list = $this->User->find('list',array(
+			'fields' => array('id', 'name')
+		));
+
+		$attendance_list = $this->LecturesAttendance->find('list',array(
+			'fields' => array('lecture_date', 'status'),
+			'conditions' => array(
+				'LecturesAttendance.lecture_id' => $lecture_id,
+				'LecturesAttendance.user_id' => $user_id
+			)
+		));
+
+
+		$this->log($attendance_list);
+		$this->log($records);
+
+		$this->set(compact("records","lecture_list","lecture_id"));
+		$this->set(compact("user_list","attendance_list"));
+
 	}
 
 	/* 専任講師関連 */
