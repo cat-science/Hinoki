@@ -40,7 +40,44 @@ class LecturesController extends AppController
 	 */
 	public function index($lecture_id)
 	{
+		$this->loadModel('LecturesRecord');
+		$this->loadModel('User');
+		$this->loadModel('LecturesAttendance');
+
+
+		$user_id = $this->Auth->user('id');
+
+		$records = $this->LecturesRecord->find('all',array(
+			//'fields' => array( 'id', 'lecture_date' ),
+			'conditions' => array(
+				'LecturesRecord.lecture_id' => $lecture_id
+			),
+			'order' => 'LecturesRecord.lecture_date desc'
+		));
 		
+		$lecture_list = $this->Lecture->find('list',array(
+			'fields' => array('id', 'lecture_name')
+		));
+
+		$user_list = $this->User->find('list',array(
+			'fields' => array('id', 'name')
+		));
+
+		$attendance_list = $this->LecturesAttendance->find('list',array(
+			'fields' => array('lecture_date', 'status'),
+			'conditions' => array(
+				'LecturesAttendance.lecture_id' => $lecture_id,
+				'LecturesAttendance.user_id' => $user_id
+			)
+		));
+
+
+		$this->log($attendance_list);
+		$this->log($records);
+
+		$this->set(compact("records","lecture_list","lecture_id"));
+		$this->set(compact("user_list","attendance_list"));
+
 	}
 
 	/* 専任講師関連 */
@@ -228,7 +265,43 @@ class LecturesController extends AppController
 	}
 
 	public function docent_index(){
+		$this->loadModel('UsersLecture');
 		$this->loadModel('User');
+		$this->loadModel('UsersCourse');
+
+		$user_id = $this->Auth->user('id');
+		
+		// 全体のお知らせの取得
+		App::import('Model', 'Setting');
+		$this->Setting = new Setting();
+		
+		$data = $this->Setting->find('all', array(
+			'conditions' => array(
+				'Setting.setting_key' => 'information'
+			)
+		));
+		
+		$info = $data[0]['Setting']['setting_value'];
+		
+		// お知らせ一覧を取得
+		$this->loadModel('Info');
+		$infos = $this->Info->getInfos($user_id, 2);
+		
+		$no_info = "";
+		
+		// 全体のお知らせもお知らせも存在しない場合
+		if(($info=="") && count($infos)==0)
+			$no_info = __('お知らせはありません');
+		
+		// 受講コース情報の取得
+		$courses = $this->UsersCourse->getCourseRecord($user_id);
+		
+		$no_record = "";
+		
+		if(count($courses)==0)
+			$no_record = __('受講可能なコースはありません');
+		
+		$this->set(compact('courses', 'no_record', 'info', 'infos', 'no_info'));
 
 		$from_date = array(
 			'year' => date('Y', strtotime("-1 month")),

@@ -135,6 +135,7 @@ class InterviewsController extends AppController{
 		));
 
 		$user_info = $user_info[0];
+		$this->log($user_info);
 		
 
 		$records = $this->Record->find('all',array(

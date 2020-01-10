@@ -86,9 +86,10 @@
                 <th>学籍番号</th>
                 <th><?php echo $user_info['User']['username'];?></th>
               </tr>
+              
               <tr>
-                <th>生年月日</th>
-                <th>yyyy/mm/dd</th>
+                <th>キャンパス</th>
+                <th><?php echo $user_info['Group'][0]['title'];?></th>
               </tr>
               
             </tbody>
