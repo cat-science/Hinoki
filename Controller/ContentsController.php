@@ -494,4 +494,9 @@ class ContentsController extends AppController
 			$course_id
 		));
 	}
+
+	public function docent_index($course_id, $user_id = null){
+		return $this->redirect("/contents/index/".$course_id);
+	}
+
 }
