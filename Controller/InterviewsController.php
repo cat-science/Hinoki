@@ -116,6 +116,8 @@ class InterviewsController extends AppController{
 			'ORDER BY' => 'User.created DESC'
 		));
 
+		$users = $this->User->setUserManyTitles($users);
+
 		$this->set(compact("users"));
 
 	}
@@ -134,9 +136,9 @@ class InterviewsController extends AppController{
 			)
 		));
 
+		$user_info = $this->User->setUserManyTitles($user_info);
 		$user_info = $user_info[0];
 		$this->log($user_info);
-		
 
 		$records = $this->Record->find('all',array(
 			'conditions' => array(

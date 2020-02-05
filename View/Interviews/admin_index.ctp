@@ -42,9 +42,7 @@
 	<tr>
 		<td><?php echo h($user['User']['username']); ?>&nbsp;</td>
 		<td><?php echo h($user['User']['name']); ?></td>
-
-		<td><div class="reader" title="<?php echo h($user[0]['group_title']); ?>"><p><?php echo h($user[0]['group_title']); ?>&nbsp;</p></td>
-		
+		<td><div class="reader" title="<?php echo h($user[0]['group_title']); ?>"><p><?php echo h($user[0]['group_title']); ?>&nbsp;</p></div></td>
     <td><div class="reader" title="<?php echo h($user[0]['lecture_title']); ?>"><p><?php echo h($user[0]['lecture_title']); ?>&nbsp;</p></div></td>
 		<?php if($loginedUser['role']=='admin') {?>
 		<td class="ib-col-action">

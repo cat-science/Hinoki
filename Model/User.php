@@ -232,4 +232,47 @@ class User extends AppModel
 		$this->Record = new Record();
 		$this->Record->deleteAll(array('Record.user_id' => $user_id), false);
 	}
+
+	public function setUserManyTitles($users){
+		foreach($users as &$user){
+			$group_title = "";
+			$course_title = "";
+			$lecture_title = "";
+			$tmp = 0;
+			foreach($user['Group'] as $user_group){
+				if($tmp !== 0){
+					$group_title .= ", ".$user_group['title'];
+				}else{
+					$group_title .= $user_group['title'];
+				}
+				$tmp++;
+			}
+			$tmp = 0;
+			foreach($user['Course'] as $user_course){
+				if($tmp !== 0){
+					$course_title .= ", ".$user_course['title'];
+				}else{
+					$course_title .= $user_course['title'];
+				}
+				$tmp++;
+			}
+			$tmp = 0;
+			foreach($user['Lecture'] as $user_lecture){
+				if($tmp !== 0){
+					$lecture_title .= ", ".$user_lecture['lecture_name'];
+				}else{
+					$lecture_title .= $user_lecture['lecture_name'];
+				}
+				$tmp++;
+			}
+			$user[0] = array(
+				'group_title' => $group_title,
+				'course_title' => $course_title,
+				'lecture_title' => $lecture_title
+			);
+		}
+		unset($user);
+		return $users;
+		
+	}
 }

@@ -32,7 +32,9 @@
 
 		echo $this->Html->css('cake.generic');
 		echo $this->Html->css('jquery-ui');
-		echo $this->Html->css('bootstrap.min');
+		echo $this->Html->css('bootstrap.min'); // v4.4
+		echo $this->Html->css('bootstrap'); // v4.4
+
 		echo $this->Html->css('common.css?20190401');
 		
 		// 管理画面用CSS
@@ -44,7 +46,9 @@
 		
 		echo $this->Html->script('jquery-1.9.1.min.js');
 		echo $this->Html->script('jquery-ui-1.9.2.min.js');
-		echo $this->Html->script('bootstrap.min.js');
+		echo $this->Html->script('bootstrap.min.js');	// v4.4
+		echo $this->Html->script('bootstrap.js');	// v4.4
+		echo $this->Html->script('bootstrap.bundle.js'); // v4.4
 		echo $this->Html->script('moment.js');
 		echo $this->Html->script('common.js?20190401');
 		
@@ -80,43 +84,50 @@
 	</style>
 </head>
 <body>
-	<div class="header ib-theme-color">
-		<div class="ib-logo ib-left">
-
-			<?php 
-				/** 
-				 * adminページ 	 => docentページ 
-				 * docentページ  => userページ
-				 * userページ 	 => adminページ
-				 */
-				if($loginedUser['role'] == 'admin' && ($is_admin_page) && (!$is_docent_page)){
-					$top_url = '/docent/lectures';
-				}else if($loginedUser['role'] == 'admin' && (!$is_admin_page) && ($is_docent_page)){
-					$top_url = '/';
-				}else if($loginedUser['role'] == 'admin' && (!$is_admin_page) && (!$is_docent_page)){
-					$top_url = '/admin/users';
-				}else if($loginedUser['role'] == 'docent' && (!$is_admin_page) && ($is_docent_page)){
-					$top_url = '/';
-				}else if($loginedUser['role'] == 'docent' && (!$is_admin_page) && (!$is_docent_page)){
-					$top_url = '/docent/lectures';
-				}else{
-					$top_url = '/';
-				}
-			?>
-
-			<?php //$top_url = (($loginedUser['role']=='admin') && (!$is_admin_page)) ? '/admin/recentstates' : '/'; ?>
-			<a href="<?php echo $this->Html->url($top_url)?>">
-				<?php echo h($this->Session->read('Setting.title')); ?>
-			</a>
-		</div>
-		<?php if(@$loginedUser) {?>
-		<div class="ib-navi-item ib-right"><?php echo $this->Html->link(__('ログアウト'), $logoutURL); ?></div>
-		<div class="ib-navi-sepa ib-right"></div>
-		<div class="ib-navi-item ib-right"><?php echo $this->Html->link(__('設定'), array('controller' => 'users', 'action' => 'setting')); ?></div>
-		<div class="ib-navi-sepa ib-right"></div>
-		<div class="ib-navi-item ib-right"><?php echo __('ようこそ ').h($loginedUser["name"]); ?> さん </div>
-		<?php }?>
-	</div>
+	<nav class="navbar navbar-expand-sm navbar-dark" style="background-color: <?php echo h($this->Session->read('Setting.color')); ?>;">
+	<?php $top_url = (($loginedUser['role']=='admin') && (!$is_admin_page)) ? '/admin/recentstates' : '/'; ?>
+	<?php 
+		/** 
+		 * adminページ 	 => docentページ 
+		 * docentページ  => userページ
+		 * userページ 	 => adminページ
+		 */
+		if($loginedUser['role'] == 'admin' && ($is_admin_page) && (!$is_docent_page)){
+			$top_url = '/docent/lectures';
+		}else if($loginedUser['role'] == 'admin' && (!$is_admin_page) && ($is_docent_page)){
+			$top_url = '/';
+		}else if($loginedUser['role'] == 'admin' && (!$is_admin_page) && (!$is_docent_page)){
+			$top_url = '/admin/users';
+		}else if($loginedUser['role'] == 'docent' && (!$is_admin_page) && ($is_docent_page)){
+			$top_url = '/';
+		}else if($loginedUser['role'] == 'docent' && (!$is_admin_page) && (!$is_docent_page)){
+			$top_url = '/docent/lectures';
+		}else{
+			$top_url = '/';
+		}
+	?>	
+	<a class="navbar-brand" href="<?php echo $this->Html->url($top_url)?>"><?php echo h($this->Session->read('Setting.title')); ?></a>
+	<button type="button" class="navbar-toggler" data-toggle="collapse" data-target="#Navber" aria-controls="Navber" aria-expanded="false" aria-label="ナビゲーションの切替">
+		<span class="navbar-toggler-icon"></span>
+	</button>
+	<?php if(@$loginedUser) {?>
+	<div class="collapse navbar-collapse" id="Navber">
+		<?php echo $this->fetch('menu'); ?>
+		<ul class="navbar-nav mt-2 mt-sm-0">
+			<li class="nav-item dropdown">
+				<a href="#" class="nav-link dropdown-toggle" id="navbarDropdown" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+					<?php echo h($loginedUser["name"]); ?>
+				</a>
+				<div class="dropdown-menu dropdown-menu-right" aria-labelledby="navbarDropdown">
+					<?php echo $this->Html->link(__('設定'), array('controller' => 'users', 'action' => 'setting'), array('class' => 'dropdown-item')); ?>
+					<div class="dropdown-divider"></div>
+					<?php echo $this->Html->link(__('ログアウト'), $logoutURL, array('class' => 'dropdown-item')); ?>
+				</div>
+			</li>
+		</ul>
+	</div><!-- /.navbar-collapse -->
+	<?php }?>
+	</nav>
 	
 	<div id="container">
 		<div id="header" class="row">
