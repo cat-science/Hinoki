@@ -1,4 +1,4 @@
-<div class="contents-questions-index">
+<div class="contents-questions-index col">
 	<div class="breadcrumb">
 	<?php
 	// 管理者による学習履歴表示モードの場合、Webテスト一覧リンクを表示しない
@@ -152,9 +152,9 @@
 				}
 			}
 			?>
-			<div class="panel panel-info">
-				<div class="panel-heading">問<?php echo $question_index;?></div>
-				<div class="panel-body">
+			<div class="card bg-light">
+				<div class="card-header">問<?php echo $question_index;?></div>
+				<div class="card-body">
 					<!--問題タイトル-->
 					<h4><?php echo h($title) ?></h4>
 					<div class="question-text bg-warning">

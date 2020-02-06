@@ -3,8 +3,7 @@
 <?php echo $this->Html->css('summernote.css');?>
 <?php $this->end(); ?>
 <?php $this->start('script-embedded'); ?>
-<?php echo $this->Html->script('summernote.min.js');?>
-<?php echo $this->Html->script('lang/summernote-ja-JP.js');?>
+<?php echo $this->Html->script('summernote-bs4.js');?>
 <script>
 	$(document).ready(function()
 	{
@@ -129,19 +128,32 @@
 </script>
 <?php $this->end(); ?>
 
-<div class="admin-contents-edit">
+<div class="admin-contents-edit col">
 	<?php
 		$this->Html->addCrumb('Webテスト一覧', array('controller' => 'courses', 'action' => 'index'));
 		$this->Html->addCrumb($course['Course']['title'],  array('controller' => 'contents', 'action' => 'index', $course['Course']['id']));
 
 		echo $this->Html->getCrumbs(' / ');
 	?>
-	<div class="panel panel-default">
-		<div class="panel-heading">
+	<div class="card bg-light">
+		<div class="card-header">
 			<?php echo ($this->action == 'admin_edit') ? __('編集') :  __('新規コンテンツ'); ?>
 		</div>
-		<div class="panel-body">
-			<?php echo $this->Form->create('Content', Configure::read('form_defaults')); ?>
+		<div class="card-body">
+			<?php
+				$config = array(
+					'inputDefaults' => array(
+						'div' => 'form-group',
+						'label' => array(
+							'class' => 'col col-sm-5 control-label'
+						),
+						'wrapInput' => 'col col-sm-12',
+						'class' => 'form-control'
+					),
+					'class' => 'form-horizontal'
+				);
+			?>
+			<?php echo $this->Form->create('Content', $config); ?>
 			<?php
 				echo $this->Form->input('id');
 				echo $this->Form->input('title',	array('label' => 'コンテンツタイトル'));

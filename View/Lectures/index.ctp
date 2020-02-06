@@ -1,8 +1,8 @@
-<?php echo $this->Html->link(__('<< トップページに戻る'), array('controller' => 'users_courses', 'action' => 'index'))?>
-<div class = "user-lectures-index">
-  <div class="panel panel-info">
-	  <div class="panel-heading"><?php echo h($lecture_list[$lecture_id]); ?></div>
-	  <div class="panel-body">
+<div class = "user-lectures-index col">
+  <?php echo $this->Html->link(__('<< トップページに戻る'), array('controller' => 'users_courses', 'action' => 'index'))?>
+  <div class="card bg-light">
+	  <div class="card-header"><?php echo h($lecture_list[$lecture_id]); ?></div>
+	  <div class="card-body">
       <table class="responsive-table">
 		    <thead>
 		    	<tr>

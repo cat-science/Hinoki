@@ -3,6 +3,8 @@
 <?php $this->start('script-embedded'); ?>
 <?php echo $this->Html->script('summernote.min.js');?>
 <?php echo $this->Html->script('lang/summernote-ja-JP.js');?>
+<?php echo $this->Html->script('summernote-bs4.js');?>
+
 <script>
 	$(document).ready(function()
 	{

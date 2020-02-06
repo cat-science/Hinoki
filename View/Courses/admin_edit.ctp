@@ -1,12 +1,26 @@
 <?php echo $this->element('admin_menu');?>
-<div class="admin-courses-edit">
 <?php echo $this->Html->link(__('<< 戻る'), array('action' => 'index'))?>
-	<div class="panel panel-default">
-		<div class="panel-heading">
+<div style="width:100vw;"></div>
+<div class="admin-courses-edit col-9 mx-auto">
+	<div class="card bg-light">
+		<div class="card-header">
 			<?php echo ($this->action == 'admin_edit') ? __('編集') :  __('新規Webテスト'); ?>
 		</div>
-		<div class="panel-body">
-			<?php echo $this->Form->create('Course', Configure::read('form_defaults')); ?>
+		<div class="card-body">
+			<?php
+				$config = array(
+					'inputDefaults' => array(
+						'div' => 'form-group',
+						'label' => array(
+							'class' => 'col col-sm-5 control-label'
+						),
+						'wrapInput' => 'col col-sm-12',
+						'class' => 'form-control'
+					),
+					'class' => 'form-horizontal'
+				);
+			?>
+			<?php echo $this->Form->create('Course', $config); ?>
 			<?php
 				echo $this->Form->input('id');
 				echo $this->Form->input('title',	array('label' => __('Webテスト名')));

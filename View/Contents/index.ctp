@@ -22,7 +22,7 @@
 <?php }?>
 </style>
 <?php $this->end(); ?>
-<div class="contents-index">
+<div class="contents-index col">
 	<div class="ib-breadcrumb">
 	<?php
 	$is_admin_record = ($this->action=='admin_record');
@@ -39,9 +39,9 @@
 	?>
 	</div>
 
-	<div class="panel panel-info">
-	<div class="panel-heading"><?php echo h($course['Course']['title']); ?></div>
-	<div class="panel-body">
+	<div class="card bg-light">
+	<div class="card-header"><?php echo h($course['Course']['title']); ?></div>
+	<div class="card-body">
 	<?php if($course['Course']['introduction']!='') {?>
 	<div class="well">
 		<?php
