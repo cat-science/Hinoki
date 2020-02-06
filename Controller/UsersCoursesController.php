@@ -134,4 +134,5 @@ class UsersCoursesController extends AppController
 		//講義情報の取得---end
 
 	}
+
 }

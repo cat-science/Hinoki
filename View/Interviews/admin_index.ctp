@@ -1,8 +1,8 @@
 <?php echo $this->element('admin_menu');?>
-<div class="admin-interviews-index">
-	<div class="ib-page-title"><?php echo __('生徒一覧'); ?></div>
+<div class="admin-interviews-index" style = "width : 100%;">
+	<div class="ib-page-title" style = "width : 20hv"><?php echo __('生徒一覧'); ?></div></br></br>
 
-	<div class="ib-horizontal">
+	<form class="form-inline">
 		<?php
 			echo $this->Form->create();
 			echo $this->Form->input('group_id',		array(
@@ -12,16 +12,29 @@
 				'empty' => '全て', 
 				'required'=>false, 
 				'class' => 'form-control',
+				'div' => 'form-group',
 				'onchange' => 'submit(this.form);'
 			));
-			echo $this->Form->input('username',		array('label' => 'ログインID : ', 'required' => false));
-			echo $this->Form->input('name',			array('label' => '氏名 : '  , 'required' => false));
+			echo $this->Form->input('username',		array(
+				'label' => 'ログインID : ', 
+				'class' => 'form-control',
+				'div' => 'form-group',
+				'required' => false
+			));
+			echo $this->Form->input('name',			array(
+				'label' => '氏名 : ',
+				'class' => 'form-control my-1',
+				'div' => 'form-group',
+				'required' => false
+			));
 		?>
-		<input type="submit" class="btn btn-info btn-add" value="検索">
+		<div class="col">
+			<input type="submit" class="btn btn-info btn-add" style="float: right;" value="検索">
+		</div>
 		<?php
 			echo $this->Form->end();
 		?>
-	</div>
+	</form>
 	<table>
 	<thead>
 	<tr>
@@ -42,9 +55,7 @@
 	<tr>
 		<td><?php echo h($user['User']['username']); ?>&nbsp;</td>
 		<td><?php echo h($user['User']['name']); ?></td>
-
-		<td><div class="reader" title="<?php echo h($user[0]['group_title']); ?>"><p><?php echo h($user[0]['group_title']); ?>&nbsp;</p></td>
-		
+		<td><div class="reader" title="<?php echo h($user[0]['group_title']); ?>"><p><?php echo h($user[0]['group_title']); ?>&nbsp;</p></div></td>
     <td><div class="reader" title="<?php echo h($user[0]['lecture_title']); ?>"><p><?php echo h($user[0]['lecture_title']); ?>&nbsp;</p></div></td>
 		<?php if($loginedUser['role']=='admin') {?>
 		<td class="ib-col-action">

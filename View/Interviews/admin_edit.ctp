@@ -86,10 +86,13 @@
                 <th>学籍番号</th>
                 <th><?php echo $user_info['User']['username'];?></th>
               </tr>
-              
               <tr>
                 <th>キャンパス</th>
-                <th><?php echo $user_info['Group'][0]['title'];?></th>
+                <th><?php echo $user_info[0]['group_title'];?></th>
+              </tr>
+              <tr>
+                <th>履修科目</th>
+                <th><?php echo $user_info[0]['lecture_title'];?></th>
               </tr>
               
             </tbody>
@@ -98,7 +101,7 @@
       </div>
     </div>
 
-    <div class = "col-md-5">
+    <div class = "col-md-3">
       <div class = "panel panel-default" style = "height:95%">
         <div class = "panel-heading">
           EJU成績
@@ -126,7 +129,7 @@
       </div>
     </div>
 
-    <div class = "col-md-4">
+    <div class = "col-md-6">
       <div class = "panel panel-default">
         <div class = "panel-heading">
           Webテスト成績
@@ -183,7 +186,7 @@ YY大学
       </div>
     </div>
 
-    <div class = "col-md-5">
+    <div class = "col-md-3">
       <div class = "panel panel-default">
         <div class = "panel-heading">
           英語成績
@@ -206,7 +209,7 @@ TOEFL:YY点
       </div>
     </div>
 
-    <div class = "col-md-4">
+    <div class = "col-md-6">
       <div class = "panel panel-default">
         <div class = "panel-heading">
           面談練習内容
