@@ -46,7 +46,7 @@
 </script>
 <?php $this->end(); ?>
 
-<div class="admin-contents-index">
+<div class="admin-contents-index col">
 	<div class="ib-breadcrumb">
 	<?php
 		$this->Html->addCrumb('Webテスト一覧', array('controller' => 'courses', 'action' => 'index'));

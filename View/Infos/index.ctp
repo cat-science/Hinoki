@@ -1,4 +1,4 @@
-<div class="infos-index">
+<div class="infos-index col">
 	<div class="breadcrumb">
 	<?php
 	$this->Html->addCrumb('HOME', array(
@@ -8,9 +8,9 @@
 	echo $this->Html->getCrumbs(' / ');
 	?>
 	</div>
-	<div class="panel panel-success">
-		<div class="panel-heading"><?php echo __('お知らせ一覧'); ?></div>
-		<div class="panel-body">
+	<div class="card bg-light">
+		<div class="card-header"><?php echo __('お知らせ一覧'); ?></div>
+		<div class="card-body">
 			<table cellpadding="0" cellspacing="0">
 			<thead>
 			<tr>

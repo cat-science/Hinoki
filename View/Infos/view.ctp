@@ -1,4 +1,4 @@
-<div class="infos-view">
+<div class="infos-view col">
 	<div class="breadcrumb">
 	<?php
 	$this->Html->addCrumb('HOME', array(
@@ -21,9 +21,9 @@
 	?>
 	</div>
 
-	<div class="panel panel-success">
-		<div class="panel-heading"><?php echo $title; ?></div>
-		<div class="panel-body">
+	<div class="card bg-light">
+		<div class="card-header"><?php echo $title; ?></div>
+		<div class="card-body">
 			<div class="text-right"><?php echo $date; ?></div>
 			<?php echo $body; ?>
 		</div>

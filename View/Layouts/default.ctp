@@ -34,6 +34,7 @@
 		echo $this->Html->css('jquery-ui');
 		echo $this->Html->css('bootstrap.min'); // v4.4
 		echo $this->Html->css('bootstrap'); // v4.4
+		echo $this->Html->css('summernote-bs4'); // v4.4
 
 		echo $this->Html->css('common.css?20190401');
 		
@@ -44,11 +45,14 @@
 		// カスタマイズ用CSS
 		echo $this->Html->css('custom.css?20190401');
 		
-		echo $this->Html->script('jquery-1.9.1.min.js');
-		echo $this->Html->script('jquery-ui-1.9.2.min.js');
+		// echo $this->Html->script('jquery-1.9.1.min.js');
+		// echo $this->Html->script('jquery-ui-1.9.2.min.js');
+		echo $this->Html->script('jquery-3.4.1.min.js');
+		echo $this->Html->script('Popper.js');
 		echo $this->Html->script('bootstrap.min.js');	// v4.4
 		echo $this->Html->script('bootstrap.js');	// v4.4
 		echo $this->Html->script('bootstrap.bundle.js'); // v4.4
+		echo $this->Html->script('summernote-bs4.js'); // v4.4
 		echo $this->Html->script('moment.js');
 		echo $this->Html->script('common.js?20190401');
 		
