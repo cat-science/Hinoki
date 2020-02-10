@@ -143,7 +143,7 @@
 	}
 </script>
 <?php $this->end(); ?>
-<div class="admin-contents-questions-edit">
+<div class="admin-contents-questions-edit col">
 	<div class="ib-breadcrumb">
 	<?php 
 		$this->Html->addCrumb('Webテスト一覧',  array('controller' => 'courses', 'action' => 'index'));
@@ -153,12 +153,12 @@
 		echo $this->Html->getCrumbs(' / ');
 	?>
 	</div>
-	<div class="panel panel-default">
-		<div class="panel-heading">
+	<div class="card bg-light">
+		<div class="card-header">
 			<?php echo ($this->action == 'admin_edit') ? __('編集') :  __('新規問題'); ?>
 		</div>
-		<div class="panel-body">
-			<?php echo $this->Form->create('ContentsQuestion', Configure::read('form_defaults')); ?>
+		<div class="card-body">
+			<?php echo $this->Form->create('ContentsQuestion', Configure::read('form_defaults_bs4')); ?>
 			<?php
 				echo $this->Form->input('id');
 				echo $this->Form->input('title',	array('label' => __('タイトル')));
@@ -166,7 +166,7 @@
 			?>
 			<div class="form-group required">
 				<label for="ContentsQuestionOptions" class="col col-sm-3 control-label">選択肢／正解</label>
-				<div class="col col-sm-9 required" id="summernote">
+				<div class="col col-sm-12 required" id="summernote">
 				「＋」で選択肢の追加、「−」で選択された選択肢を削除します。（※最大10個まで）<br>
 				また選択された選択肢が正解となります。Ctrlキーを押下したまま選択することで、複数の正解の設定も可能です。<br>
 				

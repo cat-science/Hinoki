@@ -1,11 +1,11 @@
 <?php echo $this->element('admin_menu');?>
-<div class="admin-settings-index">
-	<div class="panel panel-default">
-		<div class="panel-heading">
+<div class="admin-settings-index col">
+	<div class="card bg-light">
+		<div class="card-header">
 			<?php echo __('システム設定'); ?>
 		</div>
-		<div class="panel-body">
-			<?php echo $this->Form->create('Setting', Configure::read('form_defaults')); ?>
+		<div class="card-body">
+			<?php echo $this->Form->create('Setting', Configure::read('form_defaults_bs4')); ?>
 			<?php
 				echo $this->Form->input('title',		array('label' => 'システム名',					'value'=>$settings['title']));
 				echo $this->Form->input('copyright',	array('label' => 'コピーライト',				'value'=>$settings['copyright']));

@@ -1,12 +1,12 @@
 <?php echo $this->element('admin_menu');?>
-<div class="docent-lecture-edit">
+<div class="docent-lecture-edit col">
 <?php echo $this->Html->link(__('<< 戻る'), array('controller' => 'lectures', 'action' => 'index'))?>
-	<div class="panel panel-default">
-		<div class="panel-heading">
+	<div class="card bg-light">
+		<div class="card-header">
 			<?php echo ($this->action == 'admin_edit') ? __($lecture_name."ー授業記録") :  __($lecture_name."ー授業記録"); ?>
 		</div>
-		<div class="panel-body">
-			<?php echo $this->Form->create('LecturesRecord', Configure::read('form_defaults')); ?>
+		<div class="card-body">
+			<?php echo $this->Form->create('LecturesRecord', Configure::read('form_defaults_bs4')); ?>
 			<?php
 				echo $this->Form->hidden('id');
 				echo $this->Form->input('docent_id',	array(
@@ -24,7 +24,8 @@
 					'style' => '',
         ));
 				?>
-				<table style = "width : 74%; float : right; margin-left:26%;">
+				<!-- <table style = "width : 74%; float : right; margin-left:26%;"> -->
+				<table>
 				<thead>
 				<tr>
 					<th nowrap class="ib-col-datetime"><?php echo __('名前'); ?></th>

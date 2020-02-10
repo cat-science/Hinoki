@@ -144,20 +144,7 @@
 			<?php echo ($this->action == 'admin_edit') ? __('編集') :  __('新規コンテンツ'); ?>
 		</div>
 		<div class="card-body">
-			<?php
-				$config = array(
-					'inputDefaults' => array(
-						'div' => 'form-group',
-						'label' => array(
-							'class' => 'col col-sm-5 control-label'
-						),
-						'wrapInput' => 'col col-sm-12',
-						'class' => 'form-control'
-					),
-					'class' => 'form-horizontal'
-				);
-			?>
-			<?php echo $this->Form->create('Content', $config); ?>
+			<?php echo $this->Form->create('Content', Configure::read('form_defaults_bs4')); ?>
 			<?php
 				echo $this->Form->input('id');
 				echo $this->Form->input('title',	array('label' => 'コンテンツタイトル'));

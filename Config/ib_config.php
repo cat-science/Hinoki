@@ -110,6 +110,18 @@ $config['form_defaults'] = array(
 	'class' => 'form-horizontal'
 );
 
+$config['form_defaults_bs4'] = array(
+	'inputDefaults' => array(
+		'div' => 'form-group',
+		'label' => array(
+			'class' => 'col col-sm-5 control-label'
+		),
+		'wrapInput' => 'col col-sm-12',
+		'class' => 'form-control'
+	),
+	'class' => 'form-horizontal'
+);
+
 $config['form_submit_defaults'] = array(
 	'div' => false,
 	'class' => 'btn btn-primary'

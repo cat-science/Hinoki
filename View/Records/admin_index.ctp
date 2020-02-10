@@ -28,15 +28,15 @@
 	}
 </script>
 <?php $this->end(); ?>
-<div class="admin-records-index">
+<div class="admin-records-index col">
 	<div class="ib-page-title"><?php echo __('学習履歴一覧'); ?></div>
 	<div class="ib-horizontal">
 		<?php
 			echo $this->Form->create('Record');
 			echo '<div class="ib-search-buttons">';
-			echo $this->Form->submit(__('検索'),	array('class' => 'btn btn-info', 'div' => false));
+			echo $this->Form->submit(__('検索'),	array('class' => 'btn btn-outline-primary', 'div' => false));
 			echo $this->Form->hidden('cmd');
-			echo '<button type="button" class="btn btn-default" onclick="downloadCSV()">'.__('CSV出力').'</button>';
+			echo '<button type="button" class="btn btn-outline-secondary" onclick="downloadCSV()">'.__('CSV出力').'</button>';
 			echo '</div>';
 			
 			echo '<div class="ib-row">';

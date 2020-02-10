@@ -4,8 +4,10 @@
 		background: orange;
 	}
 </style>
-<?php echo $this->Html->link(__('授業の編集はこちら'), array('controller' => 'lectures', 'action' => 'index_2')); ?>
-<div class="users-courses-index">
+<div class="users-courses-index col">
+	<div class="text-left">
+		<?php echo $this->Html->link(__('授業の編集はこちら'), array('controller' => 'lectures', 'action' => 'index_2')); ?></br></br>
+	</div>	
 	<?php //カレンダー?>
 	<?php
 		// タイムゾーンを設定
@@ -52,14 +54,14 @@
 					// 今日の日付の場合は、class="today"をつける
 					$week .= '<td class="today" style = "width : 120px;">' . $day;
 					foreach($date_lectures as $lecture){
-						$lecture_url = '<div style = "margin : auto ;border: 1px solid #000; width : 80px; text-align: center">'. $this->Html->link($lecture, array('controller' => 'lecturesRecords', 'action' => 'edit', $lecture_name_id[$lecture], $date)) .'</div>';
+						$lecture_url = '<div style = "margin : auto ;border: 1px solid #000; width : 80px; text-align: center; font-size : 12px;">'. $this->Html->link($lecture, array('controller' => 'lecturesRecords', 'action' => 'edit', $lecture_name_id[$lecture], $date)) .'</div>';
 						$week .= $lecture_url;
 					}
 					
 		    } else {
 					$week .= '<td style = "width : 120px;" >' . $day;
 					foreach($date_lectures as $lecture){
-						$lecture_url = '<div style = "margin : auto ;border: 1px solid #000; width : 80px; text-align: center">'. $this->Html->link($lecture, array('controller' => 'lecturesRecords', 'action' => 'edit',  $lecture_name_id[$lecture], $date)) .'</div>';
+						$lecture_url = '<div style = "margin : auto ;border: 1px solid #000; width : 80px; text-align: center; font-size : 12px;">'. $this->Html->link($lecture, array('controller' => 'lecturesRecords', 'action' => 'edit',  $lecture_name_id[$lecture], $date)) .'</div>';
 						$week .= $lecture_url;
 					}
 		    }

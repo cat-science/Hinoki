@@ -7,14 +7,14 @@
 	});
 <?php $this->Html->scriptEnd(); ?>
 
-<div class="admin-infos-edit">
+<div class="admin-infos-edit col">
 <?php echo $this->Html->link(__('<< 戻る'), array('action' => 'index'))?>
-	<div class="panel panel-default">
-		<div class="panel-heading">
+	<div class="card bg-light">
+		<div class="card-header">
 			<?php echo ($this->action == 'admin_edit') ? __('編集') :  __('新規お知らせ'); ?>
 		</div>
-		<div class="panel-body">
-			<?php echo $this->Form->create('Info', Configure::read('form_defaults')); ?>
+		<div class="card-body">
+			<?php echo $this->Form->create('Info', Configure::read('form_defaults_bs4')); ?>
 			<?php
 				echo $this->Form->input('id');
 				echo $this->Form->input('title',	array('label' => __('タイトル')));
