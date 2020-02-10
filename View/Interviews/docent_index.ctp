@@ -1,5 +1,5 @@
 <?php echo $this->element('docent_menu');?>
-<div class="admin-interviews-index">
+<div class="admin-interviews-index col">
 	<div class="ib-page-title"><?php echo __('生徒一覧'); ?></div>
 
 	<div class="ib-horizontal">
