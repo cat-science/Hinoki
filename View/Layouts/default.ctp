@@ -28,50 +28,45 @@
 		if(!$is_admin_page || !$is_docent_page)
 			echo '<meta name="viewport" content="width=device-width,initial-scale=1">';
 		
-		echo $this->Html->meta('icon');
 
-		echo $this->Html->css('cake.generic');
-		echo $this->Html->css('jquery-ui');
-		echo $this->Html->css('bootstrap.min'); // v4.4
-		echo $this->Html->css('bootstrap'); // v4.4
-		echo $this->Html->css('summernote-bs4'); // v4.4
+			echo $this->Html->meta('icon');
 
-		echo $this->Html->css('common.css?20190401');
-		
-		// 管理画面用CSS
-		if($is_admin_page)
-			echo $this->Html->css('admin.css?20190401');
+			echo $this->Html->css('cake.generic');
+			echo $this->Html->css('jquery-ui');
+			echo $this->Html->css('bootstrap.min');
+			echo $this->Html->css('common.css?20190401');
+			
+			// 管理画面用CSS
+			if($is_admin_page)
+				echo $this->Html->css('admin.css?20190401');
+	
+			// カスタマイズ用CSS
+			echo $this->Html->css('custom.css?20190401');
+			
+			echo $this->Html->script('jquery-1.9.1.min.js');
+			echo $this->Html->script('jquery-ui-1.9.2.min.js');
+			echo $this->Html->script('Popper.js');
 
-		// カスタマイズ用CSS
-		echo $this->Html->css('custom.css?20190401');
-		
-		// echo $this->Html->script('jquery-1.9.1.min.js');
-		// echo $this->Html->script('jquery-ui-1.9.2.min.js');
-		echo $this->Html->script('jquery-3.4.1.min.js');
-		echo $this->Html->script('Popper.js');
-		echo $this->Html->script('bootstrap.min.js');	// v4.4
-		echo $this->Html->script('bootstrap.js');	// v4.4
-		echo $this->Html->script('bootstrap.bundle.js'); // v4.4
-		echo $this->Html->script('summernote-bs4.js'); // v4.4
-		echo $this->Html->script('moment.js');
-		echo $this->Html->script('common.js?20190401');
-		
-		// 管理画面用スクリプト
-		if($is_admin_page)
-			echo $this->Html->script('admin.js?20190401');
-		
-		// デモモード用スクリプト
-		if(Configure::read('demo_mode'))
-			echo $this->Html->script('demo.js');
-		
-		// カスタマイズ用スクリプト
-		echo $this->Html->script('custom.js?20190401');
-		
-		echo $this->fetch('meta');
-		echo $this->fetch('css');
-		echo $this->fetch('script');
-		echo $this->fetch('css-embedded');
-		echo $this->fetch('script-embedded');
+			echo $this->Html->script('bootstrap.min.js');
+			echo $this->Html->script('moment.js');
+			echo $this->Html->script('common.js?20190401');
+			
+			// 管理画面用スクリプト
+			if($is_admin_page)
+				echo $this->Html->script('admin.js?20190401');
+			
+			// デモモード用スクリプト
+			if(Configure::read('demo_mode'))
+				echo $this->Html->script('demo.js');
+			
+			// カスタマイズ用スクリプト
+			echo $this->Html->script('custom.js?20190401');
+			
+			echo $this->fetch('meta');
+			echo $this->fetch('css');
+			echo $this->fetch('script');
+			echo $this->fetch('css-embedded');
+			echo $this->fetch('script-embedded');
 	?>
 	<style>
 		.ib-theme-color
