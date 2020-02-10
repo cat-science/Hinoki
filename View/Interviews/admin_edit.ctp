@@ -50,8 +50,10 @@
 }
 
 </style>
-<?php echo $this->Html->link(__('<< 戻る'), array('action' => 'index'))?>
-<div class = "admin-interviews-edit">
+<div class = "admin-interviews-edit col">
+<div class="text-left">
+  <?php echo $this->Html->link(__('<< 戻る'), array('action' => 'index'))?>
+</div>
 <div class="ib-page-title" style = "width : 50%;"><?php echo __('面談情報編集'); ?></div>
   <?php
     $form_default = array(
@@ -67,16 +69,69 @@
     );
   ?>
 
-  <?php echo $this->Form->create('Interview', $form_default); ?>
+  <?php echo $this->Form->create('Interview',Configure::read('form_defaults_bs4')); ?>
+
+
+  <div class="row row-eq-height">
+    <div class="col-6">
+      <div class="card bg-light">
+        <div class="card-header">
+          個人情報
+        </div>
+        <div class = "card-body">
+          <table class = "table table-borderless table-striped ">
+            <tbody>
+              <tr>
+                <th >氏名</th>
+                <th ><?php echo $user_info['User']['name'];?></th>
+              </tr>
+              <tr>
+                <th>学籍番号</th>
+                <th><?php echo $user_info['User']['username'];?></th>
+              </tr>
+              <tr>
+                <th>キャンパス</th>
+                <th><?php echo $user_info[0]['group_title'];?></th>
+              </tr>
+              <tr>
+                <th>履修科目</th>
+                <th><?php echo $user_info[0]['lecture_title'];?></th>
+              </tr>
+              
+            </tbody>
+          </table>
+        </div>
+      </div>
+    </div>
+
+    <div class="col-6">
+      <div class = "card bg-light" style = "height:100%">
+        <div class = "card-header">
+          EJU成績
+          <p style="float:right; margin:0px;"><?php echo $this->Html->link(__('成績入力はこちら'), array('action' => 'eju_edit',$user_id))?></p>
+          
+        </div>
+        <div class = "card-body">
+        <?php
+          echo $this->Form->input('id');
+          echo $this->Form->hidden('user_id',array(
+            'value' => $user_info['User']['id']
+          ));
+          echo "あああああああああああああああああああああああああああああああああああああああああああああああああああああああああああああああああああ";
+        ?>
+        </div>
+      </div>
+    </div>
+  </div>
 
   <div class = "row row-eq-height">
     <div class = "col-md-3">
-      <div class = "panel panel-default" style = "height:95%">
-        <div class = "panel-heading">
+      <div class = "card bg-light" style = "height:95%">
+        <div class = "card-header">
           個人情報
         </div>
-        <div class = "panel-body">
-          <table class = "table table-borderless ">
+        <div class = "card-body">
+          <table class = "table table-borderless table-striped ">
             <tbody>
               <tr>
                 <th >氏名</th>

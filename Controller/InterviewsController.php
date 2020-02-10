@@ -138,7 +138,7 @@ class InterviewsController extends AppController{
 
 		$user_info = $this->User->setUserManyTitles($user_info);
 		$user_info = $user_info[0];
-		$this->log($user_info);
+		// $this->log($user_info);
 
 		$records = $this->Record->find('all',array(
 			'conditions' => array(
@@ -147,7 +147,7 @@ class InterviewsController extends AppController{
 			),
 			'limit' => 3
 		));
-		$this->log($records);
+		// $this->log($records);
 
 
 		$this->set(compact("user_info","records","user_id"));
@@ -182,6 +182,83 @@ class InterviewsController extends AppController{
 
 	public function admin_delete(){
 
+	}
+
+	public function admin_eju_edit($user_id){
+		$this->loadModel('User');
+		$this->loadModel('EjusRecord');
+
+		$tmp = $this->EjusRecord->find('all');
+		$this->log($tmp);
+		
+		$user_info = $this->User->find('first',array(
+			'conditions' => array(
+				'User.id' => $user_id
+			)
+		));
+		$user_name = $user_info['User']['name'];
+
+		$this->set(compact("user_name","user_id"));
+
+		$arr_year = (isset($this->request->query['year'])) ? $this->request->query['year'] : array('year' => date('Y'));
+		$year = $arr_year['year'];
+		$number_of_times = (isset($this->request->query['number_of_times'])) ? $this->request->query['number_of_times'] : 1;
+		$ja_reading = (isset($this->request->query['ja_reading'])) ? $this->request->query['ja_reading'] : "";
+		$ja_listening = (isset($this->request->query['ja_listening'])) ? $this->request->query['ja_listening'] : "";
+		$ja_writing = (isset($this->request->query['ja_writing'])) ? $this->request->query['ja_writing'] : "";
+		$sc_physics = (isset($this->request->query['sc_physics'])) ? $this->request->query['sc_physics'] : "";
+		$sc_chemistry = (isset($this->request->query['sc_chemistry'])) ? $this->request->query['sc_chemistry'] : "";
+		$sc_biology = (isset($this->request->query['sc_biology'])) ? $this->request->query['sc_biology'] : "";
+		$sougou = (isset($this->request->query['sougou'])) ? $this->request->query['sougou'] : "";
+		$ma_course1 = (isset($this->request->query['ma_course1'])) ? $this->request->query['ma_course1'] : "";
+		$ma_course2 = (isset($this->request->query['ma_course2'])) ? $this->request->query['ma_course2'] : "";
+		$cmd = (isset($this->request->query['cmd'])) ? $this->request->query['cmd'] : "";
+
+		$this->set(compact("arr_year","number_of_times"));
+
+		if($cmd == 'update'){
+			$saved_data = $this->EjusRecord->find('first',array(
+				'conditions' => array(
+					'EjusRecord.user_id' => $user_id,
+					'EjusRecord.year' => $year,
+					'EjusRecord.number_of_times' => $number_of_times
+				)
+			));
+			$saved_data = $saved_data[0];
+			$save_data['EjusRecord'] = array(
+				'id' => $saved_data['id'],
+				'user_id' => $user_id,
+				'year' => $year,
+				'number_of_times' => $number_of_times,
+				'ja_reading' => $ja_reading,
+				'ja_listening' => $ja_listening,
+				'ja_writing' => $ja_writing,
+				'sc_physics' => $sc_physics,
+				'sc_chemistry' => $sc_chemistry,
+				'sc_biology' => $sc_biology,
+				'sougou' => $sougou,
+				'ma_course1' => $ma_course1,
+				'ma_course2' => $ma_course2
+			);
+			if($this->EjusRecord->save($save_data)){
+				$this->Flash->success(__('EJU成績が保存されました'));
+				return $this->redirect(array(
+					'action' => 'edit/',$user_id
+				));
+			}else{
+				$this->Flash->error(__('The record could not be saved. Please, try again.'));
+			}
+		}else{
+			$tmp = $this->EjusRecord->find('first',array(
+				'conditions' => array(
+					'EjusRecord.user_id' => $user_id,
+					'EjusRecord.year' => $year,
+					'EjusRecord.number_of_times' => $number_of_times
+				)
+			));
+			$this->request->data['EjusRecord'] = $tmp['EjusRecord'];
+			$this->log($this->request->data);
+		}
 	}
 
 	public function admin_all_records($user_id){
