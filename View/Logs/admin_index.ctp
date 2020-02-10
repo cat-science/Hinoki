@@ -10,7 +10,7 @@
 	}
 </script>
 <?php $this->end(); ?>
-<div class="admin-records-index">
+<div class="admin-records-index col">
 	<div class="ib-page-title"><?php echo __('ログイン履歴一覧'); ?></div>
 	<div class="ib-horizontal">
 		<?php

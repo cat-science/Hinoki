@@ -1,16 +1,21 @@
-<nav class="navbar navbar-default">
-	<div class="container">
-		<div class="navbar-collapse collapse">
-		<ul class="nav navbar-nav">
-			<?php
-			$is_active = (($this->name=='Lecture')&&($this->params["action"]!='admin_password')) ? ' active' : '';
-			echo '<li class="'.$is_active.'">'.$this->Html->link(__('授業関連'), array('controller' => 'lectures', 'action' => 'index')).'</li>';
+<?php $this->start('menu'); ?>
 
-			$is_active = ($this->name=='Interviews') ? ' active' : '';
-			echo '<li class="'.$is_active.'">'.$this->Html->link(__('面談'), array('controller' => 'interviews', 'action' => 'index')).'</li>';
-			
-			?>
-		</ul>
-		</div><!--/.nav-collapse -->
-	</div>
-</nav>
+<div class="collapse navbar-collapse" id="navbarSupportedContent">
+	<ul class="navbar-nav mr-auto">
+	<?php $is_active = ($this->name=='Lectures') ? ' active' : '';?>
+	<li class="nav-item <?php echo $is_active;?>">
+		<?php
+			echo $this->Html->link(__('授業関連'), array('controller' => 'lectures', 'action' => 'index'),array('class' => 'nav-link'));
+		?>
+	</li>
+
+	<?php $is_active = ($this->name=='Interviews') ? ' active' : '';?>
+	<li class="nav-item <?php echo $is_active;?>">
+		<?php
+			echo $this->Html->link(__('面談'), array('controller' => 'interviews', 'action' => 'index'),array('class' => 'nav-link'));
+		?>
+	</li>
+
+</div>
+
+<?php echo $this->end(); ?>

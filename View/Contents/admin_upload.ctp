@@ -22,11 +22,11 @@
 		}
 	});
 </script>
-<div class="panel panel-default">
-	<div class="panel-heading">
+<div class="card bg-light">
+	<div class="card-header">
 		ファイルのアップロード
 	</div>
-	<div class="panel-body">
+	<div class="card-body">
 		<div class="alert alert-warning">アップロードするファイルを指定して、アップロードボタンをクリックしてください。<br>ファイルが複数ある場合には、ZIP形式で圧縮してアップロードを行ってください。</div>
 		<div class="form-group">
 			<h4>アップロード可能拡張子</h4>

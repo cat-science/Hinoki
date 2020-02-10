@@ -127,7 +127,7 @@
 			<tbody>
 			<?php foreach ($infos as $info): ?>
 			<tr>
-				<td width="100" valign="top"><?php echo h(Utils::getYMD($info['Info']['created'])); ?></td>
+				<td width="120" valign="top"><?php echo h(Utils::getYMD($info['Info']['created'])); ?></td>
 				<td><?php echo $this->Html->link($info['Info']['title'], 
 					array(
 						'controller' => 'infos', 

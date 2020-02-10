@@ -4,7 +4,7 @@
 		background: orange;
 	}
 </style>
-<div class="users-courses-index">
+<div class="users-courses-index col">
 	<?php //カレンダー?>
 	<?php
 		// タイムゾーンを設定
@@ -102,9 +102,9 @@
 
 
 
-	<div class="panel panel-success">
-		<div class="panel-heading"><?php echo __('お知らせ'); ?></div>
-		<div class="panel-body">
+	<div class="card bg-light">
+		<div class="card-header"><?php echo __('お知らせ'); ?></div>
+		<div class="card-body">
 			<?php if($info!=""){?>
 			<div class="well">
 				<?php
@@ -120,7 +120,7 @@
 			<tbody>
 			<?php foreach ($infos as $info): ?>
 			<tr>
-				<td width="100" valign="top"><?php echo h(Utils::getYMD($info['Info']['created'])); ?></td>
+				<td width="120" valign="top"><?php echo h(Utils::getYMD($info['Info']['created'])); ?></td>
 				<td><?php echo $this->Html->link($info['Info']['title'], array('controller' => 'infos', 'action' => 'view', $info['Info']['id'])); ?></td>
 			</tr>
 			<?php endforeach; ?>
@@ -131,9 +131,10 @@
 			<?php echo $no_info;?>
 		</div>
 	</div>
-	<div class="panel panel-info">
-	<div class="panel-heading"><?php echo __('Webテスト一覧'); ?></div>
-	<div class="panel-body">
+	</br>
+	<div class="card bg-light">
+	<div class="card-header"><?php echo __('Webテスト一覧'); ?></div>
+	<div class="card-body">
 		<ul class="list-group">
 		<?php foreach ($courses as $course): ?>
 		<?php //debug($course)?>
