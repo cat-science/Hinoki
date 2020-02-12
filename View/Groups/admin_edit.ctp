@@ -4,20 +4,23 @@
 <?php $this->Html->scriptStart(array('inline' => false)); ?>
 	$(function (e) {
 		$('#CourseCourse').select2({placeholder: "受講するWebテストを選択して下さい。(複数選択可)", closeOnSelect: <?php echo (Configure::read('close_on_select') ? 'true' : 'false'); ?>,});
+		$('#LectureLecture').select2({placeholder: "開講する授業を選択して下さい。(複数選択可)", closeOnSelect: <?php echo (Configure::read('close_on_select') ? 'true' : 'false'); ?>,});
+		
 	});
 <?php $this->Html->scriptEnd(); ?>
-<div class="admin-groups-edit">
+<div class="admin-groups-edit col">
 <?php echo $this->Html->link(__('<< 戻る'), array('action' => 'index'))?>
-	<div class="panel panel-default">
-		<div class="panel-heading">
+	<div class="card bg-light">
+		<div class="card-header">
 			<?php echo ($this->action == 'admin_edit') ? __('編集') :  __('新規キャンパス'); ?>
 		</div>
-		<div class="panel-body">
-			<?php echo $this->Form->create('Group', Configure::read('form_defaults')); ?>
+		<div class="card-body">
+			<?php echo $this->Form->create('Group', Configure::read('form_defaults_bs4')); ?>
 			<?php
 				echo $this->Form->input('id');
 				echo $this->Form->input('title',	array('label' => __('キャンパス名')));
 				echo $this->Form->input('Course',	array('label' => __('受講Webテスト'),		'size' => 20));
+				echo $this->Form->input('Lecture',	array('label' => __('受講Webテスト'),		'size' => 20));
 				echo $this->Form->input('comment',	array('label' => __('備考')));
 			?>
 			<div class="form-group">

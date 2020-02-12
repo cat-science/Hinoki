@@ -1,10 +1,25 @@
-<?php echo $this->element('admin_menu');?>
+<?php
+  if($this->action == 'admin_eju_edit'){
+    echo $this->element('admin_menu');
+  }elseif($this->action == 'docent_eju_edit'){
+    echo $this->element('docent_menu');
+  }
+?>
 <?php $this->start('script-embedded'); ?>
 <script>
 	function updateRecord()
 	{
-		$("#EjusRecordCmd").val("update");
-		$("#EjusRecordAdminEjuEditForm").submit();
+    $("#EjusRecordCmd").val("update");
+    <?php
+      if($this->action == 'admin_eju_edit'){
+        $formName = "#EjusRecordAdminEjuEditForm";
+      }elseif($this->action == 'docent_eju_edit'){
+        $formName = "#EjusRecordDocentEjuEditForm";
+      }
+    ?>
+    var formName = "<?php echo $formName;?>";
+    
+		$(formName).submit();
 		$("#EjusRecordCmd").val("");
 	}
 </script>
@@ -13,11 +28,11 @@
   <div class="text-left">
     <?php echo $this->Html->link(__('<< 戻る'), array('action' => 'edit',$user_id))?>  
   </div>
-  <div class="text-left">
+  <div class="text-left font-weight-bold" style="font-size : 20px;">
     生徒氏名:<?php echo $user_name;?>さん EJU成績入力
   </div>
   <div class="text-left">
-    注意:同じ年の同じ回が複数入力された場合は，古い情報が上書きされ，最新情報しか表示されません．ご注意ください．
+    *注意:西暦と回数を選択した時，ページは更新され，その年のその回数の成績が表示されます．
   </div>
   <div class="card bg-light">
     <div class="card-body">

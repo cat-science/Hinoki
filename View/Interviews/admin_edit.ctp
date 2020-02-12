@@ -1,4 +1,10 @@
-<?php echo $this->element('admin_menu');?>
+<?php
+  if($this->action == 'admin_edit'){
+    echo $this->element('admin_menu');
+  }elseif($this->action == 'docent_edit'){
+    echo $this->element('docent_menu');
+  }
+?>
 <?php $this->start('script-embedded'); ?>
 <script>
 	
@@ -117,80 +123,24 @@
           echo $this->Form->hidden('user_id',array(
             'value' => $user_info['User']['id']
           ));
-          echo "あああああああああああああああああああああああああああああああああああああああああああああああああああああああああああああああああああ";
+          echo $ejus_output;
         ?>
         </div>
       </div>
     </div>
+
+    
   </div>
 
-  <div class = "row row-eq-height">
-    <div class = "col-md-3">
-      <div class = "card bg-light" style = "height:95%">
+  </br>
+  <div class="row row-eq-height">
+    <div class = "col-6">
+      <div class = "card bg-light">
         <div class = "card-header">
-          個人情報
-        </div>
-        <div class = "card-body">
-          <table class = "table table-borderless table-striped ">
-            <tbody>
-              <tr>
-                <th >氏名</th>
-                <th ><?php echo $user_info['User']['name'];?></th>
-              </tr>
-              <tr>
-                <th>学籍番号</th>
-                <th><?php echo $user_info['User']['username'];?></th>
-              </tr>
-              <tr>
-                <th>キャンパス</th>
-                <th><?php echo $user_info[0]['group_title'];?></th>
-              </tr>
-              <tr>
-                <th>履修科目</th>
-                <th><?php echo $user_info[0]['lecture_title'];?></th>
-              </tr>
-              
-            </tbody>
-          </table>
-        </div>
-      </div>
-    </div>
-
-    <div class = "col-md-3">
-      <div class = "panel panel-default" style = "height:95%">
-        <div class = "panel-heading">
-          EJU成績
-        </div>
-        <div class = "panel-body" >
-        <?php
-          echo $this->Form->input('id');
-          echo $this->Form->hidden('user_id',array(
-            'value' => $user_info['User']['id']
-          ));
-          echo $this->Form->input('eju_record',array(
-            'label' => array(
-              'style' => '',
-              'text' => ''
-            ),
-            'type' => 'textarea',
-            'class' => 'form-control',
-            'placeholder' => '2019年第一回:数学150,物理100,..
-2019年第二回:数学100,物理100,..
-のように入力してください',
-            'rows' => 8
-          ));
-        ?>
-        </div>
-      </div>
-    </div>
-
-    <div class = "col-md-6">
-      <div class = "panel panel-default">
-        <div class = "panel-heading">
           Webテスト成績
         </div>
-        <div class = "panel-body">
-          <table class = "table table-borderless ">
+        <div class = "card-body">
+          <table class = "table table-borderless table-striped">
             <tbody>
               <tr>
                 <th>Webテスト</th>
@@ -209,21 +159,16 @@
             </tbody>
           </table>
           <a href="javascript:openRecord(<?php echo h($user_id); ?>);"><?php echo __('Webテスト成績一覧はこちら')?></a>
-          <?php //echo $this->Html->link(__('Webテスト成績一覧はこちら'), array('action' => 'all_records',$user_id))?>
         </div>
       </div>
     </div>
-  </div>
 
-
-  <div class = "row row-eq-height">
-
-    <div class = "col-md-3">
-      <div class = "panel panel-default">
-        <div class = "panel-heading">
+    <div class = "col-6">
+      <div class = "card bg-light" style = "height : 100%;">
+        <div class = "card-header">
           希望進路
         </div>
-        <div class = "panel-body">
+        <div class = "card-body">
         <?php
           echo $this->Form->input('future_path',array(
             'label' => array(
@@ -234,19 +179,23 @@
             'class' => 'form-control',
             'placeholder' => 'xx大学
 YY大学
-のように入力してください'
+のように入力してください',
+            'rows' => 10
           ));
         ?>
         </div>
       </div>
     </div>
 
-    <div class = "col-md-3">
-      <div class = "panel panel-default">
-        <div class = "panel-heading">
+  </div>
+  </br>
+  <div class = "row row-eq-height">
+    <div class="col-6">
+      <div class="card bg-light">
+        <div class="card-header">
           英語成績
         </div>
-        <div class = "panel-body">
+        <div class="card-body">
         <?php
           echo $this->Form->input('english_record',array(
             'label' => array(
@@ -264,12 +213,12 @@ TOEFL:YY点
       </div>
     </div>
 
-    <div class = "col-md-6">
-      <div class = "panel panel-default">
-        <div class = "panel-heading">
+    <div class = "col-6">
+      <div class = "card bg-light">
+        <div class = "card-header">
           面談練習内容
         </div>
-        <div class = "panel-body">
+        <div class = "card-body">
         <?php
           echo $this->Form->input('practice_record',array(
             'label' => array(
@@ -284,56 +233,57 @@ TOEFL:YY点
         </div>
       </div>
     </div>
-
   </div>
 
-  <div class = "row">
-    <div class = "col-md-3">
-      <div class = "panel panel-default">
-        <div class = "panel-heading">
+  </br>
+  <div class="row">
+    <div class="col-3">
+      <div class="card bg-light">
+        <div class="card-header">
           希望分野
         </div>
-        <div class = "panel-body">
-        <?php
-          echo $this->Form->input('future_field',array(
-            'label' => array(
-              'style' => '',
-              'text' => ''
-            ),
-            'type' => 'textarea',
-            'class' => 'form-control',
-            'placeholder' => ''
-          ));
-        ?>
+        <div class="card-body">
+          <?php
+            echo $this->Form->input('future_field',array(
+              'label' => array(
+                'style' => '',
+                'text' => ''
+              ),
+              'type' => 'textarea',
+              'class' => 'form-control',
+              'placeholder' => ''
+            ));
+          ?>
         </div>
       </div>
     </div>
-    <div class = "col-md-9">
-      <div class = "panel panel-default">
-        <div class = "panel-heading">
+
+    <div class="col-9">
+      <div class="card bg-light">
+        <div class="card-header">
           専任講師コメント
         </div>
-        <div class = "panel-body">
-        <?php
-          echo $this->Form->input('admin_comment',array(
-            'label' => array(
-              'style' => '',
-              'text' => ''
-            ),
-            'type' => 'textarea',
-            'class' => 'form-control',
-            'placeholder' => ''
-          ));
-        ?>
+        <div class="card-body">
+          <?php
+            echo $this->Form->input('admin_comment',array(
+              'label' => array(
+                'style' => '',
+                'text' => ''
+              ),
+              'type' => 'textarea',
+              'class' => 'form-control',
+              'placeholder' => ''
+            ));
+          ?>
         </div>
       </div>
     </div>
 
   </div>
 
+  </br>
   <div class="form-group">
-  
-  	<div class="col col-md-offset-11">
+  	<div class="col-offset-12">
   			<?php echo $this->Form->submit('保存', Configure::read('form_submit_defaults')); ?>
   	</div>
   </div>

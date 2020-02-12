@@ -37,8 +37,21 @@
 	
 	<?php $this->start('script-embedded'); ?>
 	<script>
-	var TIMELIMIT_SEC	= parseInt('<?php echo $content['Content']['timelimit'] ?>') * 60;	// 制限時間（単位：秒）
-	var IS_RECORD		= '<?php echo $is_record ?>';										// テスト結果表示フラグ
+		var TIMELIMIT_SEC	= parseInt('<?php echo $content['Content']['timelimit'] ?>') * 60;	// 制限時間（単位：秒）
+		var IS_RECORD		= '<?php echo $is_record ?>';										// テスト結果表示フラグ
+	</script>
+	<script>
+		MathJax = {
+		  tex: {
+		    inlineMath: [['$', '$'], ['\\(', '\\)']]
+		  },
+		  svg: {
+		    fontCache: 'global'
+		  }
+		};
+	</script>
+	<script type="text/javascript" id="MathJax-script" async
+		src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-mml-chtml.js">
 	</script>
 	<?php echo $this->Html->script('contents_questions.js?20190401');?>
 	<?php $this->end(); ?>

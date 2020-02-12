@@ -46,79 +46,55 @@ class InterviewsController extends AppController{
 
 	/* 講師関連 -- docent */
 	public function docent_index(){
-		$this->loadModel('User');
-
-		$users = $this->User->find('all',array(
-			'conditions' => array(
-				'User.role' => 'user'
-			),
-			'ORDER BY' => 'User.created DESC'
-		));
-
-		$this->set(compact("users"));
-
+		$this->admin_index();
+		$this->render('admin_index');
 	}
 
 	public function docent_edit($user_id){
-		$this->loadModel('User');
-		$this->loadModel('Records');
+		$this->admin_edit($user_id);
+		$this->render('admin_edit');
+	}
 
-		//個人情報を検索
-		$user_info = $this->User->find('all',array(
-			'conditions' => array(
-				'User.id' => $user_id
-			)
-		));
-
-		$user_info = $user_info[0];
-		$this->log($user_info);
-
-
-		$this->set(compact("user_info"));
-
-		if ($this->request->is(array(
-			'post',
-			'put'
-		)))
-		{
-			$request_data = $this->request->data;
-			$this->log($request_data);
-			if ($this->Interview->save($request_data))
-			{
-				$this->Flash->success(__('面談情報が保存されました'));
-				return $this->redirect( array(
-					'action' => 'index'
-				));
-			}
-			else
-			{
-				$this->Flash->error(__('The Information could not be saved. Please, try again.'));
-			}
-		}else{
-			$conditions['Interview.user_id'] = $user_id;
-			$info = $this->Interview->find('first',array(
-				'conditions' => $conditions
-			));
-			$this->request->data = $info;
-		}
+	public function docent_eju_edit($user_id){
+		$this->admin_eju_edit($user_id);
+		$this->render('admin_eju_edit');
 	}
 
 	/* 専任講師関連 -- admin */
 	public function admin_index(){
 		$this->loadModel('User');
+		$this->loadModel('Group');
+
+		$group_list = $this->Group->find('list',array(
+			'field' => array('id','title')
+		));
+
+		$group_id = (isset($this->request->query['group_id'])) ? $this->request->query['group_id'] : "";
+		$username = (isset($this->request->query['username'])) ? $this->request->query['username'] : "";
+		$name = (isset($this->request->query['name'])) ? $this->request->query['name'] : "";
+
 
 		$conditions = [];
+		$conditions['User.role'] = 'user';
+
+		if($group_id != "")
+			$conditions['User.id'] = $this->Group->getUserIdByGroupID($group_id);
+
+		if($username != "")
+			$conditions['User.username like'] = '%'.$username.'%';
+
+		if($name != "")
+			$conditions['User.name like'] = '%'.$name.'%';
 
 		$users = $this->User->find('all',array(
-			'conditions' => array(
-				'User.role' => 'user'
-			),
+			'conditions' => $conditions,
 			'ORDER BY' => 'User.created DESC'
 		));
 
 		$users = $this->User->setUserManyTitles($users);
 
-		$this->set(compact("users"));
+		$this->set(compact("group_list","group_id"));
+		$this->set(compact("users","username","name"));
 
 	}
 
@@ -128,6 +104,7 @@ class InterviewsController extends AppController{
 	public function admin_edit($user_id){
 		$this->loadModel('User');
 		$this->loadModel('Record');
+		$this->loadModel('EjusRecord');
 
 		//個人情報を検索
 		$user_info = $this->User->find('all',array(
@@ -136,21 +113,43 @@ class InterviewsController extends AppController{
 			)
 		));
 
+
+		$ejus_records = $user_info[0]['EjusRecord'];
+
 		$user_info = $this->User->setUserManyTitles($user_info);
 		$user_info = $user_info[0];
-		// $this->log($user_info);
 
 		$records = $this->Record->find('all',array(
 			'conditions' => array(
 				'User.id' => $user_id,
 				'Content.kind' => 'test',
 			),
-			'limit' => 3
+			'limit' => 4
 		));
-		// $this->log($records);
+
+		$ejus_output = "";
+		foreach($ejus_records as $row){
+			$ejus_output .= $row['year']."年"."第".$row['number_of_times']."回:"."</br>";
+
+			$ejus_output .= ($row['ja_reading'] !== NULL)   ?  " 読解: ".$row['ja_reading'] : "";
+			$ejus_output .= ($row['ja_listening'] !== NULL) ?  " 聴解・聴読解: ".$row['ja_listening'] : "";
+			$ejus_output .= ($row['jaw_writing'] !== NULL) 	?  " 記述: ".$row['jaw_writing'] : "";
+
+			$ejus_output .= ($row['sc_physics'] !== NULL) 	?  " 物理: ".$row['sc_physics'] : "";
+			$ejus_output .= ($row['sc_chemistry'] !== NULL) ?  " 化学: ".$row['sc_chemistry'] : "";
+			$ejus_output .= ($row['sc_biology'] !== NULL) 	?  " 生物: ".$row['sc_biology'] : "";
+
+			$ejus_output .= ($row['sougou'] !== NULL) 			?  " 総合科目: ".$row['sougou'] : "";
+
+			$ejus_output .= ($row['ma_course1'] !== NULL) 	?  " 数学コース1: ".$row['ma_course1'] : "";
+			$ejus_output .= ($row['ma_course2'] !== NULL) 	?  " 数学コース2: ".$row['ma_course2'] : "";
+
+			$ejus_output .= "</br>";
+		}
 
 
-		$this->set(compact("user_info","records","user_id"));
+
+		$this->set(compact("user_info","records","user_id","ejus_output"));
 
 		if ($this->request->is(array(
 			'post',
@@ -180,17 +179,37 @@ class InterviewsController extends AppController{
 
 	}
 
-	public function admin_delete(){
-
+	public function admin_delete($user_id = null){
+		
+		$this->User->id = $user_id;
+		$id = $this->Interview->find('first',array(
+			'conditions' => array(
+				'Interview.user_id' => $user_id
+			)
+		));
+		$this->Interview->id = $id['Interview']['id'];
+		if (! $this->Interview->exists())
+		{
+			throw new NotFoundException(__('Invalid user'));
+		}
+		$this->request->allowMethod('post', 'delete');
+		if ($this->Interview->delete())
+		{
+			$this->Flash->success(__('面談記録が削除されました'));
+		}
+		else
+		{
+			$this->Flash->error(__('面談記録を削除できませんでした'));
+		}
+		return $this->redirect(array(
+				'action' => 'index'
+		));
 	}
 
 	public function admin_eju_edit($user_id){
 		$this->loadModel('User');
 		$this->loadModel('EjusRecord');
 
-		$tmp = $this->EjusRecord->find('all');
-		$this->log($tmp);
-		
 		$user_info = $this->User->find('first',array(
 			'conditions' => array(
 				'User.id' => $user_id
@@ -224,7 +243,8 @@ class InterviewsController extends AppController{
 					'EjusRecord.number_of_times' => $number_of_times
 				)
 			));
-			$saved_data = $saved_data[0];
+
+			$saved_data = $saved_data['EjusRecord'];
 			$save_data['EjusRecord'] = array(
 				'id' => $saved_data['id'],
 				'user_id' => $user_id,
@@ -257,7 +277,6 @@ class InterviewsController extends AppController{
 				)
 			));
 			$this->request->data['EjusRecord'] = $tmp['EjusRecord'];
-			$this->log($this->request->data);
 		}
 	}
 

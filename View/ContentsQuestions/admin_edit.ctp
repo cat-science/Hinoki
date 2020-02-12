@@ -8,34 +8,34 @@
 <script>
 	$(document).ready(function()
 	{
-		init();		
+		init();
 	});
 
 	function add_option()
 	{
-		var opt	= document.all("data[ContentsQuestion][option_list][]").options;
-
-		var txt = document.getElementsByClassName('note-editable');
-		txt = txt[1];
-		console.log(txt);
-		alert(txt.innerHTML);
-
-
-		if(txt.innerHTML=="")
+		txt	= document.all("option");
+		opt	= document.all("data[ContentsQuestion][option_list][]").options;
+		
+		if(txt.value=="")
 		{
 			alert("選択肢を入力してください");
 			return false;
 		}
 		
-
+		if(txt.value.length > 50)
+		{
+			alert("選択肢は50文字以内で入力してください");
+			return false;
+		}
+		
 		if(opt.length==10)
 		{
 			alert("選択肢の数が最大値を超えています");
 			return false;
 		}
 		
-		opt[opt.length] = new Option( txt.innerHTML, txt.innerHTML )
-		txt.innerHTML = "";
+		opt[opt.length] = new Option( txt.value, txt.value )
+		txt.value = "";
 		update_options();
 		update_correct();
 
@@ -58,7 +58,6 @@
 	{
 		var opt = document.all("data[ContentsQuestion][option_list][]").options;
 		var txt = document.all("ContentsQuestionOptions");
-		alert(txt.value);
 		
 		txt.value = "";
 		
@@ -73,9 +72,6 @@
 				txt.value += "|" + opt[i].value;
 			}
 		}
-
-		alert(txt.value);
-
 		
 	}
 
@@ -114,9 +110,7 @@
 		// リッチテキストエディタを起動
 		CommonUtil.setRichTextEditor('#ContentsQuestionBody', <?php echo (Configure::read('use_upload_image') ? 'true' : 'false')?>, '<?php echo $this->webroot ?>');
 		CommonUtil.setRichTextEditor('#ContentsQuestionExplain', <?php echo (Configure::read('use_upload_image') ? 'true' : 'false')?>, '<?php echo $this->webroot ?>');
-		CommonUtil.setRichTextEditor('#ContentsQuestionOptions', <?php echo (Configure::read('use_upload_image') ? 'true' : 'false')?>, '<?php echo $this->webroot ?>');
 		
-
 		if($("#ContentsQuestionOptions").val()=="")
 			return;
 		
@@ -169,16 +163,11 @@
 				<div class="col col-sm-12 required" id="summernote">
 				「＋」で選択肢の追加、「−」で選択された選択肢を削除します。（※最大10個まで）<br>
 				また選択された選択肢が正解となります。Ctrlキーを押下したまま選択することで、複数の正解の設定も可能です。<br>
+				<input type="text" size="20" name="option" style=" position: relative; left: 1.5vw; width:70vw;display:inline-block;">
+				<button class="btn" style=" position: relative; left: 1.5vw;" onclick="del_option();return false;">−</button>
+				<button class="btn" style=" position: relative; left: 1.5vw;" onclick="add_option();return false;">＋</button><br>
 				
 			<?php
-				echo $this->Form->hidden('options',		array('label' => __('選択肢')));
-			?>
-				<button class="btn" style="float:right;" onclick="del_option();return false;">−</button>
-
-				<button class="btn" style="float:right;" onclick="add_option();return false;">＋</button><br>
-			<?php
-				
-
 				echo $this->Form->input('option_list',	array('label' => __('選択肢／正解'), 
 					'type' => 'select',
 					'label' => false,
@@ -186,6 +175,8 @@
 					'size' => 5,
 					'onchange' => 'update_correct()'
 				));
+
+				echo $this->Form->hidden('options',		array('label' => __('選択肢')));
 			?>
 				</div>
 			</div>
