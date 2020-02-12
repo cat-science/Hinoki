@@ -45,6 +45,13 @@ class InfosController extends AppController
 		$this->set('infos', $infos);
 	}
 
+	public function docent_index()
+	{
+		$this->render('index');
+	}
+
+
+
 	/**
 	 * お知らせの内容を表示
 	 * @param string $info_id 表示するお知らせのID
@@ -61,6 +68,11 @@ class InfosController extends AppController
 			)
 		);
 		$this->set('info', $this->Info->find('first', $options));
+	}
+
+	public function docent_view($info_id = null){
+		$this->view($info_id);
+		$this->render('view');
 	}
 
 	/**

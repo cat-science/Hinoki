@@ -1,30 +1,38 @@
-<?php echo $this->element('admin_menu');?>
+<?php
+  if($this->action == 'admin_index'){
+    echo $this->element('admin_menu');
+  }elseif($this->action == 'docent_index'){
+    echo $this->element('docent_menu');
+  }
+?>
 <div class="admin-interviews-index" style = "width : 100%;">
 	<div class="ib-page-title" style = "width : 20hv"><?php echo __('生徒一覧'); ?></div></br></br>
 
 	<form class="form-inline">
 		<?php
-			echo $this->Form->create();
+			echo $this->Form->create(array('type'=>'get'));
 			echo $this->Form->input('group_id',		array(
 				'label' => 'キャンパス : ', 
-				'options'=>$groups, 
+				'options'=>$group_list, 
 				'selected'=>$group_id, 
 				'empty' => '全て', 
 				'required'=>false, 
 				'class' => 'form-control',
 				'div' => 'form-group',
-				'onchange' => 'submit(this.form);'
+				'onchange' => ''
 			));
 			echo $this->Form->input('username',		array(
 				'label' => 'ログインID : ', 
 				'class' => 'form-control',
 				'div' => 'form-group',
+				'value' => $username,
 				'required' => false
 			));
 			echo $this->Form->input('name',			array(
 				'label' => '氏名 : ',
 				'class' => 'form-control my-1',
 				'div' => 'form-group',
+				'value' => $name,
 				'required' => false
 			));
 		?>

@@ -44,21 +44,22 @@
 			});
 		});
 	</script>
+	<script>
+		MathJax = {
+		  tex: {
+		    inlineMath: [['$', '$'], ['\\(', '\\)']]
+		  },
+		  svg: {
+		    fontCache: 'global'
+		  }
+		};
+	</script>
+	<script type="text/javascript" id="MathJax-script" async
+		src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-mml-chtml.js">
+	</script>
 <?php $this->end(); ?>
 
-<script>
-	MathJax = {
-	  tex: {
-	    inlineMath: [['$', '$'], ['\\(', '\\)']]
-	  },
-	  svg: {
-	    fontCache: 'global'
-	  }
-	};
-</script>
-<script type="text/javascript" id="MathJax-script" async
-	  src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-mml-chtml.js">
-</script>
+
 
 <div class="admin-contents-questions-index">
 	<div class="ib-breadcrumb">

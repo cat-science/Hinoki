@@ -1,10 +1,25 @@
-<?php echo $this->element('admin_menu');?>
+<?php
+  if($this->action == 'admin_eju_edit'){
+    echo $this->element('admin_menu');
+  }elseif($this->action == 'docent_eju_edit'){
+    echo $this->element('docent_menu');
+  }
+?>
 <?php $this->start('script-embedded'); ?>
 <script>
 	function updateRecord()
 	{
-		$("#EjusRecordCmd").val("update");
-		$("#EjusRecordAdminEjuEditForm").submit();
+    $("#EjusRecordCmd").val("update");
+    <?php
+      if($this->action == 'admin_eju_edit'){
+        $formName = "#EjusRecordAdminEjuEditForm";
+      }elseif($this->action == 'docent_eju_edit'){
+        $formName = "#EjusRecordDocentEjuEditForm";
+      }
+    ?>
+    var formName = "<?php echo $formName;?>";
+    
+		$(formName).submit();
 		$("#EjusRecordCmd").val("");
 	}
 </script>

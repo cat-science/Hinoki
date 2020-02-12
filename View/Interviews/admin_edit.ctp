@@ -1,4 +1,10 @@
-<?php echo $this->element('admin_menu');?>
+<?php
+  if($this->action == 'admin_edit'){
+    echo $this->element('admin_menu');
+  }elseif($this->action == 'docent_edit'){
+    echo $this->element('docent_menu');
+  }
+?>
 <?php $this->start('script-embedded'); ?>
 <script>
 	
