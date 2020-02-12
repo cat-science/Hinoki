@@ -1,5 +1,5 @@
 <?php echo $this->element('admin_menu');?>
-<div class="admin-groups-index">
+<div class="admin-groups-index col">
 	<div class="ib-page-title"><?php echo __('キャンパス一覧'); ?></div>
 	<div class="buttons_container">
 		<button type="button" class="btn btn-primary btn-add" onclick="location.href='<?php echo Router::url(array('action' => 'add')) ?>'">+ 追加</button>
@@ -9,8 +9,8 @@
 	<thead>
 	<tr>
 		<th><?php echo $this->Paginator->sort('title', 'キャンパス名'); ?></th>
-		<th nowrap class="col-course"><?php echo __('Webテスト'); ?></th>
-		<th class="ib-col-date"><?php echo $this->Paginator->sort('created', '作成日時'); ?></th>
+		<th nowrap class="col-course"><?php echo __('受験できるWebテスト'); ?></th>
+		<th nowrap class="col-course"><?php echo __('開講授業'); ?></th>
 		<th class="ib-col-date"><?php echo $this->Paginator->sort('modified', '更新日時'); ?></th>
 		<th class="ib-col-action"><?php echo __('Actions'); ?></th>
 	</tr>
@@ -18,9 +18,9 @@
 	<tbody>
 	<?php foreach ($groups as $group): ?>
 	<tr>
-		<td><?php echo h($group['Group']['title']); ?></td>
+		<td><?php echo $this->Html->link(h($group['Group']['title']), array('action' => 'user_info',$group['Group'][id])); ?></td>
 		<td><div class="reader" title="<?php echo h($group['GroupCourse']['course_title']); ?>"><p><?php echo h($group['GroupCourse']['course_title']); ?>&nbsp;</p></div></td>
-		<td class="ib-col-date"><?php echo h(Utils::getYMDHN($group['Group']['created'])); ?>&nbsp;</td>
+		<td><div class="reader" title="<?php echo h($group['GroupLecture']['lecture_NAME']); ?>"><p><?php echo h($group['GroupLecture']['lecture_name']); ?>&nbsp;</p></div></td>
 		<td class="ib-col-date"><?php echo h(Utils::getYMDHN($group['Group']['modified'])); ?>&nbsp;</td>
 		<td class="ib-col-action">
 			<?php echo $this->Form->postLink(__('削除'), 

@@ -26,15 +26,19 @@ class GroupsController extends AppController
 	{
 		$this->Group->recursive = 0;
 		$this->Group->virtualFields['course_title'] = 'GroupCourse.course_title'; // 外部結合テーブルのフィールドによるソート用
+		$this->Group->virtualFields['lecture_name'] = 'GroupLecture.lecture_name'; // 外部結合テーブルのフィールドによるソート用
 		
 		$this->Paginator->settings = array(
-			'fields' => array('*', 'GroupCourse.course_title'),
+			'fields' => array('*', 'GroupCourse.course_title','GroupLecture.lecture_name'),
 			'limit' => 20,
 			'order' => 'created desc',
 			'joins' => array(
 				array('type' => 'LEFT OUTER', 'alias' => 'GroupCourse',
 						'table' => '(SELECT gc.group_id, group_concat(c.title order by c.id SEPARATOR \', \') as course_title FROM ib_groups_courses gc INNER JOIN ib_courses c ON c.id = gc.course_id  GROUP BY gc.group_id)',
-						'conditions' => 'Group.id = GroupCourse.group_id')
+						'conditions' => 'Group.id = GroupCourse.group_id'),
+				array('type' => 'LEFT OUTER', 'alias' => 'GroupLecture',
+						'table' => '(SELECT gl.group_id, group_concat(l.lecture_name order by l.id SEPARATOR \', \') as lecture_name FROM ib_groups_lectures gl INNER JOIN ib_lectures l ON l.id = gl.lecture_id  GROUP BY gl.group_id)',
+						'conditions' => 'Group.id = GroupLecture.group_id')
 			)
 		);
 		
@@ -56,6 +60,7 @@ class GroupsController extends AppController
 	 */
 	public function admin_edit($group_id = null)
 	{
+		$this->loadModel('Lecture');
 		if ($this->action == 'edit' && ! $this->Group->exists($group_id))
 		{
 			throw new NotFoundException(__('Invalid group'));
@@ -88,7 +93,10 @@ class GroupsController extends AppController
 		}
 		
 		$courses = $this->Group->Course->find('list');
-		$this->set(compact('courses'));
+		$lectures = $this->Lecture->find('list',array(
+			'fields' => array('id','lecture_name')
+		));
+		$this->set(compact('courses','lectures'));
 	}
 
 	/**
@@ -114,5 +122,44 @@ class GroupsController extends AppController
 		return $this->redirect(array(
 				'action' => 'index'
 		));
+	}
+
+	/**
+	 * キャンパスに在籍する生徒と開講する授業と担当者を表示
+	 */
+
+	public function admin_user_info($group_id){
+		$this->loadModel('User');
+		$this->loadModel('Group');
+		$this->loadModel('UsersGroup');
+		$this->loadModel('Lecture');
+
+		$conditions['User.id'] = $this->Group->getUserIdByGroupID($group_id);
+		$conditions['User.role'] = 'user';
+
+		$user_list = $this->User->find('all',array(
+			'conditions' => $conditions
+		));
+
+		$group_info = $this->Group->find('first',array(
+			'conditions' => array(
+				'Group.id' => $group_id
+			)
+		));
+
+		$conditions = [];
+		$conditions['Lecture.id'] = $this->Group->getLectureIdByGroupID($group_id);
+
+		$lecture_info = $this->Lecture->find('all',array(
+			'conditions' => $conditions
+		));
+
+		$all_user_list = $this->User->find('list',array(
+			'fields' => 'id, name',
+			'order' => 'User.id ASC'
+		));
+
+		$this->set(compact("user_list","group_info","lecture_info",'all_user_list'));
+
 	}
 }

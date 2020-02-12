@@ -96,6 +96,19 @@ class Group extends AppModel
 					'offset' => '',
 					'finderQuery' => ''
 			),
+			'Lecture' => array(
+				'className' => 'Course',
+				'joinTable' => 'groups_lectures',
+				'foreignKey' => 'group_id',
+				'associationForeignKey' => 'lecture_id',
+				'unique' => 'keepExisting',
+				'conditions' => '',
+				'fields' => '',
+				'order' => '',
+				'limit' => '',
+				'offset' => '',
+				'finderQuery' => ''
+		),
 	);
 	
 	/**
@@ -138,5 +151,29 @@ class Group extends AppModel
 		}
 		
 		return $data;
+	}
+
+	/**
+	 * 指定したグループに所属する授業IDリストを取得
+	 * 
+	 * @param int $group_id グループID
+	 * @return array 授業IDリスト
+	 */
+	public function getLectureIdByGroupID($group_id)
+	{
+		$sql = "SELECT lecture_id FROM ib_groups_lectures WHERE group_id = :group_id";
+		
+		$params = array('group_id' => $group_id);
+		
+		$data = $this->query($sql, $params);
+		
+		$list = array();
+		
+		for($i=0; $i< count($data); $i++)
+		{
+			$list[$i] = $data[$i]['ib_groups_lectures']['lecture_id'];
+		}
+		
+		return $list;
 	}
 }

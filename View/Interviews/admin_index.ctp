@@ -68,12 +68,14 @@
 		<?php if($loginedUser['role']=='admin') {?>
 		<td class="ib-col-action">
 			<?php
-				echo $this->Form->postLink(__('削除'), array(
-					'action' => 'delete',
-					$user['User']['id']
-				), array(
-					'class' => 'btn btn-danger'
-				), __('[%s] の面談記録を削除してもよろしいですか?', $user['User']['name']));
+				if($this->action == 'admin_index'){
+					echo $this->Form->postLink(__('削除'), array(
+						'action' => 'delete',
+						$user['User']['id']
+					), array(
+						'class' => 'btn btn-danger'
+					), __('[%s] の面談記録を削除してもよろしいですか?', $user['User']['name']));
+				}
 		?>
 		<button type="button" class="btn btn-success"
 				onclick="location.href='<?php echo Router::url(array('action' => 'edit', $user['User']['id'])) ?>'">編集</button>
