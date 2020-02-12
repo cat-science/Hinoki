@@ -128,6 +128,7 @@ class InterviewsController extends AppController{
 	public function admin_edit($user_id){
 		$this->loadModel('User');
 		$this->loadModel('Record');
+		$this->loadModel('EjusRecord');
 
 		//個人情報を検索
 		$user_info = $this->User->find('all',array(
@@ -136,21 +137,43 @@ class InterviewsController extends AppController{
 			)
 		));
 
+
+		$ejus_records = $user_info[0]['EjusRecord'];
+
 		$user_info = $this->User->setUserManyTitles($user_info);
 		$user_info = $user_info[0];
-		// $this->log($user_info);
 
 		$records = $this->Record->find('all',array(
 			'conditions' => array(
 				'User.id' => $user_id,
 				'Content.kind' => 'test',
 			),
-			'limit' => 3
+			'limit' => 4
 		));
-		// $this->log($records);
+
+		$ejus_output = "";
+		foreach($ejus_records as $row){
+			$ejus_output .= $row['year']."年"."第".$row['number_of_times']."回:"."</br>";
+
+			$ejus_output .= ($row['ja_reading'] !== NULL)   ?  " 読解: ".$row['ja_reading'] : "";
+			$ejus_output .= ($row['ja_listening'] !== NULL) ?  "聴解・聴読解: ".$row['ja_listening'] : "";
+			$ejus_output .= ($row['jaw_writing'] !== NULL) 	?  " 記述: ".$row['jaw_writing'] : "";
+
+			$ejus_output .= ($row['sc_physics'] !== NULL) 	?  " 物理: ".$row['sc_physics'] : "";
+			$ejus_output .= ($row['sc_chemistry'] !== NULL) ?  " 化学: ".$row['sc_chemistry'] : "";
+			$ejus_output .= ($row['sc_biology'] !== NULL) 	?  " 生物: ".$row['sc_biology'] : "";
+
+			$ejus_output .= ($row['sougou'] !== NULL) 			?  " 総合科目: ".$row['sougou'] : "";
+
+			$ejus_output .= ($row['ma_course1'] !== NULL) 	?  " 数学コース1: ".$row['ma_course1'] : "";
+			$ejus_output .= ($row['ma_course2'] !== NULL) 	?  " 数学コース2: ".$row['ma_course2'] : "";
+
+			$ejus_output .= "</br>";
+		}
 
 
-		$this->set(compact("user_info","records","user_id"));
+
+		$this->set(compact("user_info","records","user_id","ejus_output"));
 
 		if ($this->request->is(array(
 			'post',
@@ -224,7 +247,8 @@ class InterviewsController extends AppController{
 					'EjusRecord.number_of_times' => $number_of_times
 				)
 			));
-			$saved_data = $saved_data[0];
+
+			$saved_data = $saved_data['EjusRecord'];
 			$save_data['EjusRecord'] = array(
 				'id' => $saved_data['id'],
 				'user_id' => $user_id,
@@ -257,7 +281,6 @@ class InterviewsController extends AppController{
 				)
 			));
 			$this->request->data['EjusRecord'] = $tmp['EjusRecord'];
-			$this->log($this->request->data);
 		}
 	}
 

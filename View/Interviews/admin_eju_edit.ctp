@@ -13,11 +13,11 @@
   <div class="text-left">
     <?php echo $this->Html->link(__('<< 戻る'), array('action' => 'edit',$user_id))?>  
   </div>
-  <div class="text-left">
+  <div class="text-left font-weight-bold" style="font-size : 20px;">
     生徒氏名:<?php echo $user_name;?>さん EJU成績入力
   </div>
   <div class="text-left">
-    注意:同じ年の同じ回が複数入力された場合は，古い情報が上書きされ，最新情報しか表示されません．ご注意ください．
+    *注意:西暦と回数を選択した時，ページは更新され，その年のその回数の成績が表示されます．
   </div>
   <div class="card bg-light">
     <div class="card-body">
