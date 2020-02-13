@@ -47,6 +47,7 @@ class InfosController extends AppController
 
 	public function docent_index()
 	{
+		$this->index();
 		$this->render('index');
 	}
 

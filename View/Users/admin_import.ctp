@@ -1,11 +1,11 @@
 <?php echo $this->element('admin_menu');?>
-<div class="admin-users-import">
-<?php echo $this->Html->link(__('<< 戻る'), array('action' => 'index'))?>
-	<div class="panel panel-default">
-		<div class="panel-heading">
+<div class="admin-users-import col">
+	<?php echo $this->Html->link(__('<< 戻る'), array('action' => 'index'))?>
+	<div class="card bg-light">
+		<div class="card-header">
 			インポート
 		</div>
-		<div class="panel-body">
+		<div class="card-body">
 			<li>ユーザ情報が格納されたCSVファイルを選択し、インポートを行って下さい。</li>
 			<li>CSVファイルの文字コードは「Shift-JIS」を使用してください。(UTF-8は使用できません。)</li>
 			<li>1行目はヘッダー行として扱われます。</li>
@@ -32,7 +32,7 @@
 				echo $this->Form->end();
 			?>
 			<div style="color:red;">
-			<?php echo $err_msg; ?>
+				<?php echo $err_msg; ?>
 			<div>
 		</div>
 	</div>
