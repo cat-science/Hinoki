@@ -3,11 +3,11 @@ $url = Router::url(array('controller' => 'users', 'action' => 'login'));
 $url = str_replace('/users/', '/admin/users/', $url);
 ?>
 <div class="install-complete">
-	<div class="panel panel-info">
-		<div class="panel-heading">
-			iroha Board Installer
+	<div class="card bg-light">
+		<div class="card-header">
+			Hinoki Installer
 		</div>
-		<div class="panel-body">
+		<div class="card-body">
 			<p class="msg">
 				インストールが完了しました<br>
 				<br>

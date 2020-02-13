@@ -145,7 +145,7 @@
 	</div>
 	
 	<div class="irohasoft">
-		Powered by <a href="http://irohaboard.irohasoft.jp/">iroha Board</a>
+		Powered by <a href="https://github.com/cat-science/Hinoki">Cat-science</a> With <a href="http://irohaboard.irohasoft.jp/">iroha Board</a>
 	</div>
 	
 	<?php echo $this->element('sql_dump'); ?>

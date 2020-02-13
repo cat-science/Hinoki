@@ -1,9 +1,9 @@
 <div class="install-error">
-	<div class="panel panel-danger">
-		<div class="panel-heading">
-			iroha Board Installer
+	<div class="card text-white card-danger">
+		<div class="card-header">
+			Hinoki Installer
 		</div>
-		<div class="panel-body">
+		<div class="card-body">
 			<p class="msg">
 				<?php echo h($body); ?>
 			</p>
