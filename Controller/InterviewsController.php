@@ -60,6 +60,12 @@ class InterviewsController extends AppController{
 		$this->render('admin_eju_edit');
 	}
 
+	public function docent_all_records($user_id){
+		$this->admin_all_records($user_id);
+		$this->render('admin_all_records');
+	}
+
+
 	/* 専任講師関連 -- admin */
 	public function admin_index(){
 		$this->loadModel('User');

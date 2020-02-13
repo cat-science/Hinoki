@@ -163,7 +163,7 @@
 				<div class="col col-sm-12 required" id="summernote">
 				「＋」で選択肢の追加、「−」で選択された選択肢を削除します。（※最大10個まで）<br>
 				また選択された選択肢が正解となります。Ctrlキーを押下したまま選択することで、複数の正解の設定も可能です。<br>
-				<input type="text" size="20" name="option" style=" position: relative; left: 1.5vw; width:70vw;display:inline-block;">
+				<input type="text" size="20" name="option" style=" position: relative; left: 1.5vw; width:90%;display:inline-block;">
 				<button class="btn" style=" position: relative; left: 1.5vw;" onclick="del_option();return false;">−</button>
 				<button class="btn" style=" position: relative; left: 1.5vw;" onclick="add_option();return false;">＋</button><br>
 				
@@ -173,6 +173,7 @@
 					'label' => false,
 					'multiple' => true,
 					'size' => 5,
+					'style' => 'margin-top:20px;',
 					'onchange' => 'update_correct()'
 				));
 

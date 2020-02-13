@@ -11,14 +11,14 @@
 		setTimeout('$("#UserNewPassword").val("");', 500);
 	});
 <?php $this->Html->scriptEnd(); ?>
-<div class="admin-users-edit">
+<div class="admin-users-edit col">
 <?php echo $this->Html->link(__('<< 戻る'), array('action' => 'index'))?>
-	<div class="panel panel-default">
-		<div class="panel-heading">
+	<div class="card bg-light">
+		<div class="card-header">
 			<?php echo ($this->request->data) ? __('編集') :  __('新規ユーザ'); ?>
 		</div>
-		<div class="panel-body">
-			<?php echo $this->Form->create('User', Configure::read('form_defaults')); ?>
+		<div class="card-body">
+			<?php echo $this->Form->create('User', Configure::read('form_defaults_bs4')); ?>
 			<?php
 				$password_label = ($this->request->data) ? __('新しいパスワード') : __('パスワード');
 				
@@ -51,20 +51,23 @@
 			<div class="form-group">
 				<div class="col col-sm-9 col-sm-offset-3">
 					<?php echo $this->Form->submit('保存', Configure::read('form_submit_defaults')); ?>
-				</div>
+				</div>				
 			</div>
 			<?php echo $this->Form->end(); ?>
-			<?php
-			if($this->request->data)
-			{
-				echo $this->Form->postLink(__('学習履歴を削除'), array(
-					'action' => 'clear',
-					$this->request->data['User']['id']
-				), array(
-					'class' => 'btn btn-default pull-right btn-clear'
-				), __('学習履歴を削除してもよろしいですか？', $this->request->data['User']['name']));
-			}
-			?>
+			<div class="col sol-sm-9 col-sm-offset-3">
+				<?php
+					if($this->request->data)
+					{
+						echo $this->Form->postLink(__('学習履歴を削除'), array(
+							'action' => 'clear',
+							$this->request->data['User']['id']
+						), array(
+							'class' => 'btn btn-danger '
+						), __('学習履歴を削除してもよろしいですか？', $this->request->data['User']['name']));
+					}
+				?>
+				</div>
+			
 		</div>
 	</div>
 </div>

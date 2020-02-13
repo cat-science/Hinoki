@@ -272,7 +272,8 @@ TOEFL:YY点
               ),
               'type' => 'textarea',
               'class' => 'form-control',
-              'placeholder' => ''
+              'placeholder' => '',
+              'disabled' => $this->action == 'admin_edit' ? false : true
             ));
           ?>
         </div>
