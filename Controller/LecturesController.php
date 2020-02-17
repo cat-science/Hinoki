@@ -56,7 +56,7 @@ class LecturesController extends AppController
 		));
 		
 		$lecture_list = $this->Lecture->find('list',array(
-			'fields' => array('id', 'lecture_name')
+			'fields' => array('id', 'st_lecture_name')
 		));
 
 		$user_list = $this->User->find('list',array(
@@ -71,11 +71,19 @@ class LecturesController extends AppController
 			)
 		));
 
+		$lecture_info = $this->Lecture->find('all',array(
+			'conditions' => array(
+				'Lecture.id' => $lecture_id
+			)
+		));
+		$lecture_info = $lecture_info[0];
+
 
 		$this->log($attendance_list);
 		$this->log($records);
+		$this->log($lecture_info);
 
-		$this->set(compact("records","lecture_list","lecture_id"));
+		$this->set(compact("records","lecture_list","lecture_id","lecture_info"));
 		$this->set(compact("user_list","attendance_list"));
 
 	}

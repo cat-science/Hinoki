@@ -3,6 +3,9 @@
   <div class="card bg-light">
 	  <div class="card-header"><?php echo h($lecture_list[$lecture_id]); ?></div>
 	  <div class="card-body">
+      <div class="font-weight-bold" style="font-size:20px">
+        授業の場所：<?php echo $lecture_info['Lecture']['lecture_place'];?>
+      </div> 
       <table class="responsive-table">
 		    <thead>
 		    	<tr>
