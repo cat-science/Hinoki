@@ -3,8 +3,8 @@
 <?php echo $this->Html->script( 'select2.min.js');?>
 <?php $this->Html->scriptStart(array('inline' => false)); ?>
 	$(function (e) {
-		$('#GroupGroup').select2({placeholder:   "選択しない場合、全てのユーザが対象となります。", closeOnSelect: <?php echo (Configure::read('close_on_select') ? 'true' : 'false'); ?>,});
-		$('#LectureLecture').select2({placeholder:   "選択しない場合、全てのユーザが対象となります。", closeOnSelect: <?php echo (Configure::read('close_on_select') ? 'true' : 'false'); ?>,});
+		$('#GroupGroup').select2({placeholder:   "", closeOnSelect: <?php echo (Configure::read('close_on_select') ? 'true' : 'false'); ?>,});
+		$('#LectureLecture').select2({placeholder:   "", closeOnSelect: <?php echo (Configure::read('close_on_select') ? 'true' : 'false'); ?>,});
 	});
 <?php $this->Html->scriptEnd(); ?>
 

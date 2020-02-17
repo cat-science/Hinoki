@@ -20,7 +20,7 @@
 				echo $this->Form->input('id');
 				echo $this->Form->input('title',	array('label' => __('キャンパス名')));
 				echo $this->Form->input('Course',	array('label' => __('受講Webテスト'),		'size' => 20));
-				echo $this->Form->input('Lecture',	array('label' => __('受講Webテスト'),		'size' => 20));
+				echo $this->Form->input('Lecture',	array('label' => __('受講科目'),		'size' => 20));
 				echo $this->Form->input('comment',	array('label' => __('備考')));
 			?>
 			<div class="form-group">
