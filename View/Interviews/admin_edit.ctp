@@ -138,6 +138,8 @@
       <div class = "card bg-light">
         <div class = "card-header">
           Webテスト成績
+          <p style="float:right; margin:0px;"><a href="javascript:openRecord(<?php echo h($user_id); ?>);"><?php echo __('Webテスト成績一覧はこちら')?></a></p>
+          
         </div>
         <div class = "card-body">
           <table class = "table table-borderless table-striped">
@@ -158,7 +160,6 @@
               <?php endforeach;?>
             </tbody>
           </table>
-          <a href="javascript:openRecord(<?php echo h($user_id); ?>);"><?php echo __('Webテスト成績一覧はこちら')?></a>
         </div>
       </div>
     </div>
@@ -180,7 +181,7 @@
             'placeholder' => 'xx大学
 YY大学
 のように入力してください',
-            'rows' => 10
+            'rows' => 9
           ));
         ?>
         </div>
@@ -217,19 +218,27 @@ TOEFL:YY点
       <div class = "card bg-light">
         <div class = "card-header">
           面談練習内容
+          <p style="float:right; margin:0px;"><?php echo $this->Html->link(__('面談練習入力&編集はこちら'), array('action' => 'practice_index',$user_id))?></p>
+
         </div>
         <div class = "card-body">
-        <?php
-          echo $this->Form->input('practice_record',array(
-            'label' => array(
-              'style' => '',
-              'text' => ''
-            ),
-            'type' => 'textarea',
-            'class' => 'form-control',
-            'placeholder' => ''
-          ));
-        ?>
+          <table class = "table table-borderless table-striped">
+            <tbody>
+              <tr>
+                <th>日付</th>
+                <th>テーマ</th>
+                <th>担当者</th>
+              </tr>
+              <?php foreach($practices_record as $row):?>
+                <tr>
+                  <th><?php echo $this->Html->link( $row['practice_date'], array('action' => 'practice_edit',$user_info['User']['id'],$row['id']))?></th>
+                  <th><?php echo $row['practice_theme']?></th>
+                  <th><?php echo $docent_list[$row['docent_id']]?></th>
+                </tr>
+              <?php endforeach;?>
+            </tbody>
+          </table>
+
         </div>
       </div>
     </div>

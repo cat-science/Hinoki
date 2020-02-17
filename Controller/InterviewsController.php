@@ -65,6 +65,22 @@ class InterviewsController extends AppController{
 		$this->render('admin_all_records');
 	}
 
+	public function docent_practice_index($user_id){
+		$this->admin_practice_index($user_id);
+		$this->render('admin_practice_index');
+	}
+
+	public function docent_practice_edit($user_id,$practice_id = null){
+		$this->admin_practice_edit($user_id,$practice_id);
+		$this->render('admin_practice_edit');
+	}
+
+	public function docent_practice_delete($user_id,$practice_id = null){
+		$this->admin_practice_delete($user_id,$practice_id);
+		$this->render('admin_practice_delete');
+	}
+
+
 
 	/* 専任講師関連 -- admin */
 	public function admin_index(){
@@ -119,6 +135,16 @@ class InterviewsController extends AppController{
 			)
 		));
 
+		$practices_record = $user_info[0]['PracticesRecord'];
+		$cnt = 0;
+		$tmp =[];
+		foreach($practices_record as $row){
+			$tmp[] = $row;
+			$cnt++;
+			if($cnt == 2) break; 
+		}
+		$practices_record = $tmp;
+
 
 		$ejus_records = $user_info[0]['EjusRecord'];
 
@@ -153,9 +179,18 @@ class InterviewsController extends AppController{
 			$ejus_output .= "</br>";
 		}
 
+		$docent_list = $this->User->find('list',array(
+			'filed' => array( 'id', 'name'),
+			'conditions' => array(
+				'or' => array(
+					'User.role' => 'docent',
+					'User.role' => 'admin'
+				)
+			)
+		));
 
 
-		$this->set(compact("user_info","records","user_id","ejus_output"));
+		$this->set(compact("user_info","records","user_id","ejus_output","practices_record","docent_list"));
 
 		if ($this->request->is(array(
 			'post',
@@ -163,7 +198,6 @@ class InterviewsController extends AppController{
 		)))
 		{
 			$request_data = $this->request->data;
-			$this->log($request_data);
 			if ($this->Interview->save($request_data))
 			{
 				$this->Flash->success(__('面談情報が保存されました'));
@@ -408,4 +442,108 @@ class InterviewsController extends AppController{
 
 	}
 
+	public function admin_practice_index($user_id){
+		$this->loadModel('User');
+		$this->loadModel('EjusRecord');
+		$this->loadModel('PracticesRecord');
+		
+		$user_infos = $this->User->find('first',array(
+			'conditions' => array(
+				'User.id' => $user_id
+			)
+		));
+
+		$user_info = $user_infos['User'];
+		$practices_record = $user_infos['PracticesRecord'];
+
+		$docent_list = $this->User->find('list',array(
+			'filed' => array( 'id', 'name'),
+			'conditions' => array(
+				'or' => array(
+					'User.role' => 'docent',
+					'User.role' => 'admin'
+				)
+			)
+		));
+
+		$this->set(compact("user_info","practices_record","docent_list"));
+
+
+	}
+
+	public function admin_practice_edit($user_id,$practice_id = null){
+		$this->loadModel('User');
+		$this->loadModel('EjusRecord');
+		$this->loadModel('PracticesRecord');
+
+		$user_infos = $this->User->find('first',array(
+			'conditions' => array(
+				'User.id' => $user_id
+			)
+		));
+
+		$docent_list = $this->User->find('list',array(
+			'filed' => array( 'id', 'name'),
+			'conditions' => array(
+				'or' => array(
+					'User.role' => 'docent',
+					'User.role' => 'admin'
+				)
+			)
+		));
+
+		$user_info = $user_infos['User'];
+
+
+		$this->set(compact("user_info","docent_list"));
+
+		if($this->request->is(array( 'post', 'put'))){
+
+			$request_data = $this->request->data;
+
+			$request_data['PracticesRecord']['practice_date'] = $request_data['PracticesRecord']['practice_date']['year'].'-'.$request_data['PracticesRecord']['practice_date']['month'].'-'.$request_data['PracticesRecord']['practice_date']['day'];
+
+			if($this->PracticesRecord->save($request_data)){
+				$this->Flash->success(__('面談記録が保存されました'));
+				return $this->redirect(array(
+					'action' => 'practice_index',$user_info['id']
+				));
+			}else{
+				$this->Flash->error(__('The record could not be saved. Please, try again.'));
+			}
+			
+			
+		}else{
+			$options = array(
+				'conditions' => array(
+					'PracticesRecord.' . $this->PracticesRecord->primaryKey => $practice_id
+				)
+			);
+			$this->request->data = $this->PracticesRecord->find('first', $options);
+		}
+		
+	}
+
+	public function admin_practice_delete($user_id,$practice_id = null){
+		
+		$this->loadModel('PracticesRecord');
+		
+		$this->PracticesRecord->id = $practice_id;
+		if (! $this->PracticesRecord->exists())
+		{
+			throw new NotFoundException(__('Invalid user'));
+		}
+		$this->request->allowMethod('post', 'delete');
+		if ($this->PracticesRecord->delete())
+		{
+			$this->Flash->success(__('面談記録が削除されました'));
+		}
+		else
+		{
+			$this->Flash->error(__('面談記録を削除できませんでした'));
+		}
+		return $this->redirect(array(
+				'action' => 'practice_index',$user_id
+		));
+	}
 }

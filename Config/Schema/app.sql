@@ -299,7 +299,6 @@ CREATE TABLE IF NOT EXISTS `ib_interviews` (
   `user_id` int(8) NOT NULL DEFAULT '0',
   `future_path` varchar(500) DEFAULT NULL,
   `english_record` varchar(500) DEFAULT NULL,
-  `parctice_record` varchar(500) DEFAULT NULL,
   `future_field` varchar(500) DEFAULT NULL,
   `admin_comment` varchar(500) DEFAULT NULL,
   `created` datetime DEFAULT NULL,
@@ -365,4 +364,19 @@ CREATE TABLE IF NOT EXISTS `ib_users_lectures` (
   `comment` text,
   PRIMARY KEY (`id`),
   KEY `idx_user_lecture_id` (`user_id`,`lecture_id`)
+) ENGINE=InnoDB DEFAULT CHARSET=utf8;
+
+-- ----------------------------
+-- Table structure for `ib_practices_records`
+-- ----------------------------
+CREATE TABLE IF NOT EXISTS `ib_practices_records` (
+  `id` int(8) NOT NULL AUTO_INCREMENT,
+  `practice_date` date DEFAULT NULL,
+  `practice_theme` VARCHAR(200) DEFAULT NULL,
+  `docent_id` int(8) NOT NULL DEFAULT '0',
+  `user_id` int(8) NOT NULL DEFAULT '0',
+  `practice_body` text,
+  `created` datetime DEFAULT NULL,
+  `modified` datetime DEFAULT NULL,
+  PRIMARY KEY (`id`),
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8;
