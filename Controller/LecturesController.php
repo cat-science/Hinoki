@@ -285,7 +285,7 @@ class LecturesController extends AppController
 		
 		// お知らせ一覧を取得
 		$this->loadModel('Info');
-		$infos = $this->Info->getInfos($user_id, 2);
+		$infos = $this->Info->getInfos($user_id, 5);
 		
 		$no_info = "";
 		

@@ -145,7 +145,20 @@ class User extends AppModel
 				'exclusive' => '',
 				'finderQuery' => '',
 				'counterQuery' => ''
-		)
+			),
+			'PracticesRecord' => array(
+				'className' => 'PracticesRecord',
+				'foreignKey' => 'user_id',
+				'dependent' => false,
+				'conditions' => '',
+				'fields' => '',
+				'order' => ' PracticesRecord.practice_date DESC',
+				'limit' => '',
+				'offset' => '',
+				'exclusive' => '',
+				'finderQuery' => '',
+				'counterQuery' => ''
+			)
 	);
 
 	/**

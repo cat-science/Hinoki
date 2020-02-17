@@ -40,7 +40,7 @@
 					'style' => 'width:initial; display: inline;'
 				));
 				*/
-				echo $this->Form->input('Group',	array('label' => '対象グループ',	'size' => 20));
+				echo $this->Form->input('Group',	array('label' => '対象キャンパス',	'size' => 20));
 
 			?>
 			<div class="form-group">

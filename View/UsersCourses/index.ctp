@@ -5,6 +5,44 @@
 </style>
 
 <div class="users-courses-index col">
+	</br>
+	<div class="card bg-light">
+		<div class="card-header"><?php echo __('お知らせ'); ?></div>
+		<div class="card-body">
+			<?php if($info!=""){?>
+			<div class="well">
+				<?php
+				$info = $this->Text->autoLinkUrls($info, array( 'target' => '_blank'));
+				$info = nl2br($info);
+				echo $info;
+				?>
+			</div>
+			<?php }?>
+			
+			<?php if(count($infos) > 0){?>
+			<table cellpadding="0" cellspacing="0">
+			<tbody>
+			<?php foreach ($infos as $info): ?>
+			<tr>
+				<td width="120" valign="top"><?php echo h(Utils::getYMD($info['Info']['created'])); ?></td>
+				<td><?php echo $this->Html->link($info['Info']['title'], 
+					array(
+						'controller' => 'infos', 
+						'action' => 'view', 
+						$info['Info']['id']
+					)
+					); ?></td>
+			</tr>
+			<?php endforeach; ?>
+			</tbody>
+			</table>
+			<div class="text-right"><?php echo $this->Html->link(__('一覧を表示'), array('controller' => 'infos', 'action' => 'index')); ?></div>
+			<?php }?>
+			<?php echo $no_info;?>
+		</div>
+	</div>
+	</br>
+
 	<?php //カレンダー ?>
 	<?php
 		// タイムゾーンを設定
@@ -109,41 +147,7 @@
   	</div>
 
 
-	<div class="card bg-light">
-		<div class="card-header"><?php echo __('お知らせ'); ?></div>
-		<div class="card-body">
-			<?php if($info!=""){?>
-			<div class="well">
-				<?php
-				$info = $this->Text->autoLinkUrls($info, array( 'target' => '_blank'));
-				$info = nl2br($info);
-				echo $info;
-				?>
-			</div>
-			<?php }?>
-			
-			<?php if(count($infos) > 0){?>
-			<table cellpadding="0" cellspacing="0">
-			<tbody>
-			<?php foreach ($infos as $info): ?>
-			<tr>
-				<td width="120" valign="top"><?php echo h(Utils::getYMD($info['Info']['created'])); ?></td>
-				<td><?php echo $this->Html->link($info['Info']['title'], 
-					array(
-						'controller' => 'infos', 
-						'action' => 'view', 
-						$info['Info']['id']
-					)
-					); ?></td>
-			</tr>
-			<?php endforeach; ?>
-			</tbody>
-			</table>
-			<div class="text-right"><?php echo $this->Html->link(__('一覧を表示'), array('controller' => 'infos', 'action' => 'index')); ?></div>
-			<?php }?>
-			<?php echo $no_info;?>
-		</div>
-	</div>
+	
 	</br>
 	<div class="card bg-light">
 		<div class="card-header"><?php echo __('Webテスト一覧'); ?></div>

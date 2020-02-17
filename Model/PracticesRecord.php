@@ -2,25 +2,30 @@
 /**
  * Hinoki Project
  *
+ * @author        
+ * @copyright     
+ * @link          
  * @license       http://www.gnu.org/licenses/gpl-3.0.en.html GPL License
  */
 
 App::uses('AppModel', 'Model');
 
 /**
- * Interview Model
+ * Ejus Record Model
  *
+ * @property Group $Group
+ * @property Course $Course
+ * @property User $User
+ * @property Content $Content
  */
-class Interview extends AppModel
+class PracticesRecord extends AppModel
 {
-	public $order = ""; 
-
-	public $validate = array(
-
-	);
-
+	
 	// The Associations below have been created with all possible keys, those
 	// that are not needed can be removed
+	public $hasMany = array(
+
+	);
 
 	/**
 	 * belongsTo associations
@@ -29,22 +34,13 @@ class Interview extends AppModel
 	 */
 	public $belongsTo = array(
 		'User' => array(
-			'className' => 'User',
-			'foreignKey' => 'user_id',
-			'conditions' => '',
-			'fields' => '',
-			'order' => ''
+				'className' => 'User',
+				'foreignKey' => 'user_id',
+				'conditions' => '',
+				'fields' => '',
+				'order' => ''
 		)
-	);
-
-	/**
-	 * hasMany associations
-	 *
-	 * @var array
-	 */
-	public $hasMany = array(
-
-	);
+);
 
 	/**
 	 * hasAndBelongsToMany associations
@@ -52,10 +48,9 @@ class Interview extends AppModel
 	 * @var array
 	 */
 	public $hasAndBelongsToMany = array(
-
+		
 	);
-
-
+	
 	/**
 	 * 検索用
 	 */
@@ -64,7 +59,5 @@ class Interview extends AppModel
 	);
 
 	public $filterArgs = array(
-
 	);
-
 }
