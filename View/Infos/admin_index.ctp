@@ -7,9 +7,9 @@
 	<table cellpadding="0" cellspacing="0">
 	<thead>
 	<tr>
-		<th><?php echo $this->Paginator->sort('title',   __('タイトル')); ?></th>
+		<th ><?php echo $this->Paginator->sort('title',   __('タイトル')); ?></th>
 		<th nowrap><?php echo __('対象キャンパス'); ?></th>
-		<th class="ib-col-date"><?php echo $this->Paginator->sort('created', '作成日時'); ?></th>
+		<th nowrap><?php echo __('対象授業'); ?></th>
 		<th class="ib-col-date"><?php echo $this->Paginator->sort('modified', '更新日時'); ?></th>
 		<th class="ib-col-action"><?php echo __('Actions'); ?></th>
 	</tr>
@@ -17,9 +17,9 @@
 	<tbody>
 	<?php foreach ($infos as $info): ?>
 	<tr>
-		<td><?php echo h($info['Info']['title']); ?>&nbsp;</td>
+		<td ><?php echo h($info['Info']['title']); ?>&nbsp;</td>
 		<td><div class="reader col-group" title="<?php echo h($info['InfoGroup']['group_title']); ?>"><p><?php echo h($info['InfoGroup']['group_title']); ?>&nbsp;</p></td>
-		<td class="ib-col-date"><?php echo Utils::getYMDHN($info['Info']['created']); ?>&nbsp;</td>
+		<td><div class="reader col-group" title="<?php echo h($info['InfoLecture']['lecture_title']); ?>"><p><?php echo h($info['InfoLecture']['lecture_title']); ?>&nbsp;</p></td>
 		<td class="ib-col-date"><?php echo Utils::getYMDHN($info['Info']['modified']); ?>&nbsp;</td>
 		<td class="ib-col-action">
 			<?php echo $this->Form->postLink(__('削除'), 

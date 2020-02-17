@@ -82,15 +82,19 @@ class InfosController extends AppController
 	public function admin_index()
 	{
 		$this->Info->virtualFields['group_title'] = 'InfoGroup.group_title'; // 外部結合テーブルのフィールドによるソート用
+		$this->Info->virtualFields['lecture_title'] = 'InfoLecture.lecture_title'; // 外部結合テーブルのフィールドによるソート用
 		
 		$this->Paginator->settings = array(
-			'fields' => array('*', 'InfoGroup.group_title'),
+			'fields' => array('*', 'InfoGroup.group_title', 'InfoLecture.lecture_title'),
 			'limit' => 20,
 			'order' => 'Info.created desc',
 			'joins' => array(
 				array('type' => 'LEFT OUTER', 'alias' => 'InfoGroup',
 						'table' => '(SELECT ug.info_id, group_concat(g.title order by g.id SEPARATOR \', \') as group_title FROM ib_infos_groups ug INNER JOIN ib_groups g ON g.id = ug.group_id GROUP BY ug.info_id)',
 						'conditions' => 'Info.id = InfoGroup.info_id'),
+				array('type' => 'LEFT OUTER', 'alias' => 'InfoLecture',
+						'table' => '(SELECT ul.info_id, group_concat(l.lecture_name order by l.id SEPARATOR \', \') as lecture_title FROM ib_infos_lectures ul INNER JOIN ib_lectures l ON l.id = ul.lecture_id GROUP BY ul.info_id)',
+						'conditions' => 'Info.id = InfoLecture.info_id'),
 			)
 		);
 		
