@@ -9,7 +9,7 @@ CREATE TABLE IF NOT EXISTS `ib_practices_records` (
   `practice_body` text,
   `created` datetime DEFAULT NULL,
   `modified` datetime DEFAULT NULL,
-  PRIMARY KEY (`id`),
+  PRIMARY KEY (`id`)
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8;
 
 SET FOREIGN_KEY_CHECKS=1;

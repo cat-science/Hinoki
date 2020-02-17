@@ -4,6 +4,7 @@
 <?php $this->Html->scriptStart(array('inline' => false)); ?>
 	$(function (e) {
 		$('#GroupGroup').select2({placeholder:   "選択しない場合、全てのユーザが対象となります。", closeOnSelect: <?php echo (Configure::read('close_on_select') ? 'true' : 'false'); ?>,});
+		$('#LectureLecture').select2({placeholder:   "選択しない場合、全てのユーザが対象となります。", closeOnSelect: <?php echo (Configure::read('close_on_select') ? 'true' : 'false'); ?>,});
 	});
 <?php $this->Html->scriptEnd(); ?>
 
@@ -40,7 +41,8 @@
 					'style' => 'width:initial; display: inline;'
 				));
 				*/
-				echo $this->Form->input('Group',	array('label' => '対象キャンパス',	'size' => 20));
+				echo $this->Form->input('Group',	array('label' => '対象キャンパス'));
+				echo $this->Form->input('Lecture',	array('label' => '対象授業'));
 
 			?>
 			<div class="form-group">
