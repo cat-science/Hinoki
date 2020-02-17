@@ -1,6 +1,13 @@
 SET FOREIGN_KEY_CHECKS=0;
 
-SET FOREIGN_KEY_CHECKS=1;
+CREATE TABLE IF NOT EXISTS `ib_infos_lectures` (
+  `id` int(8) NOT NULL AUTO_INCREMENT,
+  `info_id` int(8) NOT NULL DEFAULT '0',
+  `lecture_id` int(8) NOT NULL DEFAULT '0',
+  `created` datetime DEFAULT NULL,
+  `modified` datetime DEFAULT NULL,
+  `comment` text,
+  PRIMARY KEY (`id`)
+) ENGINE=InnoDB DEFAULT CHARSET=utf8;
 
-ALTER TABLE ib_lectures ADD COLUMN st_lecture_name VARCHAR(200) NULL DEFAULT NULL AFTER `lecture_name`;
-ALTER TABLE ib_lectures ADD COLUMN lecture_place VARCHAR(200) NULL DEFAULT NULL AFTER `st_lecture_name`;;
+SET FOREIGN_KEY_CHECKS=1;
