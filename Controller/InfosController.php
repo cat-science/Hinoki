@@ -114,6 +114,7 @@ class InfosController extends AppController
 	 */
 	public function admin_edit($info_id = null)
 	{
+		$this->loadModel('Lecture');
 		if ($this->action == 'admin_edit' && ! $this->Info->exists($info_id))
 		{
 			throw new NotFoundException(__('Invalid info'));
@@ -155,7 +156,10 @@ class InfosController extends AppController
 		$this->Group = new Group();
 		
 		$groups = $this->Group->find('list');
-		$this->set(compact('groups'));
+		$lectures = $this->Lecture->find('list',array(
+			'fields' => array('id','lecture_name')
+		));
+		$this->set(compact('groups','lectures'));
 	}
 
 	/**

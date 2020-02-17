@@ -74,7 +74,20 @@ class Info extends AppModel
 					'limit' => '',
 					'offset' => '',
 					'finderQuery' => ''
-	 		)
+			),
+			'Lecture' => array(
+				'className' => 'Lecture',
+				'joinTable' => 'infos_lectures',
+				'foreignKey' => 'info_id',
+				'associationForeignKey' => 'lecture_id',
+				'unique' => 'keepExisting',
+				'conditions' => '',
+				'fields' => '',
+				'order' => '',
+				'limit' => '',
+				'offset' => '',
+				'finderQuery' => ''
+		)
 	);
 	
 	/**
@@ -115,13 +128,74 @@ class Info extends AppModel
 		{
 			$group_id_list[count($group_id_list)] = $group['Group']['id'];
 		}
+
+		// 自分自身が取っている授業のIDの配列を作成
+		App::import('Model', 'UsersLecture');
+		$this->UsersLecture = new UsersLecture();
+
+		$lectures = $this->UsersLecture->find('all',array(
+			'conditions' => array(
+				'user_id' => $user_id
+			)
+		));
+
+		$lecture_id_list = [];
+
+		foreach($lectures as $lecture){
+			$lecture_id_list[count($lecture_id_list)] = $lecture['Lecture']['id'];
+		}
+
+		if(!isset($group_id_list[0]) && !isset($lecture_id_list[0])){
+			$conditions['AND'] = array(
+				array('InfoGroup.group_id' => null), 
+				array('InfoLecture.lecture_id' => null)
+			);
+		}elseif(!isset($group_id_list[0]) && isset($lecture_id_list[0])){
+			$conditions = array(
+				'OR' => array(
+					array(
+						'AND' => array(
+							array('InfoGroup.group_id' => null), 
+							array('InfoLecture.lecture_id' => null)
+						)
+						),
+					array('InfoLecture.lecture_id' => $lecture_id_list)
+				)
+			);
+		}elseif(isset($group_id_list[0]) && !isset($lecture_id_list[0])){
+			$conditions = array(
+				'OR' => array(
+					array(
+						'AND' => array(
+							array('InfoGroup.group_id' => null), 
+							array('InfoLecture.lecture_id' => null)
+						)
+						),
+					array('InfoGroup.group_id' => $group_id_list)
+				)
+				
+			);
+		}else{
+			$conditions = array(
+				'OR' => array(
+					array(
+						'AND' => array(
+							array('InfoGroup.group_id' => null), 
+							array('InfoLecture.lecture_id' => null)
+						)
+					),
+					array('InfoGroup.group_id' => $group_id_list),
+					array('InfoLecture.lecture_id' => $lecture_id_list)
+
+				)
+			);
+
+		}
+
 		
 		$option = array(
 			'fields' => array('Info.id', 'Info.title', 'Info.created'),
-			'conditions' => array('OR' => array(
-				array('InfoGroup.group_id' => null), 
-				array('InfoGroup.group_id' => $group_id_list)
-			)),
+			'conditions' => $conditions,
 			'joins' => array(
 				array(
 					'type' => 'LEFT OUTER',
@@ -129,6 +203,12 @@ class Info extends AppModel
 					'table' => 'ib_infos_groups',
 					'conditions' => 'Info.id = InfoGroup.info_id'
 				),
+				array(
+					'type' => 'LEFT OUTER',
+					'alias' => 'InfoLecture',
+					'table' => 'ib_infos_lectures',
+					'conditions' => 'Info.id = InfoLecture.info_id'
+				)
 			),
 			'group' => array('Info.id', 'Info.title', 'Info.created'),
 			'order' => array('Info.created' => 'desc'),
