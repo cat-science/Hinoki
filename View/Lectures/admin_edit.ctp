@@ -22,18 +22,10 @@
 			<?php echo $this->Form->create('Lecture', Configure::read('form_defaults_bs4')); ?>
 			<?php
 				echo $this->Form->input('id');
-				echo $this->Form->input('lecture_name',	array('label' => __('授業名')));
-				/*
-				echo $this->Form->input('opened',	array(
-					'type' => 'datetime',
-					'dateFormat' => 'YMD',
-					'monthNames' => false,
-					'timeFormat' => '24',
-					'separator' => ' - ',
-					'label'=> '公開日時',
-					'style' => 'width:initial; display: inline;'
-				));
-				*/
+				echo $this->Form->input('lecture_name',	array('label' => __('管理側授業名')));
+				echo $this->Form->input('st_lecture_name',	array('label' => __('生徒側授業名')));
+				echo $this->Form->input('lecture_place',	array('label' => __('授業の場所')));
+				
 				echo $this->Form->input('docent_id',	array(
 					'label' => __('担当講師'),
 					'options'=> $docent_list, 

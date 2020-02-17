@@ -100,7 +100,7 @@ class UsersCoursesController extends AppController
 
 		$lecture_name_id = $this->Lecture->find('list',array(
 			'fields' => array(
-				'Lecture.lecture_name','Lecture.id'
+				'Lecture.st_lecture_name','Lecture.id'
 			)
 		));
 		/*
@@ -112,7 +112,7 @@ class UsersCoursesController extends AppController
 		
 		foreach($lectures as $lecture){
 			$rows = $lecture['Lecture']['lecture_date'];
-			$lecture_name = $lecture['Lecture']['lecture_name'];
+			$lecture_name = $lecture['Lecture']['st_lecture_name'];
 
 			$rows = explode("\n",$rows);
 			foreach($rows as $row){
