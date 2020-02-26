@@ -131,6 +131,26 @@ class AppController extends Controller
 			$this->loadModel('Group');
 		}elseif(isset($this->request->params['docent'])){
 			//講師用
+
+			if($this->Auth->user())
+			{
+				if(
+					($this->Auth->user('role')!='admin')&&
+					($this->Auth->user('role')!='manager')&&
+					($this->Auth->user('role')!='editor')&&
+					($this->Auth->user('role')!='teacher')&&
+					($this->Auth->user('role')!='docent')
+				)
+				{
+					if($this->Cookie)
+						$this->Cookie->delete('Auth');
+					
+					$this->Flash->error(__('講師画面へのアクセス権限がありません'));
+					$this->redirect($this->Auth->logout());
+					return;
+				}
+			}
+
 			$this->Auth->loginAction = array(
 				'controller' => 'users',
 				'action' => 'login',

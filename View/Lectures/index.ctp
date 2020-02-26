@@ -29,7 +29,7 @@
               $attendance = '欠席';
               $status = $attendance_list[$lecture_date];
               if(isset($status)){
-                if($status == 1){
+                if($status == 2){
                   $attendance = '出席';
                 }
               }
