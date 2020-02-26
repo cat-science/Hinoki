@@ -51,7 +51,6 @@ class LecturesRecordsController extends AppController
 		//受講する生徒を探す．
 		$lecture_student_rows = $this->UsersLecture->findAllUsersInThisLecture($lecture_id);
 
-		//$this->log($lecture_student_rows);
 
 		$conditions = [];
 		foreach($lecture_student_rows as $row){
@@ -87,7 +86,6 @@ class LecturesRecordsController extends AppController
 			$LA = $info['LecturesAttendance'];
 			$attendance_data_id[$LA['user_id']] = $LA['id'];
 		}
-		$this->log($attendance_data_id);
 
 
 		
@@ -98,7 +96,6 @@ class LecturesRecordsController extends AppController
 		{
 			//saveデータを整理する
 			$request_data = $this->request->data;
-			$this->log($request_data);
 			$request_data['LecturesRecord']['lecture_id'] = $lecture_id;
 			$request_data['LecturesRecord']['lecture_date'] = $lecture_date;
 
@@ -112,8 +109,6 @@ class LecturesRecordsController extends AppController
 			);
 
 			$tmp = $this->LecturesRecord->find('first', $options);
-			$this->log('tmp');
-			$this->log($tmp);
 			// すでに履歴が存在する場合
 			if(isset($tmp['LecturesRecord'])){
 				$no = $tmp['LecturesRecord']['no'];
@@ -126,11 +121,9 @@ class LecturesRecordsController extends AppController
 				));
 				$no++;
 			}
-			$this->log($no);
 
 			$request_data['LecturesRecord']['no'] = $no;
 
-			//$this->log($request_data);
 
 
 			//attendanceのデータを別処理で，LecturesAttendanceテーブルに保存する．
@@ -144,8 +137,6 @@ class LecturesRecordsController extends AppController
 					)
 				)
 			));
-			$this->log("attendance_infos");
-			$this->log($attendance_infos);
 
 			$attendance_data_id = [];
 			foreach($attendance_infos as $info){
@@ -166,7 +157,6 @@ class LecturesRecordsController extends AppController
 					'status' => $status
 				);
 			}
-			$this->log($attendance_data);
 
 
 			if($this->LecturesRecord->save($request_data)){
@@ -192,7 +182,6 @@ class LecturesRecordsController extends AppController
 			}
 
 		}else{
-			$this->log($this->Lecture->find('all'));
 			$options = array(
 				'conditions' => array(
 					'AND' => array(
@@ -219,7 +208,6 @@ class LecturesRecordsController extends AppController
 					$tmp['LecturesRecord'][$info['LecturesAttendance']['user_id'].'-attendance'] = $info['LecturesAttendance']['status'];
 				}
 				$this->request->data = $tmp;
-				$this->log($tmp);
 			}
 			
 		}
