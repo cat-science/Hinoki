@@ -4,64 +4,50 @@
 </script>
 <?php $this->end(); ?>
 
-<div class="admin-contents-index col">
-	<div class="ib-breadcrumb">
-	<?php
-		$this->Html->addCrumb('Webテスト一覧', array('controller' => 'courses', 'action' => 'index'));
-		$this->Html->addCrumb(h($course['Course']['title']));
+<div class="admin-qas-index col">
+	<div class="row">
+		<div class="col-8">
+			<p class="h1"><?php echo __('Q & A一覧'); ?></p>
+		</div>
+	</div>
 
-		echo $this->Html->getCrumbs(' / ');
-	?>
-	</div>
-	<div class="ib-page-title"><?php echo __('コンテンツ一覧'); ?></div>
-	<div class="buttons_container">
-		<button type="button" class="btn btn-primary btn-add" onclick="location.href='<?php echo Router::url(array('action' => 'add', $course['Course']['id'])) ?>'">+ 追加</button>
-	</div>
-	<div class="alert alert-warning">ドラッグアンドドロップでコンテンツの並び順が変更できます。</div>
 	<table id='sortable-table'>
 	<thead>
 	<tr>
-		<th>コンテンツ名</th>
-		<th nowrap>コンテンツ種別</th>
+		<th nowrap>タイトル</th>
+		<th class="text-center">投稿者</th>
 		<th class="text-center">ステータス</th>
 		<th class="ib-col-date">作成日時</th>
-		<th class="ib-col-date">更新日時</th>
 		<th class="ib-col-action"><?php echo __('Actions'); ?></th>
 	</tr>
 	</thead>
 	<tbody>
-	<?php foreach ($contents as $content): ?>
+	<?php foreach ($qa_list as $qa): ?>
 	<?php
-		switch($content['Content']['kind'])
-		{
-			case 'test':
-				$title = $this->Html->link($content['Content']['title'], array('controller' => 'contents_questions', 'action' => 'index', $content['Content']['id']));
-				break;
-			default :
-				$title = h($content['Content']['title']);
-				break;
-		}
+		$title = $qa['Qa']['title'];
+		$user_id = $qa['Qa']['user_id'];
+		$user_name = $user_list[$user_id];
+		$user_name = $qa['Qa']['is_anonymous'] == 1 ? $user_name . ' (匿名)' : $user_name;	
+		$status = $qa['Qa']['is_public'] == 1 ? '公開' : '非公開';
 	?>
 	<tr>
-		<td><?php echo $title; ?></td>
-		<td><?php echo h(Configure::read('content_kind.'.$content['Content']['kind'])); ?>&nbsp;</td>
-		<td class="text-center"><?php echo h(Configure::read('content_status.'.$content['Content']['status'])); ?>&nbsp;</td>
-		<td class="ib-col-date"><?php echo Utils::getYMDHN($content['Content']['created']); ?>&nbsp;</td>
-		<td class="ib-col-date"><?php echo Utils::getYMDHN($content['Content']['modified']); ?>&nbsp;</td>
+		<td><?php echo $this->Html->link($title, array('controller' => 'qasrecords','action' => 'reply', $qa['Qa']['id']))?>&nbsp;</td>
+		<td class="text-center"><?php echo $user_name; ?>&nbsp;</td>
+		<td class="text-center"><?php echo $status;?>&nbsp;</td>
+		<td class="ib-col-date"><?php echo Utils::getYMDHN($qa['Qa']['created']); ?>&nbsp;</td>
 		<td class="ib-col-action">
 			<?php
-			echo $this->Form->hidden('id', array('id'=>'', 'class'=>'content_id', 'value'=>$content['Content']['id']));
+			echo $this->Form->hidden('id', array('id'=>'', 'class'=>'qa_id', 'value'=>$qa['Qa']['id']));
 			
 			if($loginedUser['role']=='admin')
 			{
 				echo $this->Form->postLink(__('削除'),
-					array('action' => 'delete', $content['Content']['id']),
+					array('action' => 'delete', $qa['Qa']['id']),
 					array('class'=>'btn btn-danger'),
-					__('[%s] を削除してもよろしいですか?', $content['Content']['title'])
+					__('[%s] の投稿を削除してもよろしいですか?', $qa['Qa']['title'])
 				);
 			}?>
-			<button type="button" class="btn btn-info" onclick="location.href='<?php echo Router::url(array('action' => 'copy', $course['Course']['id'], $content['Content']['id'])) ?>'">複製</button>
-			<button type="button" class="btn btn-success" onclick="location.href='<?php echo Router::url(array('action' => 'edit', $course['Course']['id'], $content['Content']['id'])) ?>'">編集</button>
+			<button type="button" class="btn btn-success" onclick="location.href='<?php echo Router::url(array('action' => 'edit', $qa['Qa']['id'])) ?>'">編集</button>
 		</td>
 	</tr>
 	<?php endforeach; ?>

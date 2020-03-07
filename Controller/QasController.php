@@ -22,7 +22,14 @@ class QasController extends AppController
 
 	/** 生徒関連 */
 	public function index(){
-		
+		$qa_list = $this->Qa->find('all',array(
+			'conditions' => array(
+				'Qa.is_public' => 1
+			),
+			'order' => 'Qa.created DESC'
+		));
+		$this->set(compact("qa_list"));
+		$this->log($qa_list);
 	}
 
 	public function add(){
@@ -56,9 +63,45 @@ class QasController extends AppController
 
 	/** 管理者関連 */
 	public function admin_index(){
+		$this->loadModel('User');
+
 		$qa_list = $this->Qa->find('all',array(
 			'order' => 'created DESC'
 		));
-		$this->set(compact("qa_list"));
+
+		$user_list = $this->User->find('list',array(
+			'fields' => array('id', 'name')
+		));
+
+		$this->set(compact("qa_list","user_list"));
+
+	}
+
+	public function admin_edit($qa_id){
+		if ($this->request->is(array(
+			'post',
+			'put'
+		)))
+		{
+			$request_data = $this->request->data;
+			if ($this->Qa->save($request_data))
+			{
+				$this->Flash->success(__('コメント・質問が保存されました'));
+				return $this->redirect( array(
+					'action' => 'index'
+				));
+			}
+			else
+			{
+				$this->Flash->error(__('The Comment or Question could not be saved. Please, try again.'));
+			}
+
+		}else{
+			$this->request->data = $this->Qa->find('first',array(
+				'conditions' => array(
+					'id' => $qa_id
+				)
+			));
+		}
 	}
 }

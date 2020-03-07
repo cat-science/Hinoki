@@ -15,15 +15,20 @@
   <table>
     <thead>
       <tr>
-        <th>タイトル</th>
-        <th>投稿日</th>
+        <th nowrap>タイトル</th>
+        <th class="ib-col-date">投稿日</th>
       </tr>
     </thead>
     <tbody>
-      <tr>
-        <td>タイトル４</td>
-        <td>2020-03-06</td>
-      </tr>
+      <?php foreach($qa_list as $qa):?>
+      <?php
+        $title = $qa['Qa']['title'];  
+      ?>
+        <tr>
+		      <td><?php echo $this->Html->link($title, array('controller' => 'qasrecords','action' => 'reply', $qa['Qa']['id']))?>&nbsp;</td>
+		      <td class="ib-col-date"><?php echo Utils::getYMDHN($qa['Qa']['created']); ?>&nbsp;</td>
+        </tr>
+      <?php endforeach;?>
     </tbody>
   </div>
   
