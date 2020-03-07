@@ -1,3 +1,4 @@
+<?php echo $this->element('menu');?>
 <style>
 	.today{
 		background: orange;
