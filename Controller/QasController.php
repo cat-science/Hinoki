@@ -104,4 +104,30 @@ class QasController extends AppController
 			));
 		}
 	}
+
+	public function admin_delete($qa_id){
+		
+		$id = $this->Qa->find('first',array(
+			'conditions' => array(
+				'Qa.id' => $qa_id
+			)
+		));
+		$this->Qa->id = $id['Qa']['id'];
+		if (! $this->Qa->exists())
+		{
+			throw new NotFoundException(__('Invalid Qa'));
+		}
+		$this->request->allowMethod('post', 'delete');
+		if ($this->Qa->delete())
+		{
+			$this->Flash->success(__('投稿が削除されました'));
+		}
+		else
+		{
+			$this->Flash->error(__('投稿を削除できませんでした'));
+		}
+		return $this->redirect(array(
+				'action' => 'index'
+		));
+	}
 }

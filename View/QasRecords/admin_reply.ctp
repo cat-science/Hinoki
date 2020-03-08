@@ -17,7 +17,7 @@
           <?php
             //管理者からアクセスの場合
             $q_user_id = $qa_info['Qa']['user_id'];
-            if($this->action == 'admin_reply'){
+            if($this->action == 'admin_reply' || $role == "admin"){
               $name = $user_list[$q_user_id];
               if($qa_info['Qa']['is_anonymous'] == 1){
                 $name = $name.'(匿名)';
@@ -32,6 +32,7 @@
                   $name = $name.'(匿名)';
                 }
               }else{
+              // そうでない場合
                 if($qa_info['Qa']['is_anonymous'] == 1){
                   $name = '(匿名)';
                 }else{
@@ -50,6 +51,7 @@
       <div class="reply-records mb-5">
         <?php foreach($reply_records as $record): ?>
         <?php
+          $this->log($record);
           $res_user_id = $record['QasRecord']['res_user_id'];
           $body = $record['QasRecord']['body']; 
           if($qa_info['Qa']['is_anonymous'] == 1 && $res_user_id == $qa_info['Qa']['user_id']){
@@ -69,6 +71,18 @@
             <div class="col-8">
               <pre class="h5"><?php echo $body;?></pre>
             </div>
+            <div class="col-2">
+              <?php
+                if($role =='admin' && $this->action == 'admin_reply')
+                {
+                  echo $this->Form->postLink(__('削除'),
+                    array('action' => 'delete', $record['QasRecord']['id']),
+                    array('class'=>'btn btn-outline-danger btn-lg'),
+                    __('[%s] を削除してもよろしいですか?', $record['QasRecord']['body'])
+                  );
+                }
+              ?>
+            </div>
           </div>
 
         <?php endforeach;?>
@@ -85,7 +99,7 @@
           ));
         ?>
         <div class="form-group">
-					<?php echo $this->Form->submit('保存', array('div' => false, 'class' => 'btn btn-outline-primary')); ?>
+					<?php echo $this->Form->submit('返信', array('div' => false, 'class' => 'btn btn-outline-primary')); ?>
 			  </div>
 			  <?php echo $this->Form->end(); ?>
       </div>

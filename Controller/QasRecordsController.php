@@ -80,4 +80,31 @@ class QasRecordsController extends AppController
 
 		}
 	}
+
+	public function admin_delete($qasRecord_id){
+		
+		$id = $this->QasRecord->find('first',array(
+			'conditions' => array(
+				'QasRecord.id' => $qasRecord_id
+			)
+		));
+		$qa_id = $id['QasRecord']['qa_id'];
+		$this->QasRecord->id = $id['QasRecord']['id'];
+		if (! $this->QasRecord->exists())
+		{
+			throw new NotFoundException(__('Invalid QasRecord'));
+		}
+		$this->request->allowMethod('post', 'delete');
+		if ($this->QasRecord->delete())
+		{
+			$this->Flash->success(__('返信が削除されました'));
+		}
+		else
+		{
+			$this->Flash->error(__('返信を削除できませんでした'));
+		}
+		return $this->redirect( array(
+			'action' => 'reply', $qa_id, '#'=>'reply-form'
+		));
+	}
 }

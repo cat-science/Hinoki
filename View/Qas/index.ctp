@@ -2,7 +2,7 @@
 
 <div class="qas-index" style="width : 100%">
   <div class="row">
-    <div class="col-8">
+    <div class="col-10">
       <p class="h1">Q & A一覧</p>
     </div>
     <div class="col-2">

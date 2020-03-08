@@ -15,14 +15,6 @@ App::uses('AppModel', 'Model');
 class QasRecord extends AppModel
 {
 	public $validate = array(
-		'title' => array(
-			'notBlank' => array(
-				'rule' => array(
-						'notBlank'
-				),
-				'message' => 'タイトルが入力されていません'
-			)
-		),
 		'body' => array(
 			'notBlank' => array(
 				'rule' => array(

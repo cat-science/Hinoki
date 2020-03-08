@@ -393,3 +393,32 @@ CREATE TABLE IF NOT EXISTS `ib_practices_records` (
   `modified` datetime DEFAULT NULL,
   PRIMARY KEY (`id`)
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8;
+
+
+-- ----------------------------
+-- Table structure for `ib_qas`
+-- ----------------------------
+CREATE TABLE IF NOT EXISTS `ib_qas` (
+  `id` int(8) NOT NULL AUTO_INCREMENT,
+  `user_id` int(8) NOT NULL,
+  `title` text,
+  `body` text,
+  `is_anonymous` int(8) NOT NULL DEFAULT '0',
+  `is_public` int(u) NOT NULL DEFAULT '0',
+  `created` datetime DEFAULT NULL,
+  `modified` datetime DEFAULT NULL,
+  PRIMARY KEY (`id`)
+) ENGINE=InnoDB DEFAULT CHARSET=utf8;
+
+-- ----------------------------
+-- Table structure for `ib_qas_records`
+-- ----------------------------
+CREATE TABLE IF NOT EXISTS `ib_qas_records` (
+  `id` int(8) NOT NULL AUTO_INCREMENT,
+  `qa_id` int(8) NOT NULL,
+  `res_user_id` int(8) NOT NULL,
+  `body` text,
+  `created` datetime DEFAULT NULL,
+  `modified` datetime DEFAULT NULL,
+  PRIMARY KEY (`id`)
+) ENGINE=InnoDB DEFAULT CHARSET=utf8;
