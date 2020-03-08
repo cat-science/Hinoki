@@ -6,7 +6,7 @@ CREATE TABLE IF NOT EXISTS `ib_qas` (
   `title` text,
   `body` text,
   `is_anonymous` int(8) NOT NULL DEFAULT '0',
-  `is_public` int(u) NOT NULL DEFAULT '0',
+  `is_public` int(8) NOT NULL DEFAULT '0',
   `created` datetime DEFAULT NULL,
   `modified` datetime DEFAULT NULL,
   PRIMARY KEY (`id`)
