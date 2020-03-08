@@ -31,7 +31,7 @@
 		$status = $qa['Qa']['is_public'] == 1 ? '公開' : '非公開';
 	?>
 	<tr>
-		<td><?php echo $this->Html->link($title, array('controller' => 'qasrecords','action' => 'reply', $qa['Qa']['id']))?>&nbsp;</td>
+		<td><?php echo $this->Html->link($title, array('controller' => 'qasRecords','action' => 'reply', $qa['Qa']['id']))?>&nbsp;</td>
 		<td class="text-center"><?php echo $user_name; ?>&nbsp;</td>
 		<td class="text-center"><?php echo $status;?>&nbsp;</td>
 		<td class="ib-col-date"><?php echo Utils::getYMDHN($qa['Qa']['created']); ?>&nbsp;</td>
