@@ -28,10 +28,10 @@
 		?>
 	</li>
 
-	<?php $is_active = ($this->name=='Infos') ? ' active' : '';?>
+	<?php $is_active = (($this->name=='Qas')||($this->name=='QasRecords')) ? ' active' : '';?>
 	<li class="nav-item <?php echo $is_active;?>">
 		<?php
-			echo $this->Html->link(__('お知らせ'), array('controller' => 'infos', 'action' => 'index'),array('class' => 'nav-link'));
+			echo $this->Html->link(__('Q & A'), array('controller' => 'qas', 'action' => 'index'),array('class' => 'nav-link'));
 		?>
 	</li>
 
@@ -56,6 +56,12 @@
 		?>
 	</li>
 
+	<?php $is_active = ($this->name=='Infos') ? ' active' : '';?>
+	<li class="nav-item <?php echo $is_active;?>">
+		<?php
+			echo $this->Html->link(__('お知らせ'), array('controller' => 'infos', 'action' => 'index'),array('class' => 'nav-link'));
+		?>
+	</li>
 	
 	<?php 
 		if($loginedUser['role']=='admin')
