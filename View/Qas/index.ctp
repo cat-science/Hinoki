@@ -25,7 +25,7 @@
         $title = $qa['Qa']['title'];  
       ?>
         <tr>
-		      <td><?php echo $this->Html->link($title, array('controller' => 'qasrecords','action' => 'reply', $qa['Qa']['id']))?>&nbsp;</td>
+		      <td><?php echo $this->Html->link($title, array('controller' => 'qasRecords','action' => 'reply', $qa['Qa']['id']))?>&nbsp;</td>
 		      <td class="ib-col-date"><?php echo Utils::getYMDHN($qa['Qa']['created']); ?>&nbsp;</td>
         </tr>
       <?php endforeach;?>
