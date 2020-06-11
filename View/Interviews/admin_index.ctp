@@ -5,56 +5,68 @@
     echo $this->element('docent_menu');
   }
 ?>
-<div class="admin-interviews-index" style = "width : 100%;">
-	<div class="ib-page-title" style = "width : 20hv"><?php echo __('生徒一覧'); ?></div></br></br>
+<div class="col-11 mx-auto bg-light">
+	<div class="h2"><?php echo __('生徒一覧'); ?></div>
 
-	<form class="form-inline">
+	<form class="form-inline mb-3 mt-3">
 		<?php
-			echo $this->Form->create(array('type'=>'get'));
+			echo $this->Form->create(array(
+				'type'=>'get',
+			));
+			
 			echo $this->Form->input('group_id',		array(
-				'label' => 'キャンパス : ', 
+				'label' => array(
+					'text' => 'キャンパス : ',
+					'class' => 'col-form-label mr-1'
+				),
 				'options'=>$group_list, 
 				'selected'=>$group_id, 
 				'empty' => '全て', 
 				'required'=>false, 
 				'class' => 'form-control',
-				'div' => 'form-group',
+				'div' => 'form-group mb-2 mr-3',
 				'onchange' => ''
 			));
 			echo $this->Form->input('username',		array(
-				'label' => 'ログインID : ', 
+				'label' => array(
+					'text' => 'ログインID : ',
+					'class' => 'col-form-label mr-1'
+				), 
 				'class' => 'form-control',
-				'div' => 'form-group',
+				'div' => 'form-group mb-2 mr-3',
 				'value' => $username,
-				'required' => false
+				'required' => false,
+				'style' => 'max-width: 150px'
 			));
 			echo $this->Form->input('name',			array(
-				'label' => '氏名 : ',
-				'class' => 'form-control my-1',
-				'div' => 'form-group',
+				'label' => array(
+					'text' => '氏名 : ',
+					'class' => 'col-form-label mr-1'
+				), 
+				'class' => 'form-control',
+				'div' => 'form-group mb-2 mr-3',
 				'value' => $name,
-				'required' => false
+				'required' => false,
+				'style' => 'max-width: 150px'
 			));
 		?>
-		<div class="col">
-			<input type="submit" class="btn btn-info btn-add" style="float: right;" value="検索">
-		</div>
+		<input type="submit" class="btn btn-outline-info mb-2"  value="検索">
 		<?php
 			echo $this->Form->end();
 		?>
 	</form>
-	<table>
+	<table class="table table-striped table-responsive-sm">
 	<thead>
 	<tr>
 		<th nowrap><?php echo $this->Paginator->sort('username', 'ログインID'); ?></th>
-		<th nowrap class="col-width"><?php echo $this->Paginator->sort('name', '氏名'); ?></th>
+		<th nowrap><?php echo $this->Paginator->sort('name', '氏名'); ?></th>
 
 		<th nowrap><?php echo __('所属キャンパス'); ?></th>
 
-		<th nowrap class="ib-col-datetime"><?php echo __('受講科目'); ?></th>
+		<th nowrap><?php echo __('受講科目'); ?></th>
 
 		<?php if($loginedUser['role']=='admin') {?>
-		<th class="ib-col-action"><?php echo __('Actions'); ?></th>
+		<th><?php echo __('Actions'); ?></th>
 		<?php }?>
 	</tr>
 	</thead>
@@ -66,18 +78,18 @@
 		<td><div class="reader" title="<?php echo h($user[0]['group_title']); ?>"><p><?php echo h($user[0]['group_title']); ?>&nbsp;</p></div></td>
     <td><div class="reader" title="<?php echo h($user[0]['lecture_title']); ?>"><p><?php echo h($user[0]['lecture_title']); ?>&nbsp;</p></div></td>
 		<?php if($loginedUser['role']=='admin') {?>
-		<td class="ib-col-action">
+		<td >
 			<?php
 				if($this->action == 'admin_index'){
 					echo $this->Form->postLink(__('削除'), array(
 						'action' => 'delete',
 						$user['User']['id']
 					), array(
-						'class' => 'btn btn-danger'
+						'class' => 'btn btn-outline-danger'
 					), __('[%s] の面談記録を削除してもよろしいですか?', $user['User']['name']));
 				}
 		?>
-		<button type="button" class="btn btn-success"
+		<button type="button" class="btn btn-outline-success"
 				onclick="location.href='<?php echo Router::url(array('action' => 'edit', $user['User']['id'])) ?>'">編集</button>
 		</td>
 		<?php }?>

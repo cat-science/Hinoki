@@ -56,11 +56,11 @@
 }
 
 </style>
-<div class = "admin-interviews-edit col">
+<div class = "col-11 mx-auto mb-5 bg-light">
 <div class="text-left">
   <?php echo $this->Html->link(__('<< 戻る'), array('action' => 'index'))?>
 </div>
-<div class="ib-page-title" style = "width : 50%;"><?php echo __('面談情報編集'); ?></div>
+<div class="h2"><?php echo __('面談情報編集'); ?></div>
   <?php
     $form_default = array(
       'inputDefaults' => array(
@@ -79,7 +79,7 @@
 
 
   <div class="row row-eq-height">
-    <div class="col-6">
+    <div class="col-12 col-md-6 mb-3">
       <div class="card bg-light">
         <div class="card-header">
           個人情報
@@ -110,7 +110,7 @@
       </div>
     </div>
 
-    <div class="col-6">
+    <div class="col-12 col-md-6 mb-3">
       <div class = "card bg-light" style = "height:100%">
         <div class = "card-header">
           EJU成績
@@ -134,7 +134,7 @@
 
   </br>
   <div class="row row-eq-height">
-    <div class = "col-6">
+    <div class = "col-12 col-md-6 mb-3">
       <div class = "card bg-light">
         <div class = "card-header">
           Webテスト成績
@@ -164,7 +164,7 @@
       </div>
     </div>
 
-    <div class = "col-6">
+    <div class = "col-12 col-md-6 mb-3">
       <div class = "card bg-light" style = "height : 100%;">
         <div class = "card-header">
           希望進路
@@ -191,7 +191,7 @@ YY大学
   </div>
   </br>
   <div class = "row row-eq-height">
-    <div class="col-6">
+    <div class="col-12 col-md-6 mb-3">
       <div class="card bg-light">
         <div class="card-header">
           英語成績
@@ -214,7 +214,7 @@ TOEFL:YY点
       </div>
     </div>
 
-    <div class = "col-6">
+    <div class = "col-12 col-md-6 mb-3">
       <div class = "card bg-light">
         <div class = "card-header">
           面談練習内容
@@ -246,7 +246,7 @@ TOEFL:YY点
 
   </br>
   <div class="row">
-    <div class="col-3">
+    <div class="col-12 col-md-3 mb-3">
       <div class="card bg-light">
         <div class="card-header">
           希望分野
@@ -267,7 +267,7 @@ TOEFL:YY点
       </div>
     </div>
 
-    <div class="col-9">
+    <div class="col-12 col-md-9 mb-3">
       <div class="card bg-light">
         <div class="card-header">
           専任講師コメント

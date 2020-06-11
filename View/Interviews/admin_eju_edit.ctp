@@ -24,11 +24,11 @@
 	}
 </script>
 <?php $this->end(); ?>
-<div class="admin-interviews-eju-edit col">
+<div class="col-11 mx-auto mb-5 bg-light">
   <div class="text-left">
     <?php echo $this->Html->link(__('<< 戻る'), array('action' => 'edit',$user_id))?>  
   </div>
-  <div class="text-left font-weight-bold" style="font-size : 20px;">
+  <div class="text-left font-weight-bold h2">
     生徒氏名:<?php echo $user_name;?>さん EJU成績入力
   </div>
   <div class="text-left">
@@ -44,12 +44,12 @@
         ));
       ?>
       <div class="form-group row">
-        <label class="col-3 col-form-label d-flex align-items-center justify-content-end" style="font-size : 2vw; padding-right: 0px; padding-left:0px;">西暦</label>
+        <label class="col-2 col-md-3 col-form-label d-flex align-items-center justify-content-end" style="font-size : 2vw; padding-right: 0px; padding-left:0px;">西暦</label>
         <?php
           echo $this->Form->input('year',array(
             'label' => false,
             'class' => 'form-control',
-            'div' => 'col-2',
+            'div' => 'col-8 col-md-2',
             'type' => 'date',
             'dateFormat' => 'Y',
             'minYear' => date('Y') - 3,
@@ -58,13 +58,13 @@
             'onchange' => 'submit(this.form)'
           ));
         ?>
-        <label class="col-1 col-form-label d-flex align-items-center justify-content-start" style="font-size : 2vw; padding-right: 0px; padding-left:0px;">年</label>
-        <label class="col-1 col-form-label d-flex align-items-center justify-content-end" style="font-size : 2vw; padding-right: 0px; padding-left:0px;">第</label>
+        <label class="col-2 col-md-1 col-form-label d-flex align-items-center justify-content-start" style="font-size : 2vw; padding-right: 0px; padding-left:0px;">年</label>
+        <label class="col-2 col-md-1 col-form-label d-flex align-items-center justify-content-end" style="font-size : 2vw; padding-right: 0px; padding-left:0px;">第</label>
         <?php
           echo $this->Form->input('number_of_times',array(
             'label' => false,
             'class' => 'form-control',
-            'div' => 'col-2',
+            'div' => 'col-8 col-md-2',
             'options' => array(
               '1' => '1',
               '2' => '2'
@@ -73,7 +73,7 @@
             'onchange' => 'submit(this.form)'
           ));
         ?>
-        <label class="col-3 col-form-label d-flex align-items-center justify-content-start" style="font-size : 2vw; padding-right: 0px; padding-left:0px;">回</label>
+        <label class="col-2 col-form-label d-flex align-items-center justify-content-start" style="font-size : 2vw; padding-right: 0px; padding-left:0px;">回</label>
       </div>
 
 
