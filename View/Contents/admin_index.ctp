@@ -46,7 +46,7 @@
 </script>
 <?php $this->end(); ?>
 
-<div class="admin-contents-index col">
+<div class="col-11 mx-auto bg-light">
 	<div class="ib-breadcrumb">
 	<?php
 		$this->Html->addCrumb('Webテスト一覧', array('controller' => 'courses', 'action' => 'index'));
@@ -55,12 +55,14 @@
 		echo $this->Html->getCrumbs(' / ');
 	?>
 	</div>
-	<div class="ib-page-title"><?php echo __('コンテンツ一覧'); ?></div>
-	<div class="buttons_container">
-		<button type="button" class="btn btn-primary btn-add" onclick="location.href='<?php echo Router::url(array('action' => 'add', $course['Course']['id'])) ?>'">+ 追加</button>
-	</div>
+	<div class="h2"><?php echo __('コンテンツ一覧'); ?></div>
+	<div class="row mb-3">
+    <div class="col-4 offset-9 col-md-1 offset-md-11">
+	  	<button type="button" class="btn btn-outline-primary" onclick="location.href='<?php echo Router::url(array('action' => 'add', $course['Course']['id'])) ?>'">+ 追加</button>
+    </div>
+  </div>
 	<div class="alert alert-warning">ドラッグアンドドロップでコンテンツの並び順が変更できます。</div>
-	<table id='sortable-table'>
+	<table id='sortable-table' class="table table-striped table-responsive-sm">
 	<thead>
 	<tr>
 		<th>コンテンツ名</th>
@@ -98,12 +100,12 @@
 			{
 				echo $this->Form->postLink(__('削除'),
 					array('action' => 'delete', $content['Content']['id']),
-					array('class'=>'btn btn-danger'),
+					array('class'=>'btn btn-outline-danger'),
 					__('[%s] を削除してもよろしいですか?', $content['Content']['title'])
 				);
 			}?>
-			<button type="button" class="btn btn-info" onclick="location.href='<?php echo Router::url(array('action' => 'copy', $course['Course']['id'], $content['Content']['id'])) ?>'">複製</button>
-			<button type="button" class="btn btn-success" onclick="location.href='<?php echo Router::url(array('action' => 'edit', $course['Course']['id'], $content['Content']['id'])) ?>'">編集</button>
+			<button type="button" class="btn btn-outline-info" onclick="location.href='<?php echo Router::url(array('action' => 'copy', $course['Course']['id'], $content['Content']['id'])) ?>'">複製</button>
+			<button type="button" class="btn btn-outline-success" onclick="location.href='<?php echo Router::url(array('action' => 'edit', $course['Course']['id'], $content['Content']['id'])) ?>'">編集</button>
 		</td>
 	</tr>
 	<?php endforeach; ?>
