@@ -12,7 +12,7 @@
 		setTimeout('$("#UserNewPassword").val("");', 500);
 	});
 <?php $this->Html->scriptEnd(); ?>
-<div class="admin-lecture-edit col">
+<div class="col-11 mx-auto bg-light">
 <?php echo $this->Html->link(__('<< 戻る'), array('action' => 'index_2'))?>
 	<div class="card bg-light">
 		<div class="card-header">
@@ -38,7 +38,7 @@
 					'label' => __('授業日'),
     			'type' => 'textarea',
     			'class' => '',
-					'style' => '',
+					'style' => 'width: 100%',
 					'placeholder' => '2019/11/01
 2019/11/02
 のように入力してください'
@@ -48,7 +48,7 @@
 					'label' => __('備考'),
 					'type' => 'textarea',
     			'class' => '',
-					'style' => '',
+					'style' => 'width: 100%',
 				));
 			?>
 			<div class="form-group">

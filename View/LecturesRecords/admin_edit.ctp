@@ -1,5 +1,5 @@
 <?php echo $this->element('admin_menu');?>
-<div class="docent-lecture-edit col">
+<div class="col-11 mx-auto bg-light mb-5">
 <?php echo $this->Html->link(__('<< 戻る'), array('controller' => 'lectures', 'action' => 'index'))?>
 	<div class="card bg-light">
 		<div class="card-header">
@@ -21,22 +21,22 @@
 					'label' => __('単元名とテキスト該当ページ'),
 					'type' => 'textarea',
     			'class' => '',
-					'style' => '',
+					'style' => 'width:100%',
         ));
 				?>
 				<!-- <table style = "width : 74%; float : right; margin-left:26%;"> -->
-				<table>
+				<table class="table table-striped table-responsive-sm">
 				<thead>
 				<tr>
-					<th nowrap class="ib-col-datetime"><?php echo __('名前'); ?></th>
-					<th nowrap class="ib-col-datetime"><?php echo __('出席状況'); ?></th>
+					<th nowrap><?php echo __('名前'); ?></th>
+					<th nowrap class="text-center"><?php echo __('出席状況'); ?></th>
 				</tr>
 				</thead>
 				<tbody>
 				<?php foreach ($users as $id => $user): ?>
 				<tr>
-				<td class="ib-col-datetime"><?php echo h($user); ?>&nbsp;</td>
-					<td class="ib-col-datetime">
+				<td class=""><?php echo h($user); ?>&nbsp;</td>
+					<td class="">
 						<?php
 							echo $this->Form->input("$id-attendance",	array(
 								'type' => 'radio',
@@ -65,13 +65,13 @@
 					'label' => __('宿題'),
 					'type' => 'textarea',
     			'class' => '',
-					'style' => '',
+					'style' => 'width:100%',
         ));
         echo $this->Form->input('comment',		array(
 					'label' => __('特記事項'),
 					'type' => 'textarea',
     			'class' => '',
-					'style' => ''
+					'style' => 'width:100%',
 				));
         
         
