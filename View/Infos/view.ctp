@@ -1,4 +1,4 @@
-<div class="infos-view col">
+<div class="col-11 mx-auto bg-light mb-5">
 	<div class="breadcrumb">
 	<?php
 	$this->Html->addCrumb('HOME', array(

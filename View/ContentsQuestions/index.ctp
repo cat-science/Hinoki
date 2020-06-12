@@ -1,4 +1,13 @@
-<div class="contents-questions-index col">
+<?php
+	if($this->action == 'docent_record' || $this->action == 'docent_index'){
+		echo $this->element('docent_menu');
+	}elseif($this->action == 'admin_record' || $this->action == 'admin_index'){
+		echo $this->element('admin_menu');
+	}else{
+		echo $this->element('menu');
+	}
+?>
+<div class="col-11 mx-auto bg-light mb-5">
 	<div class="breadcrumb">
 	<?php
 	// 管理者による学習履歴表示モードの場合、Webテスト一覧リンクを表示しない
@@ -17,8 +26,9 @@
 	echo $this->Html->getCrumbs(' / ');
 	?>
 	</div>
-	
-	<div id="lblStudySec" class="btn btn-info"></div>
+	<div class="row" style="position:fixed; z-index:100; width:90%;">
+		<div id="lblStudySec" class="btn btn-info offset-6 offset-md-10" style="z-index: 100;"></div>
+	</div>
 	<?php $this->start('css-embedded'); ?>
 	<style type='text/css'>
 		<?php if($is_admin_record) { // 管理者による学習履歴表示モードの場合、ロゴのリンクを無効化 ?>
@@ -55,14 +65,14 @@
 	</script>
 	<?php echo $this->Html->script('contents_questions.js?20190401');?>
 	<?php $this->end(); ?>
-	
+	<?php $this->log($is_record);?>
 	<!-- テスト結果ヘッダ表示 -->
 	<?php if($is_record){ ?>
 		<?php
 			$result_color  = ($record['Record']['is_passed']==1) ? 'text-primary' : 'text-danger';
 			$result_label  = ($record['Record']['is_passed']==1) ? __('合格') : __('不合格');
 		?>
-		<table class="result-table">
+		<table class="result-table table table-bordered table-responsive-sm" style="width:20%;">
 			<caption><?php echo __('テスト結果'); ?></caption>
 			<tr>
 				<td><?php echo __('合否'); ?></td>
@@ -154,23 +164,23 @@
 					$correct_label .= ($correct_label=='') ? $option_list[$correct_no - 1] : ', '.$option_list[$correct_no - 1];
 				}
 
-				$correct_tag	= sprintf('<p class="correct-text bg-success">正解 : %s</p><p>%s</p>',
+				$correct_tag	= sprintf('<p class="correct-text bg-info text-white">正解 : %s</p><p>%s</p>',
 					$correct_label, $this->Html->image($result_img, array('width'=>'60','height'=>'60')));
 				
 				// 解説の設定
 				if($question['explain']!='')
 				{
-					$explain_tag = sprintf('<div class="correct-text bg-danger">%s</div>',
+					$explain_tag = sprintf('<div class="correct-text bg-outline-danger">%s</div>',
 						$question['explain']);
 				}
 			}
 			?>
-			<div class="card bg-light">
+			<div class="card bg-light mb-5">
 				<div class="card-header">問<?php echo $question_index;?></div>
 				<div class="card-body">
 					<!--問題タイトル-->
 					<h4><?php echo h($title) ?></h4>
-					<div class="question-text bg-warning">
+					<div class="question-text bg-light">
 						<!--問題文-->
 						<?php echo $body ?>
 					</div>
@@ -190,17 +200,17 @@
 		<?php } ?>
 		
 		<?php
-			echo '<div class="form-inline"><!--start-->';
+			echo '<div class="form-inline mt-5"><!--start-->';
 			
 			// テスト実施の場合のみ、採点ボタンを表示
 			if (!$is_record)
 			{
 				echo $this->Form->hidden('study_sec');
-				echo '<input type="button" value="採点" class="btn btn-primary btn-lg btn-score" onclick="$(\'#confirmModal\').modal()">';
+				echo '<input type="button" value="採点" class="btn btn-outline-primary btn-lg btn-score" onclick="$(\'#confirmModal\').modal()">';
 				echo '&nbsp;';
 			}
 			
-			echo '<input type="button" value="戻る" class="btn btn-default btn-lg" onclick="location.href=\''.Router::url($course_url).'\'">';
+			echo '<input type="button" value="戻る" class="btn btn-outline-secondary btn-lg" onclick="location.href=\''.Router::url($course_url).'\'">';
 			echo '</div><!--end-->';
 			echo $this->Form->end();
 		?>
@@ -213,14 +223,13 @@
 		<div class="modal-content">
 			<div class="modal-header">
 				<button type="button" class="close" data-dismiss="modal"><span aria-hidden="true">&times;</span><span class="sr-only">Close</span></button>
-				<h4 class="modal-title">採点確認</h4>
 			</div>
-			<div class="modal-body">
+			<div class="modal-body h3">
 				<p>採点してよろしいですか？</p>
 			</div>
 			<div class="modal-footer">
-				<button type="button" class="btn btn-default" data-dismiss="modal">キャンセル</button>
-				<button type="button" class="btn btn-primary btn-score" onclick="sendData();">採点</button>
+				<button type="button" class="btn btn-outline-secondary" data-dismiss="modal">キャンセル</button>
+				<button type="button" class="btn btn-outline-primary btn-score" onclick="sendData();">採点</button>
 			</div>
 		</div><!-- /.modal-content -->
 	</div><!-- /.modal-dialog -->

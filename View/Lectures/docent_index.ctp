@@ -4,8 +4,7 @@
 		background: orange;
 	}
 </style>
-<div class="users-courses-index col">
-	</br>
+<div class="col-11 mx-auto bg-light mb-5">
 	<div class="card bg-light">
 		<div class="card-header"><?php echo __('お知らせ'); ?></div>
 		<div class="card-body">
@@ -110,7 +109,7 @@
 		?>
 	<div class="container">
 		<h3><a href="?ym=<?php echo $prev; ?>">&lt;</a> <?php echo $html_title; ?> <a href="?ym=<?php echo $next; ?>">&gt;</a></h3>
-      <table class="table table-bordered">
+      <table class="table table-bordered table-responsive-sm">
         <tr>
             <th>日</th>
             <th>月</th>
@@ -136,14 +135,20 @@
 		<?php foreach ($courses as $course): ?>
 		<?php //debug($course)?>
 			<a href="<?php echo Router::url(array('controller' => 'contents', 'action' => 'index', $course['Course']['id']));?>" class="list-group-item">
-				<?php if($course[0]['left_cnt']!=0){?>
-				<button type="button" class="btn btn-danger btn-rest"><?php echo __('残り')?> <span class="badge"><?php echo h($course[0]['left_cnt']); ?></span></button>
-				<?php }?>
-				<h4 class="list-group-item-heading"><?php echo h($course['Course']['title']);?></h4>
-				<p class="list-group-item-text">
-					<span><?php echo __('学習開始日').': '.Utils::getYMD($course['Record']['first_date']); ?></span>
-					<span><?php echo __('最終学習日').': '.Utils::getYMD($course['Record']['last_date']); ?></span>
-				</p>
+				<div class="row">
+					<div class="col-md-8">
+						<h4 class="list-group-item-heading"><?php echo h($course['Course']['title']);?></h4>
+						<p class="list-group-item-text">
+						<span><?php echo __('学習開始日').': '.Utils::getYMD($course['Record']['first_date']); ?></span>
+						<span><?php echo __('最終学習日').': '.Utils::getYMD($course['Record']['last_date']); ?></span>
+						</p>
+					</div>
+					<div class="col-md-auto offset-md-2">
+						<?php if($course[0]['left_cnt']!=0){?>
+						<button type="button" class="btn btn-danger btn-rest"><?php echo __('残り')?> <span class="badge"><?php echo h($course[0]['left_cnt']); ?></span></button>
+						<?php }?>
+					</div>
+				</div>
 			</a>
 		<?php endforeach; ?>
 		<?php echo $no_record;?>

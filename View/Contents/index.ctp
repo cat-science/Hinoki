@@ -1,3 +1,12 @@
+<?php
+	if($this->action == 'docent_index'){
+		echo $this->element('docent_menu');
+	}elseif($this->action == 'admin_index'){
+		echo $this->element('admin_menu');
+	}else{
+		echo $this->element('menu');
+	}
+?>
 <?php $this->start('css-embedded'); ?>
 <style>
 @media only screen and (max-width:800px)
@@ -22,17 +31,18 @@
 <?php }?>
 </style>
 <?php $this->end(); ?>
-<div class="contents-index col">
+<div class="col-11 mx-auto bg-light mb-5">
 	<div class="ib-breadcrumb">
 	<?php
 	$is_admin_record = ($this->action=='admin_record');
-	
+	$controller_name = $this->action == 'docent_index' ? 'lectures' : 'users_courses';
+	$action_name = $this->action == 'docent_index' ? 'docent_index' : 'index';
 	// 管理者による学習履歴表示の場合、パンくずリストを表示しない
 	if(!$is_admin_record)
 	{
 		$this->Html->addCrumb('<< '.__('Webテスト一覧'), array(
-			'controller' => 'users_courses',
-			'action' => 'index'
+			'controller' => $controller_name,
+			'action' => $action_name
 		));
 		echo $this->Html->getCrumbs(' / ');
 	}
@@ -51,10 +61,10 @@
 	?>
 	</div>
 	<?php }?>
-	<table class="responsive-table">
+	<table class="table table-striped table-responsive-sm">
 		<thead>
 			<tr>
-				<th><?php echo __('コンテンツ名'); ?></th>
+				<th nowarp><?php echo __('コンテンツ名'); ?></th>
 				<th class="ib-col-center"><?php echo __('種別'); ?></th>
 				<th class="ib-col-date"><?php echo __('学習開始日'); ?></th>
 				<th class="ib-col-date"><?php echo __('前回学習日'); ?></th>

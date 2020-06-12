@@ -5,15 +5,15 @@
     echo $this->element('menu');
   }
 ?>
-<div class="admin-reply col">
+<div class="col-11 mx-auto bg-light">
   <?php echo $this->Html->link(__('<< 戻る'), array('controller' => 'qas','action' => 'index'))?>
   <div class="card bg-light">
     <div class="card-body">
       <div class="row">
-        <div class="col-8">
+        <div class="col-12 col-md-8">
           <span class="h3">タイトル</span>
         </div>
-        <div class="col-4">
+        <div class="col-12 col-md-4">
           <?php
             //管理者からアクセスの場合
             $q_user_id = $qa_info['Qa']['user_id'];
@@ -51,7 +51,7 @@
       <div class="reply-records mb-5">
         <?php foreach($reply_records as $record): ?>
         <?php
-          $this->log($record);
+          // $this->log($record);
           $res_user_id = $record['QasRecord']['res_user_id'];
           $body = $record['QasRecord']['body']; 
           if($qa_info['Qa']['is_anonymous'] == 1 && $res_user_id == $qa_info['Qa']['user_id']){
@@ -64,20 +64,20 @@
             $display_name = $user_list[$res_user_id];
           }
         ?>
-          <div class="row">
-            <div class="col-2">
-              <p class="h4"><?php echo $display_name;?></p>
+          <div class="row border border-secondary">
+            <div class="col-12 col-md-2">
+              <p class="h4"><?php echo $display_name.":";?></p>
             </div>
-            <div class="col-8">
+            <div class="col-12 col-md-8">
               <pre class="h5"><?php echo $body;?></pre>
             </div>
-            <div class="col-2">
+            <div class="col-md-2">
               <?php
                 if($role =='admin' && $this->action == 'admin_reply')
                 {
                   echo $this->Form->postLink(__('削除'),
                     array('action' => 'delete', $record['QasRecord']['id']),
-                    array('class'=>'btn btn-outline-danger btn-lg'),
+                    array('class'=>'btn btn-outline-danger'),
                     __('[%s] を削除してもよろしいですか?', $record['QasRecord']['body'])
                   );
                 }
@@ -95,7 +95,8 @@
           echo $this->Form->hidden('res_user_id', array('value' => $user_id));
           echo $this->Form->hidden('qa_id', array('value' => $qa_id));
           echo $this->Form->input('body',array(
-            'label' => '返信内容'
+            'label' => '返信内容',
+            'style' => 'width: 100%'
           ));
         ?>
         <div class="form-group">

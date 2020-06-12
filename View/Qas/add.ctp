@@ -1,11 +1,7 @@
 <?php echo $this->element('menu');?>
 
-<div class="qas-index" style="width : 100%">
-  <div class="row" style="margin-top:2%; margin-bottom:2%;">
-    <div class="col-8">
-      <p class="h1">コメント・質問の投稿</p>
-    </div>
-  </div>
+<div class="col-11 mx-auto bg-light">
+	<div class="h2"><?php echo __('コメント・質問の投稿'); ?></div>
 
   <?php
     echo $this->Form->create('Qa');
@@ -21,7 +17,8 @@
         'class' => 'h2'
       ),
       'class' => 'from-control',
-      'div' => 'form-group'
+      'div' => 'form-group',
+      'style' => 'width: 100%',
     ));
 
     echo $this->Form->input('body',array(
@@ -33,7 +30,8 @@
         'class' => 'h2'
       ),
       'class' => 'from-control',
-      'div' => 'form-group'
+      'div' => 'form-group',
+      'style' => 'width: 100%',
     ));    
 
     // echo $this->Form->input('is_anonymous',array(

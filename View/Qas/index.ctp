@@ -1,18 +1,14 @@
 <?php echo $this->element('menu');?>
 
-<div class="qas-index" style="width : 100%">
-  <div class="row">
-    <div class="col-10">
-      <p class="h1">Q & A一覧</p>
-    </div>
-    <div class="col-2">
-	    <div class="buttons_container">
-        <button type="button" class="btn btn-primary btn-lg" onclick="location.href='<?php echo Router::url(array('action' => 'add')) ?>'">投稿</button>
-      </div>
+<div class="col-11 mx-auto bg-light mb-5">
+  <div class="h2"><?php echo __('Q & A一覧'); ?></div>
+	<div class="row mb-3">
+    <div class="col-4 offset-8 col-md-1 offset-md-11">
+	  	<button type="button" class="btn btn-outline-primary" onclick="location.href='<?php echo Router::url(array('action' => 'add')) ?>'">投稿</button>
     </div>
   </div>
 
-  <table>
+  <table class="table table-striped table-responsive-sm">
     <thead>
       <tr>
         <th nowrap>タイトル</th>
