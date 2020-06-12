@@ -1,5 +1,5 @@
 <?php echo $this->element('admin_menu');?>
-<div class="admin-settings-index col">
+<div class="col-11 mx-auto bg-light mb-5">
 	<div class="card bg-light">
 		<div class="card-header">
 			<?php echo __('システム設定'); ?>

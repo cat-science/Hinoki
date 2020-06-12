@@ -324,6 +324,7 @@ CREATE TABLE IF NOT EXISTS `ib_interviews` (
 -- ----------------------------
 CREATE TABLE IF NOT EXISTS `ib_lectures` (
   `id` int(8) NOT NULL AUTO_INCREMENT,
+  `st_lecture_name` varchar(200) DEFAULT NULL,
   `lecture_name` varchar(200) DEFAULT NULL,
   `docent_id` int(8) NOT NULL DEFAULT '0',
   `lecture_date` varchar(500) DEFAULT NULL,

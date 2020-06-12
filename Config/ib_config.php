@@ -124,7 +124,7 @@ $config['form_defaults_bs4'] = array(
 
 $config['form_submit_defaults'] = array(
 	'div' => false,
-	'class' => 'btn btn-primary'
+	'class' => 'btn btn-outline-primary'
 );
 
 

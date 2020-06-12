@@ -230,7 +230,7 @@ class ContentsQuestionsController extends AppController
 			}
 		}
 		
-		$is_record = (($this->action == 'record') || ($this->action == 'admin_record'));	// テスト結果表示フラグ
+		$is_record = (($this->action == 'record') || ($this->action == 'admin_record') || ($this->action == 'docent_record'));	// テスト結果表示フラグ
 		$is_admin_record = ($this->action == 'admin_record');
 		
 		$this->set(compact('content', 'contentsQuestions', 'record', 'is_record', 'is_admin_record'));
@@ -429,5 +429,22 @@ class ContentsQuestionsController extends AppController
 		
 		// 全て含まれていれば正解
 		return true;
+	}
+
+	public function docent_index($content_id, $record_id = null){
+		// return $this->redirect("/contents/index/".$course_id);
+		$this->index($content_id, $record_id);
+		$this->render('index');
+	}
+
+	/**
+	 * テスト結果を表示
+	 * @param int $content_id 表示するコンテンツ(テスト)のID
+	 * @param int $record_id 履歴ID
+	 */
+	public function docent_record($content_id, $record_id)
+	{
+		$this->index($content_id, $record_id);
+		$this->render('index');
 	}
 }

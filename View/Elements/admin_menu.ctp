@@ -1,6 +1,5 @@
 <?php $this->start('menu'); ?>
 
-<div class="collapse navbar-collapse" id="navbarSupportedContent">
 	<ul class="navbar-nav mr-auto">
 	<?php $is_active = (($this->name=='Users')&&($this->params["action"]!='admin_password')) ? ' active' : '';?>
 	<li class="nav-item <?php echo $is_active;?>">
@@ -70,6 +69,5 @@
 			echo '<li class="nav-item '.$is_active.'">'.$this->Html->link(__('システム設定'), array('controller' => 'settings', 'action' => 'index'),array('class' => 'nav-link')).'</li>';
 		}
 	?>
-</div>
-
+	
 <?php echo $this->end();?>

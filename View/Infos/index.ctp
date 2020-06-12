@@ -1,8 +1,9 @@
-<div class="infos-index col">
+<div class="col-11 mx-auto bg-light mb-5">
 	<div class="breadcrumb">
 	<?php
+	$controller_name = $this->action == 'docent_index' ? 'lectures' : 'users_courses';
 	$this->Html->addCrumb('HOME', array(
-		'controller' => 'users_courses',
+		'controller' => $controller_name,
 		'action' => 'index'
 	));
 	echo $this->Html->getCrumbs(' / ');

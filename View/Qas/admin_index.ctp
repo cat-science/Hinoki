@@ -4,21 +4,17 @@
 </script>
 <?php $this->end(); ?>
 
-<div class="admin-qas-index col">
-	<div class="row">
-		<div class="col-8">
-			<p class="h1"><?php echo __('Q & A一覧'); ?></p>
-		</div>
-	</div>
+<div class="col-11 mx-auto bg-light">
+	<div class="h2"><?php echo __('Q & A一覧'); ?></div>
 
-	<table id='sortable-table'>
+	<table id='sortable-table' class="table table-striped table-responsive-sm">
 	<thead>
 	<tr>
 		<th nowrap>タイトル</th>
-		<th class="text-center">投稿者</th>
-		<th class="text-center">ステータス</th>
-		<th class="ib-col-date">作成日時</th>
-		<th class="ib-col-action"><?php echo __('Actions'); ?></th>
+		<th >投稿者</th>
+		<th >ステータス</th>
+		<th >作成日時</th>
+		<th ><?php echo __('Actions'); ?></th>
 	</tr>
 	</thead>
 	<tbody>
@@ -32,10 +28,10 @@
 	?>
 	<tr>
 		<td><?php echo $this->Html->link($title, array('controller' => 'qasRecords','action' => 'reply', $qa['Qa']['id']))?>&nbsp;</td>
-		<td class="text-center"><?php echo $user_name; ?>&nbsp;</td>
-		<td class="text-center"><?php echo $status;?>&nbsp;</td>
-		<td class="ib-col-date"><?php echo Utils::getYMDHN($qa['Qa']['created']); ?>&nbsp;</td>
-		<td class="ib-col-action">
+		<td ><?php echo $user_name; ?>&nbsp;</td>
+		<td ><?php echo $status;?>&nbsp;</td>
+		<td ><?php echo Utils::getYMDHN($qa['Qa']['created']); ?>&nbsp;</td>
+		<td >
 			<?php
 			echo $this->Form->hidden('id', array('id'=>'', 'class'=>'qa_id', 'value'=>$qa['Qa']['id']));
 			
@@ -43,11 +39,11 @@
 			{
 				echo $this->Form->postLink(__('削除'),
 					array('action' => 'delete', $qa['Qa']['id']),
-					array('class'=>'btn btn-danger'),
+					array('class'=>'btn btn-outline-danger'),
 					__('[%s] の投稿を削除してもよろしいですか?', $qa['Qa']['title'])
 				);
 			}?>
-			<button type="button" class="btn btn-success" onclick="location.href='<?php echo Router::url(array('action' => 'edit', $qa['Qa']['id'])) ?>'">編集</button>
+			<button type="button" class="btn btn-outline-success" onclick="location.href='<?php echo Router::url(array('action' => 'edit', $qa['Qa']['id'])) ?>'">編集</button>
 		</td>
 	</tr>
 	<?php endforeach; ?>

@@ -1,4 +1,4 @@
-<div class = "user-lectures-index col">
+<div class="col-11 mx-auto bg-light">
   <?php echo $this->Html->link(__('<< トップページに戻る'), array('controller' => 'users_courses', 'action' => 'index'))?>
   <div class="card bg-light">
 	  <div class="card-header"><?php echo h($lecture_list[$lecture_id]); ?></div>
@@ -6,14 +6,14 @@
       <div class="font-weight-bold" style="font-size:20px">
         授業の場所：<?php echo $lecture_info['Lecture']['lecture_place'];?>
       </div> 
-      <table class="responsive-table">
+      <table class="table table-striped table-responsive-sm">
 		    <thead>
 		    	<tr>
-		    		<th class="ib-col-date"><?php echo __('授業日'); ?></th>
-		    		<th class="ib-col-date"><?php echo __('担当講師'); ?></th>
-		    		<th class="ib-col-date"><?php echo __('出席状況'); ?></th>
-		    		<th class="ib-col-center" style="width : 400px;"><?php echo __('単元名テキスト該当ページ'); ?></th>
-		    		<th class="ib-col-center"><?php echo __('宿題'); ?></th>
+		    		<th nowarp><?php echo __('授業日'); ?></th>
+		    		<th nowarp><?php echo __('担当講師'); ?></th>
+		    		<th nowarp><?php echo __('出席状況'); ?></th>
+		    		<th nowarp style="width : 400px;"><?php echo __('単元名テキスト該当ページ'); ?></th>
+		    		<th nowarp><?php echo __('宿題'); ?></th>
 		    	</tr>
 		    </thead>
 		    <tbody>

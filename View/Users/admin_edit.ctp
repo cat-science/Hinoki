@@ -11,7 +11,7 @@
 		setTimeout('$("#UserNewPassword").val("");', 500);
 	});
 <?php $this->Html->scriptEnd(); ?>
-<div class="admin-users-edit col">
+<div class="col-11 mx-auto mb-5">
 <?php echo $this->Html->link(__('<< 戻る'), array('action' => 'index'))?>
 	<div class="card bg-light">
 		<div class="card-header">
@@ -62,7 +62,7 @@
 							'action' => 'clear',
 							$this->request->data['User']['id']
 						), array(
-							'class' => 'btn btn-danger '
+							'class' => 'btn btn-outline-danger '
 						), __('学習履歴を削除してもよろしいですか？', $this->request->data['User']['name']));
 					}
 				?>

@@ -28,30 +28,94 @@
 	}
 </script>
 <?php $this->end(); ?>
-<div class="admin-records-index col">
-	<div class="ib-page-title"><?php echo __('学習履歴一覧'); ?></div>
-	<div class="ib-horizontal">
+<div class="col-11 mx-auto bg-light">
+	<div class="h2"><?php echo __('学習履歴一覧'); ?></div>
+	<div class="">
 		<?php
-			echo $this->Form->create('Record');
-			echo '<div class="ib-search-buttons">';
-			echo $this->Form->submit(__('検索'),	array('class' => 'btn btn-outline-primary', 'div' => false));
-			echo $this->Form->hidden('cmd');
-			echo '<button type="button" class="btn btn-outline-secondary" onclick="downloadCSV()">'.__('CSV出力').'</button>';
+			echo $this->Form->create('Record',array(
+				'class' => 'mb-3'
+			));
+			?>
+			<div class="row mb-3">
+    		<div class="col-8 offset-6 col-md-3 offset-md-9">
+					<?php
+						echo $this->Form->submit(__('検索'),	array(
+							'class' => 'btn btn-outline-primary mr-3', 
+							'div' => false
+						));
+						echo '<button type="button" class="btn btn-outline-secondary" onclick="downloadCSV()">'.__('CSV出力').'</button>';
+						echo $this->Form->hidden('cmd');
+					?>	
+    		</div>
+  		</div>
+			<?php
+
+			/********************************************** */
+			echo '<div class="form-group row">';
+			echo $this->Form->input('course_id',	array(
+				'label' => array(
+					'class' => 'col-form-label ml-3 mr-2',
+					'text' => 'Webテスト :'
+				), 
+				'options'=>$courses, 
+				'selected'=>$course_id, 
+				'empty' => '全て', 
+				'type' => 'select',
+				'required'=>false, 
+				'class'=>'form-control', 
+				'div' => false,
+				// 'div' => 'form-group row'
+			));
+
+			echo $this->Form->input('contenttitle',	array(
+				'label' => array(
+					'class' => 'col-form-label ml-3 mr-2',
+					'text' => 'コンテンツ名 :'
+				),  
+				'value'=>$contenttitle, 
+				'class'=>'form-control',
+				'div' => false,
+			));
+
 			echo '</div>';
-			
-			echo '<div class="ib-row">';
-			echo $this->Form->input('course_id',		array('label' => 'Webテスト :', 'options'=>$courses, 'selected'=>$course_id, 'empty' => '全て', 'required'=>false, 'class'=>'form-control'));
-			//echo $this->Form->input('content_category',	array('label' => 'コンテンツ種別 :', 'options'=>Configure::read('content_category'), 'selected'=>$content_category, 'empty' => '全て', 'required'=>false, 'class'=>'form-control'));
-			echo $this->Form->input('contenttitle',		array('label' => 'コンテンツ名 :', 'value'=>$contenttitle, 'class'=>'form-control'));
+			/********************************************** */
+
+			/********************************************** */
+			echo '<div class="form-group row">';
+			echo $this->Form->input('group_id',		array(
+				'label' => array(
+					'class' => 'col-form-label ml-3 mr-2',
+					'text' => 'キャンパス :'
+				), 
+				'options'=>$groups, 
+				'selected'=>$group_id, 
+				'empty' => '全て', 
+				'required'=>false, 
+				'class'=>'form-control',
+				'div' => false,
+			));
+
+			echo $this->Form->input('name',		array(
+				'label' => array(
+					'class' => 'col-form-label ml-3 mr-2',
+					'text' => '氏名 :'
+				), 
+				'value'=>$name, 
+				'class'=>'form-control',
+				'div' => false,
+			));
+
 			echo '</div>';
+			/********************************************** */
+
 			
-			echo '<div class="ib-row">';
-			echo $this->Form->input('group_id',		array('label' => 'キャンパス :', 'options'=>$groups, 'selected'=>$group_id, 'empty' => '全て', 'required'=>false, 'class'=>'form-control'));
-			echo $this->Form->input('name',			array('label' => '氏名 :', 'value'=>$name, 'class'=>'form-control'));
-			echo '</div>';
 			
-			echo '<div class="ib-search-date-container">';
+			echo '<div class="form-group row">';
 			echo $this->Form->input('from_date', array(
+				'label' => array(
+					'class' => 'col-form-label ml-3 mr-2',
+					'text' => '対象日時 : '
+				), 
 				'type' => 'date',
 				'dateFormat' => 'YMD',
 				'monthNames' => false,
@@ -59,12 +123,16 @@
 				'minYear' => date('Y') - 5,
 				'maxYear' => date('Y'),
 				'separator' => ' / ',
-				'label'=> '対象日時 : ',
 				'class'=>'form-control',
-				'style' => 'display: inline;',
-				'value' => $from_date
+				'style' => 'display: inline; width: inherit !important;',
+				'value' => $from_date,
+				'div' => false
 			));
 			echo $this->Form->input('to_date', array(
+				'label' => array(
+					'class' => 'col-form-label ml-3 mr-2',
+					'text' => '～'
+				), 
 				'type' => 'date',
 				'dateFormat' => 'YMD',
 				'monthNames' => false,
@@ -72,16 +140,16 @@
 				'minYear' => date('Y') - 5,
 				'maxYear' => date('Y'),
 				'separator' => ' / ',
-				'label'=> '～',
 				'class'=>'form-control',
-				'style' => 'display: inline;',
-				'value' => $to_date
+				'style' => 'display: inline; width: inherit !important;',
+				'value' => $to_date,
+				'div' => false
 			));
 			echo '</div>';
 			echo $this->Form->end();
 		?>
 	</div>
-	<table cellpadding="0" cellspacing="0">
+	<table cellpadding="0" cellspacing="0" class="table table-striped table-responsive-sm">
 	<thead>
 	<tr>
 		<th nowrap><?php echo $this->Paginator->sort('course_id', 'コース'); ?></th>

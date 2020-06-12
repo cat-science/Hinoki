@@ -25,23 +25,23 @@
 		$is_docent_page = (($this->params['docent']==1)&&($this->params['action']!='docent_login'));
 		
 		// 受講者向け画面及び、管理システムのログイン画面のみ viewport を設定（スマートフォン対応）
-		if(!$is_admin_page || !$is_docent_page)
+		// if(!$is_admin_page || !$is_docent_page)
 			echo '<meta name="viewport" content="width=device-width,initial-scale=1">';
 		
 
 			echo $this->Html->meta('icon');
 
-			echo $this->Html->css('cake.generic');
+			// echo $this->Html->css('cake.generic');
 			echo $this->Html->css('jquery-ui');
 			echo $this->Html->css('bootstrap.min');
-			echo $this->Html->css('common.css?20190401');
+			// echo $this->Html->css('common.css?20190401');
 			
 			// 管理画面用CSS
-			if($is_admin_page)
-				echo $this->Html->css('admin.css?20190401');
+			// if($is_admin_page)
+				// echo $this->Html->css('admin.css?20190401');
 	
 			// カスタマイズ用CSS
-			echo $this->Html->css('custom.css?20190401');
+			// echo $this->Html->css('custom.css?20190401');
 			
 			echo $this->Html->script('jquery-1.9.1.min.js');
 			echo $this->Html->script('jquery-ui-1.9.2.min.js');
@@ -83,7 +83,7 @@
 	</style>
 </head>
 <body>
-	<nav class="navbar navbar-expand-sm navbar-dark" style="background-color: <?php echo h($this->Session->read('Setting.color')); ?>;">
+	<nav class="navbar navbar-expand-lg navbar-dark" style="background-color: <?php echo h($this->Session->read('Setting.color')); ?>;">
 	<?php $top_url = (($loginedUser['role']=='admin') && (!$is_admin_page)) ? '/admin/recentstates' : '/'; ?>
 	<?php 
 		/** 
@@ -106,13 +106,13 @@
 		}
 	?>	
 	<a class="navbar-brand" href="<?php echo $this->Html->url($top_url)?>"><?php echo h($this->Session->read('Setting.title')); ?></a>
-	<button type="button" class="navbar-toggler" data-toggle="collapse" data-target="#Navber" aria-controls="Navber" aria-expanded="false" aria-label="ナビゲーションの切替">
+	<button type="button" class="navbar-toggler" data-toggle="collapse" data-target="#Navbar" aria-controls="Navbar" aria-expanded="false" aria-label="ナビゲーションの切替">
 		<span class="navbar-toggler-icon"></span>
 	</button>
 	<?php if(@$loginedUser) {?>
-	<div class="collapse navbar-collapse" id="Navber">
+	<div class="collapse navbar-collapse" id="Navbar">
 		<?php echo $this->fetch('menu'); ?>
-		<ul class="navbar-nav mt-2 mt-sm-0">
+		<ul class="navbar-nav mt-2 mt-sm-0 ml-sm-0 ml-md-5">
 			<li class="nav-item dropdown">
 				<a href="#" class="nav-link dropdown-toggle" id="navbarDropdown" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
 					<?php echo h($loginedUser["name"]); ?>
@@ -131,7 +131,7 @@
 	<div id="container">
 		<div id="header" class="row">
 		</div>
-		<div id="content" class="row">
+		<div id="content">
 			<?php echo $this->Session->flash(); ?>
 
 			<?php echo $this->fetch('content'); ?>
@@ -144,7 +144,7 @@
 		<?php echo h($this->Session->read('Setting.copyright')); ?>
 	</div>
 	
-	<div class="irohasoft">
+	<div class="bg-light text-center">
 		Powered by <a href="https://github.com/cat-science/Hinoki">Cat-science</a> With <a href="http://irohaboard.irohasoft.jp/">iroha Board</a>
 	</div>
 	

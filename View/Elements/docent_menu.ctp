@@ -1,6 +1,5 @@
 <?php $this->start('menu'); ?>
 
-<div class="collapse navbar-collapse" id="navbarSupportedContent">
 	<ul class="navbar-nav mr-auto">
 	<?php $is_active = ($this->name=='Lectures') ? ' active' : '';?>
 	<li class="nav-item <?php echo $is_active;?>">
@@ -16,6 +15,5 @@
 		?>
 	</li>
 
-</div>
 
 <?php echo $this->end(); ?>

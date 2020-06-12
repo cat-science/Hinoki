@@ -1,16 +1,18 @@
 <?php echo $this->element('admin_menu');?>
 
-<div class="admin-courses-index col">
+<div class="col-11 mx-auto bg-light">
 	<div class="text-left">
 		<?php echo $this->Html->link(__('<< 戻る'), array('action' => 'index'))?>
 	</div>
 	
-	<div class="ib-page-title"><?php echo __('授業一覧'); ?></div>
-	<div class="buttons_container">
-		<button type="button" class="btn btn-primary btn-add" onclick="location.href='<?php echo Router::url(array('action' => 'add')) ?>'">+ 追加</button>
-	</div>
+	<div class="h2"><?php echo __('授業一覧'); ?></div>
+	<div class="row mb-3">
+    <div class="col-4 offset-8 col-md-2 offset-md-10">
+	  	<button type="button" class="btn btn-outline-primary" onclick="location.href='<?php echo Router::url(array('action' => 'add')) ?>'">+ 追加</button>
+    </div>
+  </div>
 
-	<table id='sortable-table'>
+	<table id='sortable-table' class="table table-striped table-responsive-sm">
 	<thead>
 	<tr>
 		<th><?php echo __('授業名'); ?></th>
@@ -38,11 +40,11 @@
 			{
 				echo $this->Form->postLink(__('削除'),
 					array('action' => 'delete', $lecture['Lecture']['id']),
-					array('class'=>'btn btn-danger'),
+					array('class'=>'btn btn-outline-danger'),
 					__('[%s] を削除してもよろしいですか?', $lecture['Lecture']['lecture_name'])
 				);
 			}?>
-			<button type="button" class="btn btn-success" onclick="location.href='<?php echo Router::url(array('action' => 'edit', $lecture['Lecture']['id'])) ?>'">編集</button>
+			<button type="button" class="btn btn-outline-success" onclick="location.href='<?php echo Router::url(array('action' => 'edit', $lecture['Lecture']['id'])) ?>'">編集</button>
 		</td>
 	</tr>
 	<?php endforeach; ?>

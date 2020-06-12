@@ -501,7 +501,7 @@ class InterviewsController extends AppController{
 
 			$request_data = $this->request->data;
 
-			$request_data['PracticesRecord']['practice_date'] = $request_data['PracticesRecord']['practice_date']['year'].'-'.$request_data['PracticesRecord']['practice_date']['month'].'-'.$request_data['PracticesRecord']['practice_date']['day'];
+			$request_data['PracticesRecord']['practice_date'] = $request_data['practice_date'];
 
 			if($this->PracticesRecord->save($request_data)){
 				$this->Flash->success(__('面談記録が保存されました'));
@@ -520,6 +520,8 @@ class InterviewsController extends AppController{
 				)
 			);
 			$this->request->data = $this->PracticesRecord->find('first', $options);
+			$practice_date = $this->request->data['PracticesRecord']['practice_date'];
+			$this->set(compact("practice_date"));
 		}
 		
 	}
