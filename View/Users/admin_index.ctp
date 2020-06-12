@@ -1,13 +1,11 @@
 <?php echo $this->element('admin_menu');?>
 <div class="col-11 mx-auto bg-light">
 	<div class="h2"><?php echo __('ユーザ一覧'); ?></div>
-	<div class="row justify-content-end mb-5">
-		<?php if($loginedUser['role']=='admin'){ ?>
-		<!-- <button type="button" class="btn btn-primary btn-export" onclick="location.href='<?php echo Router::url(array('action' => 'export')) ?>'">エクスポート</button> -->
-		<!-- <button type="button" class="btn btn-primary btn-import" onclick="location.href='<?php echo Router::url(array('action' => 'import')) ?>'">インポート</button> -->
-		<button type="button" class="btn btn-outline-primary btn-add" onclick="location.href='<?php echo Router::url(array('action' => 'add')) ?>'">+ 追加</button>
-		<?php }?>
-	</div>
+	<div class="row mb-3">
+  	<div class="col-4 offset-8 col-md-2 offset-md-10">
+			<button type="button" class="btn btn-outline-primary btn-add" onclick="location.href='<?php echo Router::url(array('action' => 'add')) ?>'">+ 追加</button>
+  	</div>
+  </div>
 		<?php
 			
 		?>

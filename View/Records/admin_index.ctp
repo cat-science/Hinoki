@@ -37,7 +37,7 @@
 			));
 			?>
 			<div class="row mb-3">
-    		<div class="col-8 offset-6 col-md-2 offset-md-10">
+    		<div class="col-8 offset-6 col-md-3 offset-md-9">
 					<?php
 						echo $this->Form->submit(__('検索'),	array(
 							'class' => 'btn btn-outline-primary mr-3', 

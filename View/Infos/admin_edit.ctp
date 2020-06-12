@@ -8,7 +8,7 @@
 	});
 <?php $this->Html->scriptEnd(); ?>
 
-<div class="admin-infos-edit col">
+<div class="col-11 mx-auto bg-light mb-5">
 <?php echo $this->Html->link(__('<< 戻る'), array('action' => 'index'))?>
 	<div class="card bg-light">
 		<div class="card-header">

@@ -1,10 +1,12 @@
 <?php echo $this->element('admin_menu');?>
-<div class="admin-infos-index col">
-	<div class="ib-page-title"><?php echo __('お知らせ一覧'); ?></div>
-	<div class="buttons_container">
-		<button type="button" class="btn btn-primary btn-add" onclick="location.href='<?php echo Router::url(array('action' => 'add')) ?>'">+ 追加</button>
+<div class="col-11 mx-auto bg-light">
+	<div class="h2"><?php echo __('お知らせ一覧'); ?></div>
+	<div class="row mb-3">
+    <div class="col-4 offset-8 col-md-2 offset-md-10">
+			<button type="button" class="btn btn-outline-primary btn-add" onclick="location.href='<?php echo Router::url(array('action' => 'add')) ?>'">+ 追加</button>
+		</div>
 	</div>
-	<table cellpadding="0" cellspacing="0">
+	<table cellpadding="0" cellspacing="0" class="table table-striped table-responsive-sm">
 	<thead>
 	<tr>
 		<th ><?php echo $this->Paginator->sort('title',   __('タイトル')); ?></th>
@@ -24,10 +26,10 @@
 		<td class="ib-col-action">
 			<?php echo $this->Form->postLink(__('削除'), 
 					array('action' => 'delete', $info['Info']['id']), 
-					array('class'=>'btn btn-danger'), 
+					array('class'=>'btn btn-outline-danger'), 
 					__('[%s] を削除してもよろしいですか?', $info['Info']['title'])
 			); ?>
-			<button type="button" class="btn btn-success" onclick="location.href='<?php echo Router::url(array('action' => 'edit', $info['Info']['id'])) ?>'">編集</button>	
+			<button type="button" class="btn btn-outline-success" onclick="location.href='<?php echo Router::url(array('action' => 'edit', $info['Info']['id'])) ?>'">編集</button>	
 		</td>
 	</tr>
 	<?php endforeach; ?>

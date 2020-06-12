@@ -10,29 +10,75 @@
 	}
 </script>
 <?php $this->end(); ?>
-<div class="admin-records-index col">
-	<div class="ib-page-title"><?php echo __('ログイン履歴一覧'); ?></div>
-	<div class="ib-horizontal">
+<div class="col-11 mx-auto bg-light mb-5">
+	<div class="h2"><?php echo __('ログイン履歴一覧'); ?></div>
+	
+	
+	<div class="">
+
 		<?php
 			echo $this->Form->create('Log',array('type' => 'get'));
-			echo '<div class="ib-search-buttons">';
-			echo $this->Form->submit(__('検索'),	array('class' => 'btn btn-info', 'div' => false));
-			echo $this->Form->hidden('cmd');
-			//echo '<button type="button" class="btn btn-default" onclick="downloadCSV()">'.__('CSV出力').'</button>';
+		?>
+		<div class="row mb-3">
+    	<div class="col-4 offset-8 col-md-2 offset-md-10">
+				<?php
+					echo $this->Form->submit(__('検索'),	array(
+						'class' => 'btn btn-outline-info', 
+						'div' => false
+					));
+					echo $this->Form->hidden('cmd');
+				?>
+    	</div>
+		</div>
+		<?php
+			/********************************************** */
+			echo '<div class="form-group row">';
+			echo $this->Form->input('group_id',		array(
+				'label' => array(
+					'class' => 'col-form-label ml-3 mr-2',
+					'text' => 'キャンパス :'
+				), 
+				'options'=>$groups, 
+				'selected'=>$group_id, 
+				'empty' => '全て', 
+				'required'=>false, 
+				'class'=>'form-control',
+				'div' => false,
+			));
 			echo '</div>';
+			/********************************************** */
 
-			echo '<div class="ib-row">';
-			echo $this->Form->input('group_id',		array('label' => 'キャンパス :', 'options'=>$groups, 'selected'=>$group_id, 'empty' => '全て', 'required'=>false, 'class'=>'form-control'));
-      echo $this->Form->input('username',			array('label' => 'ログインID :', 'value'=>$username, 'class'=>'form-control'));
-      echo $this->Form->input('name',			array('label' => '氏名 :', 'value'=>$name, 'class'=>'form-control'));
+			/********************************************** */
+			echo '<div class="form-group row">';
+
+      echo $this->Form->input('username',		array(
+				'label' => array(
+					'class' => 'col-form-label ml-3 mr-2',
+					'text' => 'ログインID :'
+				), 
+				'value'=>$username, 
+				'class'=>'form-control',
+				'div' => false,
+			));
+
+      echo $this->Form->input('name',			array(
+				'label' => array(
+					'class' => 'col-form-label ml-3 mr-2',
+					'text' => '氏名 :'
+				), 
+				'value'=>$name, 
+				'class'=>'form-control',
+				'div' => false,
+			));
       
       echo '</div>';
+			/********************************************** */
 			
 			
 			echo $this->Form->end();
 		?>
 	</div>
-	<table cellpadding="0" cellspacing="0">
+	<table cellpadding="0" cellspacing="0" class="table table-striped table-responsive-sm">
 	<thead>
 	<tr>
     <th nowrap><?php echo $this->Paginator->sort('User.username', 'ログインID'); ?></th>

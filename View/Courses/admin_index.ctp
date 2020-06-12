@@ -48,7 +48,7 @@
 <div class="col-11 mx-auto bg-light mb-5">
 	<div class="h2"><?php echo __('Webテスト一覧'); ?></div>
 	<div class="row mb-3">
-    <div class="col-4 offset-9 col-md-1 offset-md-11">
+    <div class="col-4 offset-8 col-md-2 offset-md-10">
 	  	<button type="button" class="btn btn-outline-primary" onclick="location.href='<?php echo Router::url(array('action' => 'add')) ?>'">+ 追加</button>
     </div>
   </div>
